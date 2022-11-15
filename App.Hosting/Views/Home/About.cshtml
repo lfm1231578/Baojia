@@ -1,0 +1,1104 @@
+@{
+    ViewData["Title"] = "九泰药械-关于我们";
+    var reslut = ViewBag.Dailt;
+
+
+    var c = 1;
+}
+@section css{
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+    <link href="~/web/css/about.css" rel="stylesheet" />
+    <style type="text/css">
+        .blog-nav .layui-nav {
+            width: 100%;
+        }
+    </style>
+    <style>
+        .header-box {
+            display: flex;
+            justify-content: flex-start;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        .header-box-left {
+            flex-basis: auto;
+        }
+
+        .header-box-right {
+            width: 100%;
+        }
+
+        .header-box-right-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .title-left {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .header-box-right-title h2 {
+            font-size: 20px;
+        }
+
+        .header-box-right-title .date {
+            margin-left: 6px;
+            background: #F44336;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 10px;
+            border-radius: 10px;
+            height: 18px;
+        }
+
+        .header-box-right-tag {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+            .header-box-right-tag .item {
+                background: #FFECD4;
+                color: #D3903B;
+                padding: 5px 10px;
+                border-radius: 4px;
+            }
+
+            .header-box-right-tag .item1 {
+                background: #CCD9FF;
+                color: #2146CF;
+                padding: 5px 10px;
+                border-radius: 4px;
+            }
+
+        .header-box-right-content {
+            display: flex;
+            flex-wrap: wrap;
+            background: rgba(0, 132, 255, 0.04);
+            padding: 10px;
+            font-size: 12px;
+            line-height: 24px;
+        }
+
+            .header-box-right-content .item {
+                width: 50%;
+            }
+        /*.header-box-right-tag {
+                                                    display: flex;
+                                                }*/
+    </style>
+    <style>
+                        .base-info {
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                        }
+
+                            .base-info .city-web-box, .gcp-box {
+                                margin-top: 20px;
+                                border: 1px solid #eee;
+                                height: 60px;
+                            }
+
+                        .text-center {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .base-info .major {
+                            padding: 10px;
+                        }
+
+                        .base-info .contact-box {
+                            margin: 20px 0;
+                        }
+
+                        .base-info .contact-box-content {
+                            border: 1px solid #eee;
+                        }
+
+                        .base-info .contact-info {
+                            margin: 10px;
+                            line-height: 32px;
+                        }
+
+                        .info-title {
+                            font-weight: bold;
+                        }
+
+                        .h60 {
+                            min-height: 60px;
+                        }
+
+                        .desc-box {
+                            margin: 20px 0;
+                        }
+
+                            .desc-box .desc-title {
+                                margin: 10px 0 20px;
+                            }
+
+                        .desc-content {
+                            line-height: 24px;
+                            font-size: 12px;
+                        }
+
+                        .line {
+                            height: 1px;
+                            background: #eee;
+                        }
+
+                        .other {
+                            padding-top: 20px;
+                        }
+
+                            .other .other-item {
+                                color: #00B050;
+                                font-size: 12px;
+                                line-height: 25px;
+                                font-weight: bold;
+                            }
+
+                        .other-title {
+                            margin-bottom: 20px;
+                        }
+
+                        .other .other-item:first-child {
+                            margin-top: 20px;
+                        }
+
+                        .default-content {
+                            padding: 0 20px
+                        }
+
+                        .default-lh {
+                            line-height: 35px;
+                        }
+
+                        .default-label {
+                            background: #E0E6F5;
+                            border-bottom: 1px solid #E0E6F5;
+                            border-right: 1px solid #E0E6F5;
+                            font-size: 12px;
+                        }
+
+                        .default-border {
+                            border: 1px solid #eee;
+                        }
+
+                        .default-ml {
+                            margin-left: 10px;
+                        }
+
+                        .border-bottom-none {
+                            border-bottom: none;
+                        }
+
+                        .mechanism-title {
+                            margin: 20px 0;
+                        }
+
+                        .default-table-title {
+                            color: #2146CF;
+                        }
+
+                        .check-box, .major-box {
+                            margin-top: 35px;
+                        }
+
+                        .default-mtb20 {
+                            margin: 20px 0;
+                        }
+
+                        .apparatus-box {
+                            padding-bottom: 20px;
+                        }
+
+                        .contact-item {
+                            padding-left: 10px;
+                        }
+
+                        .department-item {
+                            border: 1px solid #949494;
+                            color: #949494;
+                            padding: 5px 10px;
+                            border-radius: 2px;
+                            font-size: 12px;
+                        }
+
+                            .department-item:hover {
+                                cursor: pointer;
+                            }
+
+                        .department-item-active {
+                            border: 1px solid #2146CF;
+                            background: #2146CF;
+                            color: #fff;
+                        }
+
+                        .select-box {
+                            margin-bottom: 20px;
+                        }
+
+                        .researcher-title {
+                            margin-bottom: 20px;
+                            font-weight: bold;
+                        }
+                        .mb40{
+                            margin-bottom: 40px;
+                        }
+                    </style>
+}
+    <div class="blog-body" border是真正的主体内容 -->
+        <div class="blog-container">
+            <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+                <a href="/" title="网站首页">首页</a>
+                <a><cite>医院详情</cite></a>
+            </blockquote>
+            <div class="blog-main">
+                <!-- header start -->
+                <div class="header-box">
+                    <div class="header-box-left">
+                        <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" />
+                    @*    <div>
+                            浏览量5679
+                        </div>*@
+                    </div>
+                    <div class="header-box-right">
+                        <div class="header-box-right-title">
+                            <div class="title-left">
+                                <h2>@reslut.Dsname</h2>
+                                <span class="date">@reslut.Dsshijian</span>
+                            </div>
+                            @*<div>
+                                <span>分享</span>
+                                <span>收藏</span>
+                                <span>报错</span>
+                            </div>*@
+                        </div>
+                        <div class="header-box-right-tag">
+                            <span class="item">@reslut.Dstag</span>
+                            <span class="item1">@reslut.Dstag1</span>
+                        </div>
+                        <div class="header-box-right-content">
+                            <div class="item">机构电话: @reslut.Dsphone </div>
+                            <div class="item">机构传真: @reslut.Dsemais </div>
+                            <div class="item">机构邮箱: @reslut.Dsemail</div>
+                            <div class="item">接待时间: @reslut.Dsjiedaishijian </div>
+                            <div class="item">所在地址: @reslut.Dsadress</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header end -->
+                <div class="layui-tab layui-tab-brief shadow" lay-filter="tabAbout">
+                    <ul class="layui-tab-title">
+                        <li lay-id="1" class="layui-this">机构信息</li>
+                        <li lay-id="2" id="frinedlink">备案信息</li>
+                        <li lay-id="3">伦理委员会</li>
+                        <li lay-id="4">科宣专业组</li>
+                        <li lay-id="5">I期/BE临床试验病房</li>
+                        <li lay-id="6">攻略互助站</li>
+                    </ul>
+
+                    <div class="layui-tab-content">
+                        <!--  机构信息 start -->
+                        <div class="layui-tab-item default-content layui-show">
+                            <div class="base-info">
+                                <div class="info-title">基本信息</div>
+                                <div class="layui-row city-web-box">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DJGXXshen
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构网址</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DJGXXweb</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row gcp-box">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">原GCP认证专业</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        @reslut.DJGXXgcp
+                                    </div>
+                                </div>
+                                <div class="info-title contact-box">联系方式</div>
+                                <div class="layui-row">
+                                    <div class="layui-col-md3 contact-box-content">
+                                        <div class="default-label text-center h60">
+                                            @reslut.DJGXXlianxirenzhiwei
+                                        </div>
+                                        <div class="contact-info">
+                                            <div>@reslut.DJGXXlianxiren</div>
+                                            <div>@reslut.DJGXXlianxirenphone</div>
+                                            <div>@reslut.DJGXXlianxirenemmail</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="desc-box">
+                                <div class="info-title desc-title"> 机构简介</div>
+                                <div class="desc-content">
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DJGXXjiajie
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DJGXXjiajie1
+                                    </div>
+                                    
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DJGXXjiajie2
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DJGXXjiajie3
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DJGXXjiajie4
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DJGXXjiajie5
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="other">
+                                <div class="info-title other-title"> 其他情况</div>
+                              @*  <div class="other-item">以上信息如有错误，</div>
+                                <div class="other-item">请卿长按二维码进入公众号留言正确信息，</div>
+                                <div class="other-item">蔽号晓筑守12小时内修改更新，</div>
+                                <div class="other-item">感谢卿的支持！</div>
+                                <div>
+                                    <img src="https://storage.yscro.com/ueditor/net/upload1/7de12dff-d2c2-4a37-bb6b-b1cfa5aaf620.png"></img>
+                                </div>*@
+                            </div>
+                        </div>
+                        <!--  机构信息 end -->
+                        <div class="layui-tab-item default-content">
+                            <div class="back-up">
+                                <div class="info-title mechanism-title">
+                                    药物临床试验机构备案信息
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYWshen
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案号</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYWbenanhao</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构名称</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYWname
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构级别</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYWjibei</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">联系人</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYWlianxiren
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">联系电话</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYWlianxiphone</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案状态</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYWzhuantai
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案时间</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYWshijian</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- -->
+                                <div class="check-box">
+                                    <table class="layui-table" lay-skin="nob">
+                                        <thead>
+                                            <tr>
+                                                <th>检查日期</th>
+                                                <th>检查类别</th>
+                                                <th>监督检查结果</th>
+                                                <th>处理情况</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>@reslut.DBAXXYWjcrq</td>
+                                                <td>@reslut.DBAXXYWjclb</td>
+                                                <td>@reslut.DBAXXYWjdjcjg</td>
+                                                <td>@reslut.DBAXXYWclqk</td>
+                                            </tr>
+                                            <tr>
+                                                <td>@reslut.DBAXXYWjcrq1</td>
+                                                <td>@reslut.DBAXXYWjclb1</td>
+                                                <td>@reslut.DBAXXYWjdjcjg1</td>
+                                                <td>@reslut.DBAXXYWclqk1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- -->
+                                <!-- -->
+                                <div class="major-box">
+                                    <table class="layui-table" lay-skin="nob">
+                                        <thead>
+                                            <tr>
+                                                <th>专业名称</th>
+                                                <th>主要研究者</th>
+                                                <th>职称</th>
+                                                <th>专业备案时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>@reslut.DBAXXYWzymc</td>
+                                                <td>@reslut.DBAXXYWzyyjz</td>
+                                                <td>@reslut.DBAXXYWzc</td>
+                                                <td>@reslut.DBAXXYWzybasj</td>
+                                            </tr>
+                                            <tr>
+                                                <td>@reslut.DBAXXYWzymc1</td>
+                                                <td>@reslut.DBAXXYWzyyjz1</td>
+                                                <td>@reslut.DBAXXYWzc1</td>
+                                                <td>@reslut.DBAXXYWzybasj1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- -->
+                            </div>
+                            <div class="line default-mtb20"></div>
+                            <div class="apparatus-box">
+                                <div class="info-title default-mtb20">
+                                    医疗器械临床试验机构备案信息
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYLshen
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案号</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYLbenanhao</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构名称</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYLname
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构级别</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYLjibei</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">联系人</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYLlianxiren
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">联系电话</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYLlianxiphone</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案状态</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DBAXXYLzhuantai
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案时间</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DBAXXYLshijian</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- -->
+                                <div class="major-box">
+                                    <table class="layui-table" lay-skin="nob">
+                                        <thead>
+                                            <tr>
+                                                <th>专业名称</th>
+                                                <th>主要研究者</th>
+                                                <th>职称</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>@reslut.DBAXXYLzymc</td>
+                                                <td>@reslut.DBAXXYLzyyjz</td>
+                                                <td>@reslut.DBAXXYLzc</td>
+                                            </tr>
+                                            <tr>
+                                                <td>@reslut.DBAXXYLzymc1</td>
+                                                <td>@reslut.DBAXXYLzyyjz1</td>
+                                                <td>@reslut.DBAXXYLzc1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- -->
+
+                            </div>
+                        </div>
+                        <div class="layui-tab-item default-content">
+                            <div class="layui-row default-border default-mtb20">
+
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">伦理电话</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DLLWTHphone
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">伦理传真</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DLLWTHchuangzhen</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">伦理邮箱</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DLLWTHemail
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">接待时间</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DLLWTHjiedaishijian</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">伦理网址</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DLLWTHwangzhi
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">@reslut.DLLWTHshen</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">详细地址</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DLLWTHadress
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">备案号</div>
+                                            <div class="layui-col-md8 text-center h60"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-title default-mtb20">
+                                联系方式
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-md3 default-border">
+                                    <div class="default-label text-center h60">
+                                        @reslut.DLLWTHLXFSzhiwei
+                                    </div>
+                                    <div class="contact-info">
+                                        <div class="default-lh contact-item">@reslut.DLLWTHLXFSmingzhi</div>
+                                        <div class="default-lh contact-item">@reslut.DLLWTHLXFSdianhua</div>
+                                        <div class="default-lh contact-item">@reslut.DLLWTHLXFSyouxiang</div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md3 default-border">
+                                    <div class="default-label text-center h60">
+                                        @reslut.DLLWTHLXFSzhiwei1
+                                    </div>
+                                    <div class="contact-info">
+                                        <div class="default-lh contact-item">@reslut.DLLWTHLXFSmingzhi1</div>
+                                        <div class="default-lh contact-item">@reslut.DLLWTHLXFSdianhua1</div>
+                                        <div class="default-lh contact-item">@reslut.DLLWTHLXFSyouxiang1</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line default-mtb20"></div>
+                            <div class="layui-row default-border default-mtb20">
+                                <div class="layui-col-md2">
+                                    <div class="default-label text-center h60">相关政策</div>
+                                </div>
+                                <div class="layui-col-md10 text-center h60 major">
+                                    @reslut.Dstag1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item default-content">
+                            <div class="info-title default-mtb20">
+                                科室
+                            </div>
+                            <div class="select-box">
+                            @if (@reslut.DKSZYZHX1 != "") { 
+                            <span id="DKSZYZHX1" class="department-item department-item-active">@reslut.DKSZYZHX1</span>
+                            }
+                 
+                            @if (@reslut.DKSZYZHX2 != "")
+                            {
+                                <span id="DKSZYZHX2"  class="department-item">@reslut.DKSZYZHX2</span>
+                            }
+
+@*                            
+                            @if (@reslut.DKSZYZHX3 != "" || @reslut.DKSZYZHX3 != null)
+                            {
+                                <span id="DKSZYZHX3" class="department-item">@reslut.DKSZYZHX3</span>
+                            }*@
+
+                            </div>
+                            <div class="layui-row default-border">
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md4 default-label text-center h60">科室楼层位置</div>
+                                    <div id="DKSZYZHX1weizhi" class="layui-col-md8 text-center h60" id="DKSZYZHX1weizhi">
+                                            @reslut.DKSZYZHX1weizhi
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md4 default-label text-center h60">项目经验</div>
+                                    <div id="DKSZYZHX1jingyan" class="layui-col-md8 text-center h60">@reslut.DKSZYZHX1jingyan</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-title default-mtb20">
+                                联系方式
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-md3 default-border">
+                                <div class="default-label text-center h60" id="DKSZYZHX1zhiwei">
+                                        @reslut.DKSZYZHX1zhiwei
+                                    </div>
+                                    <div class="contact-info">
+                                        <div class="default-lh contact-item" id="DKSZYZHX1mingzi" >@reslut.DKSZYZHX1mingzi</div>
+                                        <div class="default-lh contact-item" id="DKSZYZHX1dianhua"  >
+                                            @reslut.DKSZYZHX1dianhua
+                                        </div>
+                                    <div class="default-lh contact-item" id="DKSZYZHX1email">@reslut.DKSZYZHX1email</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line default-mtb20"></div>
+                            <div class="info-title default-mtb20">
+                                科室简介
+                            </div>
+                            <div class="desc-content">
+                            <div id="DKSZYZHX1keshi">
+                                    &nbsp; &nbsp; &nbsp; &nbsp;@reslut.DKSZYZHX1keshi
+                                    
+                                </div>
+                            <div id="DKSZYZHX2keshi">
+                                    &nbsp; &nbsp; &nbsp; &nbsp;@reslut.DKSZYZHX2keshi
+                                </div>
+                            </div>
+                            <div class="line default-mtb20"></div>
+                            <div class="info-title default-mtb20">
+                                研究团队
+                            </div>
+                            <div>
+                                @*<div class="text-center"><img style="width:150px;height:185px;" src="" /></div>*@
+                                <div class="text-center"></div>
+                                @*<div class="researcher-title">：</div>*@
+                                <div class="desc-content">&nbsp; &nbsp; &nbsp; &nbsp @reslut.DKSZYZHX1yanjiutuandui</div>
+                                <div class="desc-content">&nbsp; &nbsp; &nbsp; &nbsp @reslut.DKSZYZHX2yanjiutuandui</div>
+                            </div>
+                            <div class="line default-mtb20"></div>
+                            <div style="padding-bottom: 20px;">
+                                <img src="" />
+                            </div>
+                        </div>
+                        <div class="layui-tab-item default-content">
+                            <div class="info-title default-mtb20">
+                                基本信息
+                            </div>
+                             <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">启动类型</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                @reslut.DLCSYqdlx
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">启动年月</div>
+                                        <div class="layui-col-md8 text-center h60">@reslut.DLCSYqdny</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">观察床</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                            @reslut.DLCSYgcc
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">抢救床位数</div>
+                                        <div class="layui-col-md8 text-center h60">@reslut.DLCSYcjcws</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">具体楼层地址</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                            @reslut.DLCSYjtlcdz
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">受试者类型</div>
+                                        <div class="layui-col-md8 text-center h60">@reslut.DLCSYgsszlx</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-title default-mtb20">
+                                    联系方式
+                                </div>
+                                <div class="layui-row">
+                                <div class="layui-col-md3 default-border">
+                                    <div class="default-label text-center h60">
+                                        @reslut.DLCSYLXFSzhiwei
+                                    </div>
+                                    <div class="contact-info">
+                                        <div class="default-lh contact-item">@reslut.DLCSYLXFSmingzhi</div>
+                                        <div class="default-lh contact-item">@reslut.DLCSYLXFSdianhua</div>
+                                        <div class="default-lh contact-item">@reslut.DLCSYLXFSdizhi</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-title default-mtb20">
+                                项目经验
+                            </div>
+                             <div class="layui-row default-border ">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60"> @reslut.DLCSYXMJY1</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY11
+                                </div>
+                            </div>
+                             <div class="layui-row default-border ">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60">@reslut.DLCSYXMJY2</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY21
+                                </div>
+                            </div>
+                             <div class="layui-row default-border ">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60">@reslut.DLCSYXMJY3</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY31
+                                </div>
+                            </div>
+                             <div class="layui-row default-border ">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60">@reslut.DLCSYXMJY4</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY41
+                                </div>
+                            </div>
+                            <div class="layui-row default-border">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60"> @reslut.DLCSYXMJY5</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY51
+                                </div>
+                            </div>
+                            <div class="layui-row default-border mb40">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60">@reslut.DLCSYXMJY6</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY61
+                                </div>
+                            </div>
+
+                            <div class="layui-row default-border">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60">@reslut.DLCSYXMJY7</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY71
+                                </div>
+                            </div>
+                            <div class="layui-row default-border mb40">
+                                <div class="layui-col-md4">
+                                    <div class="default-label text-center h60"> @reslut.DLCSYXMJY8</div>
+                                </div>
+                                <div class="layui-col-md8 text-center h60 major">
+                                    @reslut.DLCSYXMJY81
+                                </div>
+                            </div>
+                            <div class="info-title default-mtb20">
+                                研究团队
+                                </div>
+                            <div class="desc-content">
+                                &nbsp;&nbsp; &nbsp;&nbsp;  @reslut.DLCSYYJTD1
+                            </div>
+                            <div class="info-title default-mtb20">
+                                更多介绍
+                            </div>
+                            <div class="desc-content">
+                                &nbsp;&nbsp; &nbsp;&nbsp; @reslut.DLCSYGDJS1
+                            </div>
+                            <div style="height: 25px;"></div>
+                        </div>
+                        <div class="layui-tab-item"></div>
+                    </div>
+                </div>
+            </div>
+  
+                <div class="clear"></div>
+        </div>
+
+    <div id="DKSZYZHX1Text" style="display: none">@reslut.DKSZYZHX1</div>
+    <div id="DKSZYZHX1weizhiText" style="display: none">@reslut.DKSZYZHX1weizhi</div>
+    <div id="DKSZYZHX1zhiweiText" style="display: none">@reslut.DKSZYZHX1zhiwei</div>
+    <div id="DKSZYZHX1mingziText" style="display: none">@reslut.DKSZYZHX1mingzi</div>
+    <div id="DKSZYZHX1dianhuaText" style="display: none">@reslut.DKSZYZHX1dianhua</div>
+    <div id="DKSZYZHX1emailText" style="display: none">@reslut.DKSZYZHX1email</div>
+    <div id="DKSZYZHX1keshiText" style="display: none">@reslut.DKSZYZHX1keshi</div>
+    <div id="DKSZYZHX1yanjiutuanduiText" style="display: none">@reslut.DKSZYZHX1yanjiutuandui</div>
+    <div id="DKSZYZHX2Text" style="display: none">@reslut.DKSZYZHX2</div>
+    <div id="DKSZYZHX2weizhiText" style="display: none">@reslut.DKSZYZHX2weizhi</div>
+    <div id="DKSZYZHX2zhiweiText" style="display: none">@reslut.DKSZYZHX2zhiwei</div>
+    <div id="DKSZYZHX2mingziText" style="display: none">@reslut.DKSZYZHX2mingzi</div>
+    <div id="DKSZYZHX2dianhuaText" style="display: none">@reslut.DKSZYZHX2dianhua</div>
+    <div id="DKSZYZHX2emailText" style="display: none">@reslut.DKSZYZHX2email</div>
+    <div id="DKSZYZHX2keshiText" style="display: none">@reslut.DKSZYZHX2keshi</div>
+    <div id="DKSZYZHX2keshi1Text" style="display: none">@reslut.DKSZYZHX2keshi1</div>
+    <div id="DKSZYZHX2yanjiutuanduiText" style="display: none">@reslut.DKSZYZHX2yanjiutuandui</div>
+    <div id="DKSZYZHX2yanjiutuandui1Text" style="display: none">@reslut.DKSZYZHX2yanjiutuandui1</div>
+    </div>
+    <script type="text/template" id="linkview">
+
+        {{#  layui.each(d, function(index, item){ }}
+        <li>
+            <a target="_blank" href="{{item.Link}}" title="{{item.SiteName}}" class="friendlink-item">
+                <p class="friendlink-item-pic">
+                    {{# if(item.Logo){}}
+                    <img src="{{item.Logo}}" />
+                    {{# };}}
+                </p>
+                <p class="friendlink-item-title">{{item.SiteName}}</p>
+                <p class="friendlink-item-domain">{{item.Link}}</p>
+            </a>
+        </li>
+        {{#  }); }}
+    </script>
+    <script type="text/template" id="msgview">
+        <li>
+            <div class="comment-parent">
+                <img src="{{d.Image40}}" alt="{{d.NikeName}}">
+                <div class="info">
+                    <span class="username">{{d.NikeName}}</span>
+                </div>
+                <div class="content">
+                    {{d.Content}}
+                </div>
+                <p class="info info-footer">
+                    <span class="time">{{d.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>{{d.Adscription}}</span>&nbsp;&nbsp;
+                    <a class="btn-reply" style="color: #009688;font-size:14px;" href="javascript:;" onclick="btnReplyClick(this)">回复</a>
+                </p>
+            </div>
+            <hr>
+            {{# layui.each(d.Reply,function(index,item){ }}
+            <div class="comment-child">
+                <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+                <div class="info">
+                    <span class="username">	{{item.FromNikeName}} : </span>
+                    {{# if(item.IsMaster){ }}
+                    <span class="is_bloger">博主</span>
+                    {{# }; }}
+                    &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+                    <span>{{item.Content}}</span>
+                </div>
+                <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+            </div>
+            <hr>
+            {{# }); }}
+            {{# if(d.page>1){ }}
+            <div class="layui-flow-more"><a href="javascript:void(0);" data-rootid="{{d.MsgId}}" data-page="2" data-total="{{d.page}}" onclick="nextpage(this);" style="cursor:pointer;">查看更多回复</a></div>
+            {{# }; }}
+            <!-- 回复表单默认隐藏 -->
+            <div class="replycontainer layui-hide">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <textarea name="content" lay-verify="replyContent" placeholder="回复  @@{{d.NikeName}}:" class="layui-textarea" style="min-height:80px;"></textarea>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-mini" data-rootid="{{d.MsgId}}" data-fromid="{{d.FromUId}}" lay-submit="formReply" lay-filter="formReply">提交</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </script>
+    <script type="text/template" id="moreview">
+        {{# layui.each(d,function(index,item){ }}
+        <div class="comment-child">
+            <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+            <div class="info">
+                <span class="username">	{{item.FromNikeName}} : </span>
+                {{# if(item.IsMaster){ }}
+                <span class="is_bloger">博主</span>
+                {{# }; }}
+                &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+                <span>{{item.Content}}</span>
+            </div>
+            <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+        </div>
+        <hr>
+        {{# }); }}
+    </script>
+    <script>
+        var allItem = document.querySelectorAll('.department-item')
+        for (let i = 0; i < allItem.length; i++) {
+            allItem[i].onclick = function (e) {
+                addTagCurrentClass(e.target.innerText)
+                editContain(e.target.innerText)
+            }
+        }
+        function addTagCurrentClass(value) {
+            for (let i = 0; i < allItem.length; i++) {
+                allItem[i].classList.remove("department-item-active")
+                if (allItem[i].innerText === value) {
+                    allItem[i].classList.add("department-item-active")
+                }
+            }
+        }
+        function editContain(value) {
+
+            if (value.trim().includes(document.querySelector("#DKSZYZHX1").innerText)) {
+                document.querySelector("#DKSZYZHX1weizhi").innerText = document.querySelector("#DKSZYZHX1weizhiText").innerText
+                document.querySelector("#DKSZYZHX1zhiwei").innerText = document.querySelector("#DKSZYZHX1zhiweiText").innerText
+                document.querySelector("#DKSZYZHX1mingzi").innerText = document.querySelector("#DKSZYZHX1mingziText").innerText
+                document.querySelector("#DKSZYZHX1dianhua").innerText = document.querySelector("#DKSZYZHX1dianhuaText").innerText
+                document.querySelector("#DKSZYZHX1email").innerText = document.querySelector("#DKSZYZHX1emailText").innerText
+                document.querySelector("#DKSZYZHX1keshi").innerText = document.querySelector("#DKSZYZHX1keshiText").innerText
+                document.querySelector("#DKSZYZHX1yanjiutuandui").innerText = document.querySelector("#DKSZYZHX1yanjiutuanduiText").innerText
+            } else if (value.trim().includes(document.querySelector("#DKSZYZHX2").innerText)) {
+                document.querySelector("#DKSZYZHX1weizhi").innerText = document.querySelector("#DKSZYZHX2weizhiText").innerText
+                 document.querySelector("#DKSZYZHX1zhiwei").innerText = document.querySelector("#DKSZYZHX2zhiweiText").innerText
+                document.querySelector("#DKSZYZHX1mingzi").innerText = document.querySelector("#DKSZYZHX2mingziText").innerText
+                document.querySelector("#DKSZYZHX1dianhua").innerText = document.querySelector("#DKSZYZHX2dianhuaText").innerText
+                document.querySelector("#DKSZYZHX1email").innerText = document.querySelector("#DKSZYZHX2emailText").innerText
+                document.querySelector("#DKSZYZHX1keshi").innerText = document.querySelector("#DKSZYZHX2keshiText").innerText
+                document.querySelector("#DKSZYZHX1yanjiutuandui").innerText = document.querySelector("#DKSZYZHX2yanjiutuanduiText").innerText
+            } 
+        }
+
+    </script>
+
+    @section script{
+    <script src="~/web/js/about.js"></script>
+ 
+    <script>
+        //var $ = layui.$
+        //$(".department-item").click(function () {
+        //       $(this).addClass("department-item-active").siblings().removeClass("department-item-active")
+        //})
+    </script>
+}

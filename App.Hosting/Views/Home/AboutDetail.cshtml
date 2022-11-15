@@ -1,0 +1,795 @@
+
+@{
+    ViewData["Title"] = "九泰药械-关于我们";
+}
+@section css{
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+    <link href="~/web/css/about.css" rel="stylesheet" />
+    <style type="text/css">
+        .blog-nav .layui-nav {
+            width: 100%;
+        }
+    </style>
+}
+<div class="blog-body"border是真正的主体内容 -->
+    <div class="blog-container">
+        <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+            <a href="/" title="网站首页">首页</a>
+            <a><cite>关于我们</cite></a>
+        </blockquote>
+        <div class="blog-main">
+            <style>
+                    .header-box{
+                        display:flex;
+                        justify-content:flex-start;
+                        background:#fff;
+                        border-radius:10px;
+                        padding:20px;
+                        margin-bottom: 10px;
+                    }
+
+                    .header-box-left{
+                        flex-basis: auto;
+                    }
+
+                    .header-box-right {
+                        width: 100%;
+                    }
+                    .header-box-right-title{
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 10px;
+                    }
+
+                    .title-left{
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items:center;
+                    }
+                    .header-box-right-title h2 {
+                        font-size: 20px;
+                    }
+
+                   .header-box-right-title .date {
+                             margin-left: 6px;
+                            background: #F44336;
+                            color: #fff;
+                            font-size:16px;
+                            padding: 0 10px;
+                            border-radius: 10px;
+                            height: 18px;
+                        }
+
+                    .header-box-right-tag{
+                        margin-bottom: 15px;
+                        font-size: 14px;
+                    }
+
+                    .header-box-right-tag .item {
+                        background: #FFECD4;
+                        color: #D3903B;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                    }
+
+                    .header-box-right-tag .item1 {
+                        background: #CCD9FF;
+                        color: #2146CF;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                    }
+                    .header-box-right-content {
+                        display:flex;
+                        flex-wrap: wrap;
+                        background: rgba(0, 132, 255, 0.04);
+                        padding: 10px;
+                        font-size:12px;
+                        line-height:24px;
+                    }
+
+                    .header-box-right-content .item{
+                        width: 50%;
+                    }
+                    /*.header-box-right-tag {
+                        display: flex;
+                    }*/
+            </style>
+            <!-- header start -->
+            <div class="header-box">
+                <div class="header-box-left">
+                    <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" />
+                    <div>
+                        浏览量5679
+                    </div>
+                </div>
+                    <div class="header-box-right">
+                    <div class="header-box-right-title">
+                          <div class="title-left">
+                                <h2>首都医科大学附属北京友谊医院</h2>
+                                <span class="date">2022-10-10</span>
+                           </div>
+                           <div>
+                               <span>分享</span>
+                                <span>收藏</span>
+                                <span>报错</span>
+                           </div>
+                    </div>
+                     <div class="header-box-right-tag">
+                            <span class="item">新型冠状病毒肺炎医疗救治定点医院和发热门诊</span>
+                            <span class="item1">伦理前置审批</span>
+                    </div>
+                       <div class="header-box-right-content">
+                           <div class="item">机构电话: 010-63138628 </div>
+                            <div class="item">机构传真: - </div>
+                            <div class ="item">机构邮箱: yyygcp@163.com </div>
+                            <div class="item">接待时间: - </div>
+                            <div class ="item">所在地址: 北京市宣武区永安路95号</div>
+                        </div>
+                </div>
+            </div>
+            <!-- header end -->
+            <div class="layui-tab layui-tab-brief shadow" lay-filter="tabAbout">
+                <ul class="layui-tab-title">
+                    <li lay-id="1" class="layui-this">机构信息</li>
+                    <li lay-id="2" id="frinedlink">备案信息</li>
+                    <li lay-id="3">伦理委员会</li>
+                    <li lay-id="4">科宣专业组</li>
+                    <li lay-id="5">I期/BE临床试验病房</li>
+                    <li lay-id="6">攻略互助站</li>
+                </ul>
+                <style>
+                        .base-info{
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                        }
+
+                         .base-info .city-web-box,.gcp-box {
+                            margin-top: 20px;
+                            border: 1px solid #eee;
+                            height: 60px;
+                        }
+                        .text-center{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .base-info .major {
+                            padding: 10px;
+                        }
+
+                        .base-info .contact-box{
+                            margin: 20px 0;
+                 
+                        }
+
+                        .base-info .contact-box-content {
+                            border: 1px solid #eee;
+                        }
+
+                        .base-info .contact-info {
+                            margin: 10px;
+                            line-height: 32px;
+                        }
+                        .info-title{
+                            font-weight: bold;
+                        }
+                        .h60{
+                            min-height: 60px;
+                        }
+
+                        .desc-box{
+                            margin: 20px 0;
+                        }
+                        .desc-box .desc-title{
+                            margin: 10px 0  20px;
+                        }
+
+                        .desc-content{
+                            line-height: 24px;
+                            font-size: 12px;
+                        }
+                        .line{
+                           height: 1px;
+                           background:#eee;
+                        }
+                        .other{
+                            padding-top:20px ;
+                        }
+
+                         .other .other-item {
+                            color: #00B050;
+                            font-size: 12px;
+                            line-height: 25px;
+                            font-weight: bold;
+                        }
+
+                        .other-title{
+                            margin-bottom: 20px;
+                        }
+                       .other .other-item:first-child {
+                            margin-top: 20px;
+                        }
+                        .default-content{
+                            padding: 0 20px
+                        }
+                        .default-lh{
+                            line-height: 35px;
+                        }
+                        .default-label{
+                            background: #E0E6F5;
+                            border-bottom: 1px solid #E0E6F5;
+                            border-right: 1px solid #E0E6F5;
+                            font-size: 12px;
+                        }
+                        .default-border{
+                            border:1px solid #eee;
+                        }
+
+                        .default-ml{
+                            margin-left: 10px;
+                        }
+                        .border-bottom-none{
+                            border-bottom: none;
+                        }
+                        .mechanism-title{
+                            margin: 20px 0;
+                        }
+                        .default-table-title{
+                            color: #2146CF;
+                        }
+
+                        .check-box,.major-box{
+                            margin-top: 35px;
+                        }
+                        .default-mtb20{
+                            margin: 20px 0;
+                        }
+                        .apparatus-box{
+                           padding-bottom: 20px;
+                        }
+                        .contact-item{
+                            padding-left: 10px;
+                        }
+                        .department-item{
+                            border: 1px solid #949494;
+                            color: #949494;
+                            padding: 5px 10px;
+                            border-radius:2px;
+                            font-size: 12px;
+                        }
+                        .department-item:hover{
+                            cursor: pointer;
+                        }
+                        .department-item-active{
+                            border: 1px solid #2146CF;
+                            background: #2146CF;
+                            color: #fff;
+                        }
+                        .select-box{
+                            margin-bottom: 20px;
+                        }
+                        .researcher-title{
+                            margin-bottom: 20px;
+                            font-weight: bold;
+                        }
+                        </style>
+                <div class="layui-tab-content">
+                        <!--  机构信息 start -->
+                        <div class="layui-tab-item default-content layui-show">
+                        <div class="base-info">
+                            <div class="info-title">基本信息</div>
+                            <div class="layui-row city-web-box">
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                            北京北京
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构网址</div>
+                                            <div class="layui-col-md8 text-center h60">http://www.bfh.com.cn/</div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="layui-row gcp-box">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">原GCP认证专业</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        1，呼吸、妇产、眼科、皮肤、麻醉、消化、心血管、神经内科、肾病、泌尿、胃肠外营养、肿瘤、骨科、热带病、血液；2，医学影像（诊断、治疗、核医学）、内分泌、感染、耳鼻咽喉、口腔
+                                    </div>
+                                </div>
+                                <div class="info-title contact-box">联系方式</div>
+                                <div class="layui-row">
+                                    <div class="layui-col-md3 contact-box-content">
+                                        <div class="default-label text-center h60">
+                                            机构办主任助理
+                                        </div>
+                                        <div class="contact-info">
+                                            <div>杨春秀</div>
+                                            <div>010-63138628</div>
+                                            <div>chunxiuyang@sina.com</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="desc-box">
+                                <div class="info-title desc-title"> 机构简介</div>
+                               <div class="desc-content">
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; 首都医科大学附属北京友谊医院始建于1952年，原名为北京苏联红十字医院，是新中国成立后，在苏联政府和苏联红十字会援助下，由党和政府建立的第一所大型医院。1954年新院址落成，毛泽东主席特别题词“减少人民的疾病，提高人民的健康水平”。1957年3月，苏联政府将医院正式移交我国政府，周恩来总理亲自来院参加了移交仪式。1970年，周总理亲自为医院命名为“北京友谊医院”。
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp; &nbsp;&nbsp; 目前，首都医科大学附属北京友谊医院是集医疗、教学、科研、预防和保健为一体的北京市属三级甲等综合医院，是首都医科大学第二临床医学院。医院设有西城院区和通州院区，其中通州院区位于北京城市副中心。
+                                    </div>
+                                </div>
+                        </div>
+                            <div class="line"></div>
+                            <div class="other">
+                                <div class="info-title other-title"> 其他情况</div>
+                                <div class="other-item">以上信息如有错误，</div>
+                                <div class="other-item">请卿长按二维码进入公众号留言正确信息，</div>
+                                <div class="other-item">蔽号晓筑守12小时内修改更新，</div>
+                                <div class="other-item">感谢卿的支持！</div>
+                                <div>
+                                    <img src="https://storage.yscro.com/ueditor/net/upload1/7de12dff-d2c2-4a37-bb6b-b1cfa5aaf620.png"></img>
+                                </div>
+                            </div>
+                    </div>
+                        <!--  机构信息 end -->
+                        <div class="layui-tab-item default-content">
+                        <div class="back-up">
+                                <div class="info-title mechanism-title">
+                                    药物临床试验机构备案信息
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                        <div class="layui-col-md8 text-center h60">
+                                            北京北京
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构网址</div>
+                                        <div class="layui-col-md8 text-center h60">http://www.bfh.com.cn/</div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                北京北京
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构网址</div>
+                                            <div class="layui-col-md8 text-center h60">http://www.bfh.com.cn/</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                            北京北京
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md6">
+                                    <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构网址</div>
+                                            <div class="layui-col-md8 text-center h60">http://www.bfh.com.cn/</div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="layui-row default-border">
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">所在省市</div>
+                                            <div class="layui-col-md8 text-center h60">
+                                                北京北京
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-md6">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md4 default-label text-center h60">机构网址</div>
+                                            <div class="layui-col-md8 text-center h60">http://www.bfh.com.cn/</div>
+                                        </div>
+                                    </div>
+                                </div>
+                               <!-- -->
+                                <div class="check-box">
+                                    <table class="layui-table" lay-skin="nob">
+                                        <thead>
+                                            <tr>
+                                                <th>检查日期</th>
+                                                <th>检查类别</th>
+                                                <th>监督检查结果</th>
+                                                <th>处理情况</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2021-06-24</td>
+                                                <td>日常监督检查</td>
+                                                <td>基本符合规定，现场检查发现问题已改正。</td>
+                                                <td>无</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2020-12-17</td>
+                                                <td>新增专业首次检查,日常监督检查</td>
+                                                <td>基本符合规定，现场检查发现问题已改正。</td>
+                                                <td>无</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                               <!-- -->
+                               <!-- -->
+                                <div class="major-box">
+                                    <table class="layui-table" lay-skin="nob">
+                                        <thead>
+                                            <tr>
+                                                <th>专业名称</th>
+                                                <th>主要研究者</th>
+                                                <th>职称</th>
+                                                <th>专业备案时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>内科-呼吸内科专业</td>
+                                                <td>徐波</td>
+                                                <td>主任医师,副教授</td>
+                                                <td>2020-05-17</td>
+                                            </tr>
+                                            <tr>
+                                                <td>内科-呼吸内科专业</td>
+                                                <td>徐秋芬</td>
+                                                <td>主任医师,副教授</td>
+                                                <td>2020-05-17</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>    
+                               <!-- -->
+                        </div>
+                            <div class="line default-mtb20"></div>
+                            <div class="apparatus-box">
+                                <div class="info-title default-mtb20">
+                                    医疗器械临床试验机构备案信息
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">省份</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        北京市
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">备案号</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        械临机构备201800254
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">机构名称</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        首都医科大学附属北京友谊医院
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">机构级别</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        三级甲等
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">联系人</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        靳聪
+                                    </div>
+                                </div>
+                                 <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">联系电话</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        01063139850
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border border-bottom-none">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">备案状态</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        已备案
+                                    </div>
+                                </div>
+                                <div class="layui-row default-border">
+                                    <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">备案时间</div>
+                                    </div>
+                                    <div class="layui-col-md10 text-center h60 major">
+                                        2022-09-29(变更)
+                                    </div>
+                                </div>
+                                <!-- -->
+                                <div class="major-box">
+                                    <table class="layui-table" lay-skin="nob">
+                                        <thead>
+                                            <tr>
+                                                <th>专业名称</th>
+                                                <th>主要研究者</th>
+                                                <th>职称</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>内科-呼吸内科专业</td>
+                                                <td>徐波</td>
+                                                <td>主任医师,副教授</td>
+                                            </tr>
+                                            <tr>
+                                                <td>内科-呼吸内科专业</td>
+                                                <td>徐秋芬</td>
+                                                <td>主任医师,副教授</td>
+                                            </tr>
+                                            <tr>
+                                                <td>内科-消化内科专业</td>
+                                                <td>李鹏</td>
+                                                <td>主任医师</td>
+                                            </tr>
+                                            <tr>
+                                                <td>内科-消化内科专业</td>
+                                                <td>马红</td>
+                                                <td>主任医师</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- -->
+
+                            </div>
+                    </div>
+                        <div class="layui-tab-item default-content">
+                            <div class="layui-row default-border default-mtb20">
+                                <div class="layui-col-md2">
+                                        <div class="default-label text-center h60">伦理电话</div>
+                                </div>
+                                <div class="layui-col-md10 text-center h60 major">
+                                    010-6313 9017 
+                                </div>
+                            </div>
+                        <div class="info-title default-mtb20">
+                                联系方式
+                        </div>
+                        <div class="layui-row">
+                                <div class="layui-col-md3 default-border">
+                                <div class="default-label text-center h60">
+                                        崔焱
+                                </div>
+                                <div class="contact-info">
+                                        <div class="default-lh contact-item">cymail2013@163.com</div>
+                                    <div class="default-lh contact-item">-</div>
+                                    <div class="default-lh contact-item">-</div>
+                                </div>
+                            </div>
+                                <div class="layui-col-md3 default-border default-ml">
+                                    <div class="default-label text-center h60">
+                                    杨春秀
+                                </div>
+                                 <div class="contact-info">
+                                        <div class="default-lh contact-item">chunxiuyang@sina.com</div>
+                                        <div class="default-lh contact-item">-</div>
+                                        <div class="default-lh contact-item">- </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="line default-mtb20"></div>
+                        <div class="layui-row default-border default-mtb20">
+                            <div class="layui-col-md2">
+                                    <div class="default-label text-center h60">相关政策</div>
+                            </div>
+                            <div class="layui-col-md10 text-center h60 major">
+                                    伦理前置审批
+                            </div>
+                        </div>
+                    </div>
+                        <div class="layui-tab-item default-content">
+                        <div class="info-title default-mtb20">
+                                科室
+                        </div>
+                        <div class="select-box">
+                                <span class="department-item department-item-active">内分泌</span>
+                                <span class="department-item">心血管内科</span>
+                                <span class="department-item">呼吸内科</span>
+                        </div>
+                        <div class="layui-row default-border">
+                            <div class="layui-col-md6">
+                                <div class="layui-row">
+                                        <div class="layui-col-md4 default-label text-center h60">科室楼层位置</div>
+                                    <div class="layui-col-md8 text-center h60">
+                                            门诊楼2楼
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6">
+                                <div class="layui-row">
+                                        <div class="layui-col-md4 default-label text-center h60">项目经验</div>
+                                        <div class="layui-col-md8 text-center h60">II期和III期</div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="info-title default-mtb20">
+                                联系方式
+                        </div>
+                         <div class="layui-row">
+                                <div class="layui-col-md3 default-border">
+                                <div class="default-label text-center h60">
+                                        主治医师
+                                </div>
+                                <div class="contact-info">
+                                        <div class="default-lh contact-item">尚军洁</div>
+                                        <div class="default-lh contact-item">
+                                            15938856652
+                                        </div>
+                                        <div class="default-lh contact-item">junjieshang163@163.com</div>
+                                </div>
+                            </div>
+                                <div class="layui-col-md3 default-border default-ml">
+                                    <div class="default-label text-center h60">
+                                    主治医师
+                                </div>
+                                 <div class="contact-info">
+                                        <div class="default-lh contact-item">高伟</div>
+                                        <div class="default-lh contact-item">13723033060</div>
+                                        <div class="default-lh contact-item">240763273@qq.coms</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="line default-mtb20"></div>
+                        <div class="info-title default-mtb20">
+                                科室简介
+                        </div>
+                            <div class="desc-content">
+                            <div>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;内分泌、糖尿病专业疾病诊治科室及医学教学科研基地。科室先后派出多名医护人员分别赴北京协和医院、上海瑞金医院、湖南湘雅医院、北京304空军医院等全国知名医院进修学习。经过不断的发展壮大，已发展成为一个基础扎实、技术力量雄厚、富有临床特色、设备先进的科室。是一个团结、临床技术力量雄厚的优秀集体。
+                            </div>
+                                <div>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;对内分泌代谢性疾病诊疗技术综合能力强，具有较强的对各种内分泌代谢疾病及相关性疾病的临床诊疗能力。能诊治糖尿病及其各种急慢性并发症、肾上腺疾病、垂体下丘脑疾病、甲状腺疾病、甲状旁腺疾病及骨质疏松症等。
+                                </div>
+                        </div>
+                         <div class="line default-mtb20"></div>
+                        <div class="info-title default-mtb20">
+                                研究团队
+                        </div>
+                        <div>
+                                <div class="text-center"><img style="width:150px;height:185px;" src="https://storage.yscro.com/uploads/20211028/FkCZKubc2m-STdbJEr4019-V6T4O.png" /></div>
+                                <div class="text-center">尚军洁</div>
+                                <div class="researcher-title">研究者简历：</div>
+                                <div class="desc-content">&nbsp; &nbsp; &nbsp; &nbsp尚军洁为内分泌科主任，主任医师，擅长糖尿病及其各种急慢性并发症、 甲状腺疾病及骨质疏松症、内分泌性高血压、血脂异常 高尿酸血症 痛风等内分泌疾病的诊治。是南阳市内分泌学会副主任委员。于2019年12月08日参加中国医药质量管理协会在南阳举办的药物临床试验研究者培训班并获得培训合格证书，已在国家级期刊发表文章10余篇，SCI文章1篇，获得市级科技成果一等奖1项，二等奖8项，省级课题3项，作为主要研究者参与完成药物临床试验3项。</div>
+                        </div>
+                        <div class="line default-mtb20"></div>
+                        <div style="padding-bottom: 20px;">
+                            <img src="https://storage.yscro.com/uploads/20220607/FlLmni_pgQkIyCAMHgQmjQe87W6V.png" />
+                        </div>
+                    </div>
+                    <div class="layui-tab-item "></div>
+                    <div class="layui-tab-item"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script type="text/template" id="linkview">
+    {{#  layui.each(d, function(index, item){ }}
+    <li>
+        <a target="_blank" href="{{item.Link}}" title="{{item.SiteName}}" class="friendlink-item">
+            <p class="friendlink-item-pic">
+                {{# if(item.Logo){}}
+                <img src="{{item.Logo}}" />
+                {{# };}}
+            </p>
+            <p class="friendlink-item-title">{{item.SiteName}}</p>
+            <p class="friendlink-item-domain">{{item.Link}}</p>
+        </a>
+    </li>
+    {{#  }); }}
+</script>
+<script type="text/template" id="msgview">
+    <li>
+        <div class="comment-parent">
+            <img src="{{d.Image40}}" alt="{{d.NikeName}}">
+            <div class="info">
+                <span class="username">{{d.NikeName}}</span>
+            </div>
+            <div class="content">
+                {{d.Content}}
+            </div>
+            <p class="info info-footer">
+                <span class="time">{{d.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>{{d.Adscription}}</span>&nbsp;&nbsp;
+                <a class="btn-reply" style="color: #009688;font-size:14px;" href="javascript:;" onclick="btnReplyClick(this)">回复</a>
+            </p>
+        </div>
+        <hr>
+        {{# layui.each(d.Reply,function(index,item){ }}
+        <div class="comment-child">
+            <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+            <div class="info">
+                <span class="username">	{{item.FromNikeName}} : </span>
+                {{# if(item.IsMaster){ }}
+                <span class="is_bloger">博主</span>
+                {{# }; }}
+                &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+                <span>{{item.Content}}</span>
+            </div>
+            <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+        </div>
+        <hr>
+        {{# }); }}
+        {{# if(d.page>1){ }}
+        <div class="layui-flow-more"><a href="javascript:void(0);" data-rootid="{{d.MsgId}}" data-page="2" data-total="{{d.page}}" onclick="nextpage(this);" style="cursor:pointer;">查看更多回复</a></div>
+        {{# }; }}
+        <!-- 回复表单默认隐藏 -->
+        <div class="replycontainer layui-hide">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <textarea name="content" lay-verify="replyContent" placeholder="回复  @@{{d.NikeName}}:" class="layui-textarea" style="min-height:80px;"></textarea>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-mini" data-rootid="{{d.MsgId}}" data-fromid="{{d.FromUId}}" lay-submit="formReply" lay-filter="formReply">提交</button>
+                </div>
+            </form>
+        </div>
+    </li>
+</script>
+<script type="text/template" id="moreview">
+    {{# layui.each(d,function(index,item){ }}
+    <div class="comment-child">
+        <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+        <div class="info">
+            <span class="username">	{{item.FromNikeName}} : </span>
+            {{# if(item.IsMaster){ }}
+            <span class="is_bloger">博主</span>
+            {{# }; }}
+            &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+            <span>{{item.Content}}</span>
+        </div>
+        <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+    </div>
+    <hr>
+    {{# }); }}
+</script>
+@*<script>
+        $(".department-item").click(function () {
+           $(this).addClass("department-item-active").siblings().removeClass("department-item-active")
+    })
+</script>*@
+@section script{
+    <script src="~/web/js/about.js"></script>
+}
