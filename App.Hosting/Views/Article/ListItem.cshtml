@@ -1,12 +1,12 @@
 @{
-    ViewData["Title"] = "医院中心";
+    ViewData["Title"] = "摘要";
     var hospital = ViewBag.Yixue;//数据
     var count = ViewBag.Count;//总条数
     var page1 = ViewBag.PageNum;//当前页
     var code = ViewBag.Code;
     var key = ViewBag.Key;
     var shenfen = ViewBag.Shenfen;//省份
-    var k = 1;
+    var k = 0;
 }
 @section css{
     <link href="~/web/css/article.css" rel="stylesheet" />
@@ -18,6 +18,19 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
+
+        .blog-main{
+            background: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .blog-main table{
+           margin: 15px auto;
+           width: calc(100% - 20px);
+          
+        }
     </style>
 }
     @using App.Core.Entities.Blog
@@ -25,8 +38,8 @@
 <div class="blog-body">
     <div class="blog-container">
         <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
-            <a href="/" title="网站首页">首页<span class="layui-box">&gt;</span></a>
-                <a><cite>医院数据库</cite></a>
+            <a href="/" title="网站首页">首页1<span class="layui-box">&gt;</span></a>
+                <a><cite>摘要数据库</cite></a>
           
 
 
@@ -191,133 +204,47 @@
             <button id="search-btn" class="layui-btn" lay-submit="" lay-filter="demo2">查询</button>
         </div>
         <div class="blog-main">
-            <div id="parentArticleList" class="blog-main-left animated slideInLeft">
-               @* <div class="flow-default" id="articlelist">
+                <table lay-filter="demo">
+                    <thead>
+                        <tr class="">
+                            <th lay-data="{field:'sort', width:80, sort: true}">序号</th>
+                            <th lay-data="{field:'no',sort:true, escape: false}">登记号</th>
+                            <th lay-data="{field:'username2',sort:true, escape: false}">试验状态</th>
+                            <th lay-data="{field:'username3',sort:true, escape: false}">药物名称</th>
+                            <th lay-data="{field:'username4',sort:true, escape: false}">适应症</th>
+                            <th lay-data="{field:'username5',sort:true, escape: false}">试验通俗题目</th>
+                        </tr>
+                    </thead>
+			            <tbody>
+                             @foreach (Makeiteminfo info in hospital)
+                            {
+                                k += 1;
 
-                </div>*@
-                @foreach (Articleiteminfo info in hospital)
-                {
-                    <div class="article shadow animated zoomIn">
-                        <div class="article-left "> <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" alt="关于implicit 隐式转换的使用"> </div>
-                        <div class="article-right">
-                            <div class="article-title">
-                                @*                                <span class="article_is_top">置顶</span>&nbsp; <span class="article_is_yc">
-                            原创
-                            </span>*@
-                                &nbsp;
-                                <a href="/home/about?tid=@info.Syurl&sid=@shenfen" class="index-block"> @info.Syname</a>
-                            </div>
-                            <div class=" article-footer">
-                                @if (info.Sytag != "")
-                                {
-                                    <a href="/home/index?code=1&state=10&tag=2&key=Sytag2:333@@Sytag4:888@@Sytag4:null" class="flag">
-                                        @*tag 1:普通查询 直接传值 2:高级查询 Sytag2:333@@Sytag4:888 (后端没有做判断， ：后面取不到值就传 string "" )*@
-                                        @info.Sytag
-                                    </a>
-                                }
-                                @if (info.Sytag1 != "")
-                                {
-                                    <a href="/article/list?tid=1085792939428417536" class="flag1">
-                                        @info.Sytag1
-                                    </a>
-                                }
-                                @if (info.Sytag2 != "")
-                                {
-                                    <a href="/article/list" class="flag">
-                                        @info.Sytag2
-                                    </a>
-                                }
-
-                                @if (info.Sytag4 != "")
-                                {
-                                    <a href="/article/list?tid=1085792939428417536" class="flag2">
-                                        @info.Sytag4
-                                    </a>
-                                }
-
-                            </div>
-                        </div>
-                        <br />
-                        <div class="article-right-new item-base-info">
-                            <a class="index-block">基本信息：</a> @info.Syxiangmu
-                        </div>
-                        <div class="article-right-new item-base-info">
-                            <a class="index-block">机构电话：</a> @info.Syphnoe
-                        </div>
-                        <br />
-                        @if (@info.Syjiedaishijian != null && @info.Syjiedaishijian != "")
-                        {
-                            <div class="article-right-new">
-                                <a class="index-block">接待时间：</a> @info.Syjiedaishijian
-                            </div>
-                        }
-                        <br />
-
-                        @if (@info.Syadress != null && @info.Syadress != "")
-                        {
-                            <div class="article-right-new">
-                                <a class="index-block">机构地址：</a> @info.Syadress
-                            </div>
-                        }
-                        <div class="clear">
-                        </div>
-
-                    </div>
-                }
-                共 ：<a class="index-block-jiguo">@count </a> 条
-                <div id="demo0" style="text-align:center;"></div>
-                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                    <legend style="display:none" id="pageCount">@count</legend>
-                </fieldset>
-            </div>
-            <div class="blog-main-right">
-                <div class="blog-search animated fadeInRight">
-                    <div class="layui-form-item">
-                        <div class="search-keywords  shadow">
-                            <input type="text" id="keywords" name="keywords" lay-filter="searchInput" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
-                        </div>
-                        <div class="search-submit  shadow">
-                            <a class="search-btn" lay-submit="search" lay-filter="search"><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
+				            <tr style=" color:#535353">
+                            <td height="40">&nbsp;&nbsp;@k</td>
+				            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.JBXXdengjihao
+					            </a></td>
+				            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.TitleStage
+					            </a>
+				            </td>
+				            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.TitleName
+					            </a>
+				            </td>
+                            <td><a href="/home/aboutItem?tid=@info.JBXXdengjihao"  onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">@info.JBXXshiyingzheng</a></td>
+                            <td><a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">@info.JBXXshiyantongshutimu</a></td>
+				            </tr>
+                            }
+	            </tbody>
+                </table>
+                <div>
+                    <div id="demo0" style="text-align:center;"></div>
                 </div>
-                <div class="article-category shadow categoryOut">
-                    <div class="article-category-title" id="category">分类导航</div>
-                    <div class="clear"></div>
-                </div>
-                <!--热门文章-->
-                <div class="layui-tab layui-tab-brief shadow animated fadeInRight blog-module">
-                    <div class="blog-module-title"><i class="layui-icon layui-icon-fire"></i>&nbsp;热门文章</div>
-                    @*  <ul class="hot-list" id="hot">
-                    </ul>*@
-                    <ui class="hot-list" id="hot1">
-                        @foreach (Articleiteminfo info in hospital)
-                        {
-                            <li>
-                                <a href="/home/about">
-                                    <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110">
-                                </a>
-                                <div class="hot-right-box">
-                                    <h4>
-                                        <a href="/home/about" class="index-block-jiguo">
-                                            @info.Syname
-                                        </a>
-                                    </h4>
-                                    <p class="hot-date">
-                                        <i class="layui-icon layui-icon-date"></i>
-                                        <a>机构电话： @info.Syphnoe</a>
-                                    </p>
-                                    @*                              <p class="hot-view">
-                                <i class="layui-icon layui-icon-read"></i>
-                                <a>122</a>
-                                </p>*@
-                                </div>
-                            </li>
-                        }
-                    </ui>
-                </div>
-                <div class="category-toggle"><i class="fa fa-chevron-left"></i></div>
-            </div>
         </div>
         <div class="clear"></div>
     </div>
@@ -391,7 +318,7 @@
                 keyStr = keyStr + key + ':' + (formData[key] || 'null') + '$$'
             }
             keyStrAll = keyStr
-            const url = '/article/list?code=1&state=10&tag=2&' + keyStr
+            const url = '/article/listItem?code=1&state=10&tag=2&' + keyStr
             window.location.href = url
             
         }
@@ -406,7 +333,7 @@
                                     , jump: function (obj, first) {
                     if (!first) {
                         curr = obj.curr
-                        window.location.href = "/article/list?state=10&code=" + obj.curr + "&" + keyStrAll
+                        window.location.href = "/article/listItem?state=10&code=" + obj.curr + "&" + keyStrAll
                         console.log(obj)
                     }
 
@@ -415,6 +342,23 @@
         })
     </script>
     <script type="text/javascript">
+        layui.use(['laypage', 'layer', 'table'], function () {
+            layui.table.init('demo', {});
+            var laypage = layui.laypage
+            var dropdown = layui.dropdown
+            laypage.render({
+                elem: 'demo0'
+                , curr: @code
+                                        , count: @count //数据总数
+                                            , jump: function (obj, first) {
+                    if (!first) {
+                        curr = obj.curr
+                        window.location.href = "/article/listItem?state=10&code=" + obj.curr + "&" + keyStrAll
+                        console.log(obj)
+                    }
 
+                }
+            });
+        })
     </script>
 }

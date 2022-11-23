@@ -17,6 +17,9 @@ namespace App.Core.Entities.Blog
         /// </summary>
         public string Title { get; set; }
 
+        public string Hospitalid_Cra5 { get; set; }
+        public string Hospitalid { get; set; }
+        
         /// <summary>
         /// 标题
         /// </summary>

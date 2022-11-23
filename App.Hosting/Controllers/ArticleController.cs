@@ -45,13 +45,24 @@ namespace App.Hosting.Controllers
             {
                 pagesize = Convert.ToInt32(state);
             }
-            string str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  AirtleTable order by Topdesc desc ";
+
+            string shenfen = "";
+            if (key != null)
+            {
+                shenfen = key.Split("DJGXXshen:")[1].Split("$$Dstag:")[0];
+            }
+            string table = "AirtleTable";
+            if (shenfen != "")
+            {
+                table = table + "_" + shenfen;
+            }
+            string str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  " + table + " order by Topdesc desc ";
             if (tag == "2")
             {
                 //DJGXXshen:天津$$Dstag:1$$interest2:1$$interest3:1$$sex:国内试验$$qishu:I 期$$Dsname:null$$DLCSYgcc:null$$title:null$$title1:null$$title2:null$$title3:null$$
-                str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  AirtleTable";
+                str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  " + table;
                 string _where = " where 1= 1";
-                string _desc = "order by Topdesc desc";
+                string _desc = " order by Topdesc desc";
                 var arr = key.Split("$$");
                 foreach (string i in arr)
                 {
@@ -81,7 +92,7 @@ namespace App.Hosting.Controllers
                     //if (i.Contains("Dsjiedaishijian") && i.Split(":")[1]  != "null") _where += "  AND Dsjiedaishijian   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Dsadress") && i.Split(":")[1]  != "null") _where += "  AND Dsadress   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Dsliurangshu") && i.Split(":")[1]  != "null") _where += "  AND Dsliurangshu   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("DJGXXshen") && i.Split(":")[1] != "null") _where += "  AND DJGXXshen   like '%" + i.Split(":")[1] + @"%' ";
+                    //if (i.Contains("DJGXXshen") && i.Split(":")[1] != "null") _where += "  AND DJGXXshen   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DJGXXweb") && i.Split(":")[1]  != "null") _where += "  AND DJGXXweb   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DJGXXjgwz") && i.Split(":")[1]  != "null") _where += "  AND DJGXXjgwz   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DJGXXjgzzdm") && i.Split(":")[1]  != "null") _where += "  AND DJGXXjgzzdm   like '%" + i.Split(":")[1] + @"%' ";
@@ -224,6 +235,8 @@ namespace App.Hosting.Controllers
             ViewBag.Count = result.Count();
             ViewBag.PageNum = (result.Count() - 1) / pagesize + 1;
             ViewBag.Code = index;
+            ViewBag.Shenfen = shenfen;
+            ViewBag.Key = key;
 
             string name1 = string.Empty;
             //if (!string.IsNullOrWhiteSpace(cid))
@@ -237,7 +250,75 @@ namespace App.Hosting.Controllers
             //ViewBag.CategoryName = "";
             return View();
         }
+        public IActionResult ListItem(string cid, string tid, string code, string state, string tag, string key)
+        {
 
+            var a = tag;
+            var index = 1;
+            var pagesize = 10;
+            if (code != "" && code != null)
+            {
+                index = Convert.ToInt32(code);
+            }
+            if (state != "" && state != null)
+            {
+                pagesize = Convert.ToInt32(state);
+            }
+
+            string shenfen = "";
+            if (key != null)
+            {
+                shenfen = key.Split("DJGXXshen:")[1].Split("$$Dstag:")[0];
+            }
+            //string table = "AirtleTable";
+            //if (shenfen != "")
+            //{
+            //    table = table + "_" + shenfen;
+            //}
+            string str = " SELECT Other, TitleName, TitleStage,JBXXshiyingzheng,JBXXshiyantongshutimu,JBXXdengjihao FROM MakeTable order by Todesc desc ";
+        
+            var result = GetItemEntity(str);
+            var data = result.Skip((index - 1) * pagesize).Take(pagesize).ToList();
+            //List<BannerInfo> list = await _bannerService.GetListCacheAsync(null, o => o.SortCode, false);
+
+            //var article = await _articleService.GetListCacheAsync(null, o => o.CreatorTime, false);
+            ViewBag.Yixue = data;
+            ViewBag.Count = result.Count();
+            ViewBag.PageNum = (result.Count() - 1) / pagesize + 1;
+            ViewBag.Code = index;
+            ViewBag.Shenfen = "";
+            ViewBag.Key = key;
+
+            string name1 = string.Empty;
+            return View();
+        }
+
+        private IList<Makeiteminfo> GetItemEntity(string sqlstr, string filter = "")
+        {
+            var list1 = new List<Makeiteminfo>();
+            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+            conText.Open();//打开数据库  
+            string sqls = sqlstr;//创建统计语句  
+            SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+            SqlDataReader dr;//创建DataReader对象  
+            dr = comText.ExecuteReader();//执行查询  
+            while (dr.Read())//判断数据表中是否含有数据  
+            {
+                var i = new Makeiteminfo();
+                var date = dr;
+                i.Other = date["Other"].ToString();
+                i.TitleName = date["TitleName"].ToString();
+                i.TitleStage = date["TitleStage"].ToString();
+                i.JBXXshiyingzheng = date["JBXXshiyingzheng"].ToString();
+                i.JBXXshiyantongshutimu = date["JBXXshiyantongshutimu"].ToString();
+                i.JBXXdengjihao = date["JBXXdengjihao"].ToString();
+
+                list1.Add(i);
+            }
+            dr.Close();//关闭DataReader对象  
+            return list1;
+        }
         private IList<Articleiteminfo> GetGoalsEntity(string sqlstr, string filter = "")
         {
             var list1 = new List<Articleiteminfo>();

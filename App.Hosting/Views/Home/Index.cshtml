@@ -157,9 +157,10 @@
 
                     </div>
                 }
-            <div id="demo0"></div>    
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-              <legend style="display:none" id="pageCount">@count</legend>
+                共 ：<a class="index-block-jiguo">@count </a> 条
+                <div id="demo0" style="text-align:center;"></div>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px; margin-left:200px">
+                    <legend style="display:none" id="pageCount">@count</legend>
             </fieldset>
             </div>
             <div class="blog-main-right">
@@ -230,7 +231,6 @@
         <div class="clear"></div>
     </div>
 </div>
-
 <script type="text/template" id="tipsview">
     {{#  layui.each(d, function(index, item){ }}
     <span style="color: rgb(0, 150, 136); cursor: pointer; display:{{index==0?'block':'none'}};">
@@ -277,7 +277,42 @@
 </script>
 @section script{
     <script src="~/web/js/index.js"></script>
+    <script src="~/js/axios.min.js"></script>
     <script type="text/javascript">
+        console.log("-------->");
+        document.cookie = ''
+        document.cookie = 'token=242b494f-c62d-47ca-807f-c78b6ae314b4'
+
+        axios({
+            method: 'post',
+            url: 'https://www.yscro.com/api/organization/cdeorg',
+            data: {
+                test_range: 1,
+                page: 1,
+                limit: 10,
+                orgid: '1f9b57a723b5bf85e519859733d42629'
+            },
+            withCredentials: true
+        }).then(res=>{
+        console.log(res)})
+        //$.ajax({
+        //    type: "POST",
+        //    url: "https://www.yscro.com/api/organization/cdeorg",
+        //    contentType: "application/json; charset=utf-8",
+        //    xhrFields: { withCredentials: true },
+        //    data: JSON.stringify({
+        //        test_range: 1,
+        //        page: 1,
+        //        limit: 10,
+        //        orgid: '1f9b57a723b5bf85e519859733d42629'
+        //    }),
+        //    success: function (response) {
+        //        console.log(response)
+        //    },
+        //    error: function (err) {
+        //    }
+        //})
+
         let curr = 1
         layui.use(['laypage', 'layer'], function () {
              var laypage = layui.laypage

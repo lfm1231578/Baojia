@@ -1,0 +1,1204 @@
+@{
+    ViewData["Title"] = "摘要详情";
+    var reslut = ViewBag.Dailt;
+
+
+    var c = 1;
+}
+@section css{
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+    <link href="~/web/css/about.css" rel="stylesheet" />
+    <style type="text/css">
+        .blog-nav .layui-nav {
+            width: 100%;
+        }
+    </style>
+    <style>
+        body{
+           background: #fff;
+        }
+        footer{
+            display: none;
+        }
+        .right .layui-col-md4 {
+            width: 33.33333333%;
+        }
+
+        .right .layui-col-md8 {
+            width: 66.66666667%;
+        }
+
+        .right .layui-col-md2 {
+            width: 16.66666667%;
+        }
+
+        .right .layui-col-md10 {
+            width: 83.33333333%;
+        }
+
+        .right .layui-col-md6 {
+            width: 50%;
+        }
+    </style>
+        <style>
+        .left {
+            position: fixed;
+            left: calc(50% - 675px);
+            top: 134px;
+        }
+
+        .right {
+            width: 1000px;
+            margin: 0 auto;
+            height: 1500px;
+        }
+
+        .left .active {
+            /* background-color: #007bff;
+            color: #fff; */
+            width: 149px;
+            border-left: 2px solid #009688;
+            color: #009688;
+            font-weight: bold;
+            transition: color 0.1s;
+            transition: font-weight 0.1s;
+        }
+
+        .left a {
+            display: block;
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #eee;
+            text-align: center;
+            color: #888;
+            border-bottom: none;
+            letter-spacing: 1px;
+        }
+
+        .left a:last-child {
+            border-bottom: 1px solid #eee;
+        }
+
+        .default-height {
+            min-height: 60px;
+        }
+
+        .label {
+            background: #F1F5FF;
+            display: inline-block;
+            min-height: 60px;
+        }
+
+        .content {
+            min-height: 60px;
+        }
+
+        .text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .border {
+            border: 1px solid #E0E6F5;
+        }
+
+        .pro-title {
+            font-size: 18px;
+            margin: 30px 0;
+            font-weight: bold;
+            position: relative;
+            padding-left: 10px;
+            /* color: #0079d6; */
+        }
+
+        .m0 {
+            margin-top: 0;
+        }
+
+        .pro-title:before {
+            content: "";
+            position: absolute;
+            left: -2px;
+            top: -3px;
+            height: 30px;
+            border-right: 3px solid #009688;
+        }
+
+        .layui-row {
+            display: flex;
+        }
+
+        .layui-table {
+            margin: 0;
+        }
+
+        .pl10 {
+            padding: 10px;
+        }
+
+        .line {
+            margin-top: 30px;
+            height: 1px;
+            background-color: #eee;
+        }
+
+        .page-title {
+            width: 1000px;
+            margin: 0 auto 30px;
+            font-size: 24px;
+            font-weight: bold;
+            /* margin-bottom: 15px; */
+        }
+
+        .base-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .base-info a {
+            font-size: 13px;
+            color: #888;
+        }
+        .border-bottom-none{
+            border-bottom: none;
+        }
+        .border-left-none{
+            border-left: none;
+        }
+       @("@")media screen and (max-width: 1200px) {
+            .left {
+                display: none;
+            } 
+            .page-title {
+                width: 95%;
+                margin: 0 auto 10px;
+            }
+            .right {
+                width: 95%;
+                margin: 0 auto;
+            }
+        }
+       @("@")media screen and (max-width: 768px) {
+            .page-title {
+                width: 95%;
+                margin: 0 auto 10px;
+            }
+
+            .base-info {
+                display: block;
+            }
+
+            .base-info a {
+                margin-top: 10px;
+                display: block;
+            }
+
+            .right {
+                width: 95%;
+                margin: 0 auto;
+            }
+
+            .layui-table td {
+                word-break: break-all;
+            }
+
+            .scroll-x-box {
+                width: 100%;
+                overflow-x: scroll;
+            }
+        }
+    </style>
+}   
+    <div class="blog-body" border是真正的主体内容 -->
+        <div class="blog-container">
+         @*   <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+                <a href="/" title="网站首页">首页1</a>
+                <a><cite>摘要详情</cite></a>
+            </blockquote>*@
+           @* <div class="blog-main">
+
+
+            </div>*@
+                <div class="page-title">
+                    @reslut.TitleName ｜@reslut.SYZTXXshiyanzhuantai
+                </div>
+                <div class="left">
+                    <a href="javascript:void(0)" class="active jump">基本信息</a>
+                    <a href="javascript:void(0)" class="jump">申请人信息</a>
+                    <a href="javascript:void(0)" class="jump">临床试验信息</a>
+                    <a href="javascript:void(0)" class="jump">试验分组</a>
+                    <a href="javascript:void(0)" class="jump">终点指标</a>
+                    <a href="javascript:void(0)" class="jump">研究者信息</a>
+                    <a href="javascript:void(0)" class="jump">各参加机构信息</a>
+                    <a href="javascript:void(0)" class="jump">伦理委员会信息</a>
+                    <a href="javascript:void(0)" class="jump">试验状态信息</a>
+                    <a href="javascript:void(0)" class="jump">临床试验结果摘要</a>
+                </div>
+                    <div class="right  ">
+        <div id="section1" class="section">
+            <div class="pro-title m0 base-info">
+                基本信息
+                <a href="http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml?keywords=@reslut.JBXXdengjihao">数据来源:临床试验登记与信息公示平台，查看原文请点击</a>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            登记号
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.JBXXdengjihao
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            相关登记号
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none"> @reslut.JBXXxiangguandengjihao</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            曾用名
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.JBXXchengyongming
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            药物类型
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">@reslut.JBXXyaowuleixin</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    临床申请受理号
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.JBXXlinchuangshoushenqing
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    适应症
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.JBXXshiyingzheng
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    试验通俗题目
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.JBXXshiyantongshutimu
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    试验专业题目
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.JBXXshiyanzhuanyetimu
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            试验方案编号
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.JBXXshiyanfanganbianhao
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            方案最近版本号
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">@reslut.JBXXfanganzuijing</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border">
+                            版本日期
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-left-none">@reslut.JBXXbanbenriqi</div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border">
+                            方案是否为联合用药
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-left-none">
+                            @reslut.JBXXfanganshifou
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div id="section2" class="section">
+            <div class="pro-title">申请人信息</div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    试验专业题目
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.SQRXXshengqingrenmingcheng
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            申请人名称
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">@reslut.SQRXXshengqingrenmingcheng</div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            联系人姓名
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">
+                           @reslut.SQRXXlianxirenxingming
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            联系人座机/手机
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.SQRXXlianxirenzuoji / @reslut.SQRXXlianxirenshoujihao
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none ">
+                            联系人Email
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">
+                            @reslut.SQRXXlianxirenemail
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border">
+                            联系人邮政地址
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-left-none">
+                            @reslut.SQRXXlianxirenyouzhendizhi
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border">
+                            联系人邮编
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-left-none">
+                            @reslut.SQRXXlianxirenyoubian
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="line"></div>
+        <div id="section3" class="section">
+            <div class="pro-title">临床试验信息</div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            试验分类
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.LCSYXXshiyanfenlie
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            试验分期
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">
+                            @reslut.LCSYXXshiyanfenqi
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    试验目的
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.LCSYXXshiyanmudi
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            随机化
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.LCSYXXshuijihua
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            盲法
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">
+                            @reslut.LCSYXXmanfang
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            试验范围
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                            @reslut.LCSYXXshiyanfangwei
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            设计类型
+
+
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">
+                            @reslut.LCSYXXshejiliexing
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            年龄
+
+
+
+                        </div>
+                        <div class="layui-col-md8 text-center content border border-bottom-none border-left-none">
+                           @reslut.LCSYXXninaliang
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md4 label text-center border border-bottom-none">
+                            性别
+                        </div>
+                        <div class="layui-col-md8 text-center content  border border-bottom-none border-left-none">
+                            @reslut.LCSYXXxingbei
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    健康受试者
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                   @reslut.LCSYXXjiankuangshoushizhen
+
+                </div>
+            </div>
+
+
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    入选标准
+                </div>
+                <div class="layui-col-md10  content  border border-bottom-none pl10 border-left-none">
+                    <ul>
+                        @if( reslut.LCSYXXruxuanbiaozhun != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun1 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun1</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun1 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun1</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun2 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun2</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun3 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun3</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun4 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun4</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun5 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun5</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun6 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun6</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun7 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun7</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun8 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun8</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun9 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun9</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun10 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun10</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun11 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun11</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun12 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun12</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun13 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun13</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun14 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun14</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun15 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun15</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun16 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun16</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun17 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun17</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun18 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun18</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun19 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun19</li>}
+                        @if( reslut.LCSYXXruxuanbiaozhun20 != ""){<li>▷  @reslut.LCSYXXruxuanbiaozhun20</li>}
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border">
+                    排除标准
+                </div>
+                <div class="layui-col-md10 content  border pl10 border-left-none">
+                    <ul>
+                            @if( reslut.LCSYXXpaichubiaozhun != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun1 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun1</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun2 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun2</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun3 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun3</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun4 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun4</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun5 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun5</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun6 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun6</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun7 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun7</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun8 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun8</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun9 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun9</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun10 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun10</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun11 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun11</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun12 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun12</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun13 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun13</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun14 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun14</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun15 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun15</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun16 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun16</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun17 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun17</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun18 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun18</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun19 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun19</li>}
+                            @if( reslut.LCSYXXpaichubiaozhun20 != ""){<li>▷  @reslut.LCSYXXpaichubiaozhun20</li>}
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="line"></div>
+        <div id="section4" class="section">
+            <div class="pro-title">试验分组</div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    试验药
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    <table class="layui-table" >
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>用法</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@reslut.SYFZshiyanyaomingcheng</td>
+                                <td>
+                                    @reslut.SYFZshiyanyaoyongfa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border">
+                    对照药
+                </div>
+                <div class="layui-col-md10 text-center content  border border-left-none">
+                    <table class="layui-table" >
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>用法</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @reslut.SYFZduizhaomyaomingcheng</td>
+                                <td>@reslut.SYFZduizhaoyaoyongfa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="line"></div>
+        <div id="section5" class="section">
+            <div class="pro-title">终点指标</div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    主要终点指标
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    <table class="layui-table">
+                        <thead>
+                            <tr>
+                                <th>指标</th>
+                                <th>评价时间</th>
+                                <th>终点指标选择</th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                            
+                                @if (reslut.ZDZBZDZBzhibiao != "")
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBZDZBzhibiao</td>
+                                        <td>@reslut.ZDZBZDZBpingjiashijian</td>
+                                        <td> @reslut.ZDZBZDZBzongdianzhibiaoxuanzhe</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBZDZBzhibiao1 != "" && reslut.ZDZBZDZBzhibiao1 != "ZDZBZDZBzhibiao1" )
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBZDZBzhibiao1</td>
+                                        <td>@reslut.ZDZBZDZBpingjiashijian1</td>
+                                        <td> @reslut.ZDZBZDZBzongdianzhibiaoxuanzhe1</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBZDZBzhibiao2 != ""&& reslut.ZDZBZDZBzhibiao2 != "ZDZBZDZBzhibiao2" )
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBZDZBzhibiao2</td>
+                                        <td>@reslut.ZDZBZDZBpingjiashijian2</td>
+                                        <td> @reslut.ZDZBZDZBzongdianzhibiaoxuanzhe2</td>
+                                    </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    对照药
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none" >
+                    <table class="layui-table">
+                        <thead>
+                            <tr>
+                                <th>指标</th>
+                                <th>评价时间</th>
+                                <th>终点指标选择</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @if (reslut.ZDZBCYZDZBzhibiao != "")
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBCYZDZBzhibiao</td>
+                                        <td>@reslut.ZDZBCYZDZBpingjiashijian</td>
+                                        <td> @reslut.ZDZBCYZDZBzongdianzhibiaoxuanzhe</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBCYZDZBzhibiao1 != "")
+                                {
+                                     <tr>
+                                        <td>@reslut.ZDZBCYZDZBzhibiao1</td>
+                                        <td>@reslut.ZDZBCYZDZBpingjiashijian1</td>
+                                        <td> @reslut.ZDZBCYZDZBzongdianzhibiaoxuanzhe1</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBCYZDZBzhibiao2 != "")
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBCYZDZBzhibiao2</td>
+                                        <td>@reslut.ZDZBCYZDZBpingjiashijian2</td>
+                                        <td> @reslut.ZDZBCYZDZBzongdianzhibiaoxuanzhe2</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBCYZDZBzhibiao3 != "")
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBCYZDZBzhibiao3</td>
+                                        <td>@reslut.ZDZBCYZDZBpingjiashijian3</td>
+                                        <td> @reslut.ZDZBCYZDZBzongdianzhibiaoxuanzhe3</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBCYZDZBzhibiao4 != "")
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBCYZDZBzhibiao4</td>
+                                        <td>@reslut.ZDZBCYZDZBpingjiashijian4</td>
+                                        <td> @reslut.ZDZBCYZDZBzongdianzhibiaoxuanzhe4</td>
+                                    </tr>
+                                }
+                                
+                                @if (reslut.ZDZBCYZDZBzhibiao5 != "")
+                                {
+                                    <tr>
+                                        <td>@reslut.ZDZBCYZDZBzhibiao5</td>
+                                        <td>@reslut.ZDZBCYZDZBpingjiashijian5</td>
+                                        <td> @reslut.ZDZBCYZDZBzongdianzhibiaoxuanzhe5</td>
+                                    </tr>
+                                }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    数据安全监察委员会（DMC）
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                   @reslut.ZDZBshujuanquanjianchaweiyuanhui
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border">
+                    为受试者购买试验伤害保险
+                </div>
+                <div class="layui-col-md10 text-center content  border border-left-none">
+                    @reslut.ZDZBweishouzhezheguomaishiyan
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div id="section6" class="section">
+            <div class="pro-title">研究者信息</div>
+            <div class="scroll-x-box">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>学位</th>
+                            <th>职称</th>
+                            <th>电话</th>
+                            <th>Email</th>
+                            <th width="150">邮政地址</th>
+                            <th>邮编</th>
+                            <th>单位名称</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@reslut.YJZXXxingming</td>
+                            <td>@reslut.YJZXXxuewei</td>
+                            <td>@reslut.YJZXXzhicheng</td>
+                            <td>@reslut.YJZXXdianhuan</td>
+                            <td>@reslut.YJZXXemail</td>
+                            <td>@reslut.YJZXXyouzhenbiaoma</td>
+                            <td>@reslut.YJZXXyoubian</td>
+                            <td>@reslut.YJZXXdangweimingcheng</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div id="section7" class="section">
+            <div class="pro-title">各参加机构信息</div>
+            <div class="scroll-x-box">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th>机构名称</th>
+                            <th>（主要）研究者</th>
+                            <th>国家</th>
+                            <th>地区</th>
+                            <th>城市</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @if( reslut.GCJJGmingcheng != ""){ 
+                                <tr><td>@reslut.GCJJGmingcheng</td><td>@reslut.GCJJGzhuyaoyanjiuzhe</td><td>@reslut.GCJJGguojia</td><td>@reslut.GCJJGdiqu</td><td>@reslut.GCJJGchengshi</td></tr>
+                            }
+                            @if( reslut.GCJJGmingcheng1 != ""){ 
+                                <tr><td>@reslut.GCJJGmingcheng1</td><td>@reslut.GCJJGzhuyaoyanjiuzhe1</td><td>@reslut.GCJJGguojia1</td><td>@reslut.GCJJGdiqu1</td><td>@reslut.GCJJGchengshi1</td></tr>
+                                    }
+                        @if( reslut.GCJJGmingcheng2 != ""){ <tr><td>@reslut.GCJJGmingcheng2</td><td>@reslut.GCJJGzhuyaoyanjiuzhe2</td><td>@reslut.GCJJGguojia2</td><td>@reslut.GCJJGdiqu2</td><td>@reslut.GCJJGchengshi2</td></tr>}
+                        @if( reslut.GCJJGmingcheng3 != ""){ <tr><td>@reslut.GCJJGmingcheng3</td><td>@reslut.GCJJGzhuyaoyanjiuzhe3</td><td>@reslut.GCJJGguojia3</td><td>@reslut.GCJJGdiqu3</td><td>@reslut.GCJJGchengshi3</td></tr>}
+                        @if( reslut.GCJJGmingcheng4 != ""){  <tr><td>@reslut.GCJJGmingcheng4</td><td>@reslut.GCJJGzhuyaoyanjiuzhe4</td><td>@reslut.GCJJGguojia4</td><td>@reslut.GCJJGdiqu4</td><td>@reslut.GCJJGchengshi4</td></tr>}
+                        @if( reslut.GCJJGmingcheng5 != ""){  <tr><td>@reslut.GCJJGmingcheng5</td><td>@reslut.GCJJGzhuyaoyanjiuzhe5</td><td>@reslut.GCJJGguojia5</td><td>@reslut.GCJJGdiqu5</td><td>@reslut.GCJJGchengshi5</td></tr>}
+                        @if( reslut.GCJJGmingcheng6 != ""){  <tr><td>@reslut.GCJJGmingcheng6</td><td>@reslut.GCJJGzhuyaoyanjiuzhe6</td><td>@reslut.GCJJGguojia6</td><td>@reslut.GCJJGdiqu6</td><td>@reslut.GCJJGchengshi6</td></tr>}
+                        @if( reslut.GCJJGmingcheng7 != ""){  <tr><td>@reslut.GCJJGmingcheng7</td><td>@reslut.GCJJGzhuyaoyanjiuzhe7</td><td>@reslut.GCJJGguojia7</td><td>@reslut.GCJJGdiqu7</td><td>@reslut.GCJJGchengshi7</td></tr>}
+                        @if( reslut.GCJJGmingcheng8 != ""){  <tr><td>@reslut.GCJJGmingcheng8</td><td>@reslut.GCJJGzhuyaoyanjiuzhe8</td><td>@reslut.GCJJGguojia8</td><td>@reslut.GCJJGdiqu8</td><td>@reslut.GCJJGchengshi8</td></tr>}
+                        @if( reslut.GCJJGmingcheng9 != ""){  <tr><td>@reslut.GCJJGmingcheng9</td><td>@reslut.GCJJGzhuyaoyanjiuzhe9</td><td>@reslut.GCJJGguojia9</td><td>@reslut.GCJJGdiqu9</td><td>@reslut.GCJJGchengshi9</td></tr>}
+                        @if( reslut.GCJJGmingcheng10 != ""){  <tr><td>@reslut.GCJJGmingcheng10</td><td>@reslut.GCJJGzhuyaoyanjiuzhe10</td><td>@reslut.GCJJGguojia10</td><td>@reslut.GCJJGdiqu10</td><td>@reslut.GCJJGchengshi10</td></tr>}
+                        @if( reslut.GCJJGmingcheng11 != ""){  <tr><td>@reslut.GCJJGmingcheng11</td><td>@reslut.GCJJGzhuyaoyanjiuzhe11</td><td>@reslut.GCJJGguojia11</td><td>@reslut.GCJJGdiqu11</td><td>@reslut.GCJJGchengshi11</td></tr>}
+                        @if( reslut.GCJJGmingcheng12 != ""){  <tr><td>@reslut.GCJJGmingcheng12</td><td>@reslut.GCJJGzhuyaoyanjiuzhe12</td><td>@reslut.GCJJGguojia12</td><td>@reslut.GCJJGdiqu12</td><td>@reslut.GCJJGchengshi12</td></tr>}
+                        @if( reslut.GCJJGmingcheng13 != ""){  <tr><td>@reslut.GCJJGmingcheng13</td><td>@reslut.GCJJGzhuyaoyanjiuzhe13</td><td>@reslut.GCJJGguojia13</td><td>@reslut.GCJJGdiqu13</td><td>@reslut.GCJJGchengshi13</td></tr>}
+                        @if( reslut.GCJJGmingcheng14 != ""){  <tr><td>@reslut.GCJJGmingcheng14</td><td>@reslut.GCJJGzhuyaoyanjiuzhe14</td><td>@reslut.GCJJGguojia14</td><td>@reslut.GCJJGdiqu14</td><td>@reslut.GCJJGchengshi14</td></tr>}
+                        @if( reslut.GCJJGmingcheng15 != ""){  <tr><td>@reslut.GCJJGmingcheng15</td><td>@reslut.GCJJGzhuyaoyanjiuzhe15</td><td>@reslut.GCJJGguojia15</td><td>@reslut.GCJJGdiqu15</td><td>@reslut.GCJJGchengshi15</td></tr>}
+                        @if( reslut.GCJJGmingcheng16 != ""){  <tr><td>@reslut.GCJJGmingcheng16</td><td>@reslut.GCJJGzhuyaoyanjiuzhe16</td><td>@reslut.GCJJGguojia16</td><td>@reslut.GCJJGdiqu16</td><td>@reslut.GCJJGchengshi16</td></tr>}
+                        @if( reslut.GCJJGmingcheng17 != ""){  <tr><td>@reslut.GCJJGmingcheng17</td><td>@reslut.GCJJGzhuyaoyanjiuzhe17</td><td>@reslut.GCJJGguojia17</td><td>@reslut.GCJJGdiqu17</td><td>@reslut.GCJJGchengshi17</td></tr>}
+                        @if( reslut.GCJJGmingcheng18 != ""){  <tr><td>@reslut.GCJJGmingcheng18</td><td>@reslut.GCJJGzhuyaoyanjiuzhe18</td><td>@reslut.GCJJGguojia18</td><td>@reslut.GCJJGdiqu18</td><td>@reslut.GCJJGchengshi18</td></tr>}
+                        @if( reslut.GCJJGmingcheng19 != ""){  <tr><td>@reslut.GCJJGmingcheng19</td><td>@reslut.GCJJGzhuyaoyanjiuzhe19</td><td>@reslut.GCJJGguojia19</td><td>@reslut.GCJJGdiqu19</td><td>@reslut.GCJJGchengshi19</td></tr>}
+                        @if( reslut.GCJJGmingcheng20 != ""){  <tr><td>@reslut.GCJJGmingcheng20</td><td>@reslut.GCJJGzhuyaoyanjiuzhe20</td><td>@reslut.GCJJGguojia20</td><td>@reslut.GCJJGdiqu20</td><td>@reslut.GCJJGchengshi20</td></tr>}
+                       @if( reslut.GCJJGmingcheng21 != ""){  <tr><td>@reslut.GCJJGmingcheng21</td><td>@reslut.GCJJGzhuyaoyanjiuzhe21</td><td>@reslut.GCJJGguojia21</td><td>@reslut.GCJJGdiqu21</td><td>@reslut.GCJJGchengshi21</td></tr>}
+                        @if( reslut.GCJJGmingcheng22 != ""){  <tr><td>@reslut.GCJJGmingcheng22</td><td>@reslut.GCJJGzhuyaoyanjiuzhe22</td><td>@reslut.GCJJGguojia22</td><td>@reslut.GCJJGdiqu22</td><td>@reslut.GCJJGchengshi22</td></tr>}
+                       @if( reslut.GCJJGmingcheng23 != ""){   <tr><td>@reslut.GCJJGmingcheng23</td><td>@reslut.GCJJGzhuyaoyanjiuzhe23</td><td>@reslut.GCJJGguojia23</td><td>@reslut.GCJJGdiqu23</td><td>@reslut.GCJJGchengshi23</td></tr>}
+                        @if( reslut.GCJJGmingcheng24 != ""){  <tr><td>@reslut.GCJJGmingcheng24</td><td>@reslut.GCJJGzhuyaoyanjiuzhe24</td><td>@reslut.GCJJGguojia24</td><td>@reslut.GCJJGdiqu24</td><td>@reslut.GCJJGchengshi24</td></tr>}
+                        @if( reslut.GCJJGmingcheng25 != ""){  <tr><td>@reslut.GCJJGmingcheng25</td><td>@reslut.GCJJGzhuyaoyanjiuzhe25</td><td>@reslut.GCJJGguojia25</td><td>@reslut.GCJJGdiqu25</td><td>@reslut.GCJJGchengshi25</td></tr>}
+                        @if( reslut.GCJJGmingcheng26 != ""){  <tr><td>@reslut.GCJJGmingcheng26</td><td>@reslut.GCJJGzhuyaoyanjiuzhe26</td><td>@reslut.GCJJGguojia26</td><td>@reslut.GCJJGdiqu26</td><td>@reslut.GCJJGchengshi26</td></tr>}
+                        @if( reslut.GCJJGmingcheng27 != ""){  <tr><td>@reslut.GCJJGmingcheng27</td><td>@reslut.GCJJGzhuyaoyanjiuzhe27</td><td>@reslut.GCJJGguojia27</td><td>@reslut.GCJJGdiqu27</td><td>@reslut.GCJJGchengshi27</td></tr>}
+                       @if( reslut.GCJJGmingcheng28 != ""){  <tr><td>@reslut.GCJJGmingcheng28</td><td>@reslut.GCJJGzhuyaoyanjiuzhe28</td><td>@reslut.GCJJGguojia28</td><td>@reslut.GCJJGdiqu28</td><td>@reslut.GCJJGchengshi28</td></tr>}
+                        @if( reslut.GCJJGmingcheng29 != ""){ <tr><td>@reslut.GCJJGmingcheng29</td><td>@reslut.GCJJGzhuyaoyanjiuzhe29</td><td>@reslut.GCJJGguojia29</td><td>@reslut.GCJJGdiqu29</td><td>@reslut.GCJJGchengshi29</td></tr>}
+                        @if( reslut.GCJJGmingcheng30 != ""){ <tr><td>@reslut.GCJJGmingcheng30</td><td>@reslut.GCJJGzhuyaoyanjiuzhe30</td><td>@reslut.GCJJGguojia30</td><td>@reslut.GCJJGdiqu30</td><td>@reslut.GCJJGchengshi30</td></tr>}
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div id="section8" class="section">
+            <div class="pro-title">伦理委员会</div>
+            <div class="scroll-x-box">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>审查结论</th>
+                            <th>审查日期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @if (reslut.LLWYHmingcheng1 != "")
+                            {
+                                <tr>
+                                    <td>@reslut.LLWYHmingcheng1</td>
+                                    <td>@reslut.LLWYHshechajiruan1 </td>
+                                    <td>@reslut.LLWYHchachariqi1</td>
+                                </tr>
+                            }
+                            
+                            @if (reslut.LLWYHmingcheng2 != "")
+                            {
+                            <tr>
+                                <td>@reslut.LLWYHmingcheng2</td>
+                                <td>@reslut.LLWYHshechajiruan2 </td>
+                                <td>@reslut.LLWYHchachariqi2</td>
+                            </tr>
+                            }
+                            
+                            @if (reslut.LLWYHmingcheng3 != "")
+                            {
+                                <tr>
+                                    <td>@reslut.LLWYHmingcheng3</td>
+                                    <td>@reslut.LLWYHshechajiruan3</td>
+                                    <td>@reslut.LLWYHchachariqi3</td>
+                                </tr>
+                            }
+                            
+                            @if (reslut.LLWYHmingcheng4 != "")
+                            {
+                                <tr>
+                                    <td>@reslut.LLWYHmingcheng4</td>
+                                    <td>@reslut.LLWYHshechajiruan4 </td>
+                                    <td>@reslut.LLWYHchachariqi4</td>
+                                </tr>
+                            }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div id="section9" class="section">
+            <div class="pro-title">试验状态信息</div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    试验状态
+
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.SYZTXXshiyanzhuantai
+
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    目标入组人数
+
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.SYZTXXmubiaoruzhurenshu.Replace("?","")
+
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    已入组例数
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none" >
+                   @reslut.SYZTXXyiruzhulishu.Replace("?","")
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    实际入组总例数
+
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.SYZTXXshijiruzhuzonglishu.Replace("?","")
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    第一例受试者签署知情同意书日期
+
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                   @reslut.SYZTXXdiyilieshoushizheqianshu.Replace("?","")
+
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border border-bottom-none">
+                    第一例受试者入组日期
+
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-bottom-none border-left-none">
+                    @reslut.SYZTXXdiyilieshoushizheruzhuriqi.Replace("?","")
+
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md2 label text-center border">
+                    试验终止日期
+
+
+
+                </div>
+                <div class="layui-col-md10 text-center content  border border-left-none">
+                   @reslut.SYZTXXshiyanzongzhiriqi.Replace("?","")
+
+                </div>
+            </div>
+
+        </div>
+        <div class="line"></div>
+        <div id="section10" class="section">
+            <div class="pro-title">临床试验结果摘要
+            </div>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>版本号</th>
+                        <th>版本日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="height: 300px;"></div>
+    </div>
+
+                <div class="clear"></div>
+        </div>
+
+    </div>
+    <script type="text/template" id="linkview">
+
+        {{#  layui.each(d, function(index, item){ }}
+        <li>
+            <a target="_blank" href="{{item.Link}}" title="{{item.SiteName}}" class="friendlink-item">
+                <p class="friendlink-item-pic">
+                    {{# if(item.Logo){}}
+                    <img src="{{item.Logo}}" />
+                    {{# };}}
+                </p>
+                <p class="friendlink-item-title">{{item.SiteName}}</p>
+                <p class="friendlink-item-domain">{{item.Link}}</p>
+            </a>
+        </li>
+        {{#  }); }}
+    </script>
+    <script type="text/template" id="msgview">
+        <li>
+            <div class="comment-parent">
+                <img src="{{d.Image40}}" alt="{{d.NikeName}}">
+                <div class="info">
+                    <span class="username">{{d.NikeName}}</span>
+                </div>
+                <div class="content">
+                    {{d.Content}}
+                </div>
+                <p class="info info-footer">
+                    <span class="time">{{d.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>{{d.Adscription}}</span>&nbsp;&nbsp;
+                    <a class="btn-reply" style="color: #009688;font-size:14px;" href="javascript:;" onclick="btnReplyClick(this)">回复</a>
+                </p>
+            </div>
+            <hr>
+            {{# layui.each(d.Reply,function(index,item){ }}
+            <div class="comment-child">
+                <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+                <div class="info">
+                    <span class="username">	{{item.FromNikeName}} : </span>
+                    {{# if(item.IsMaster){ }}
+                    <span class="is_bloger">博主</span>
+                    {{# }; }}
+                    &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+                    <span>{{item.Content}}</span>
+                </div>
+                <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+            </div>
+            <hr>
+            {{# }); }}
+            {{# if(d.page>1){ }}
+            <div class="layui-flow-more"><a href="javascript:void(0);" data-rootid="{{d.MsgId}}" data-page="2" data-total="{{d.page}}" onclick="nextpage(this);" style="cursor:pointer;">查看更多回复</a></div>
+            {{# }; }}
+            <!-- 回复表单默认隐藏 -->
+            <div class="replycontainer layui-hide">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <textarea name="content" lay-verify="replyContent" placeholder="回复  @@{{d.NikeName}}:" class="layui-textarea" style="min-height:80px;"></textarea>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-mini" data-rootid="{{d.MsgId}}" data-fromid="{{d.FromUId}}" lay-submit="formReply" lay-filter="formReply">提交</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </script>
+    <script type="text/template" id="moreview">
+        {{# layui.each(d,function(index,item){ }}
+        <div class="comment-child">
+            <img src="{{item.FromImage}}" alt="{{item.FromNikeName}}">
+            <div class="info">
+                <span class="username">	{{item.FromNikeName}} : </span>
+                {{# if(item.IsMaster){ }}
+                <span class="is_bloger">博主</span>
+                {{# }; }}
+                &nbsp;回复 <span class="username">@@{{item.ToNikeName}}：</span>
+                <span>{{item.Content}}</span>
+            </div>
+            <p class="info"><span class="time">{{item.CreatorTime}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{{item.Adscription}}</span></p>
+        </div>
+        <hr>
+        {{# }); }}
+    </script>
+    <script>
+        var allItem = document.querySelectorAll('.department-item')
+        for (let i = 0; i < allItem.length; i++) {
+            allItem[i].onclick = function (e) {
+                addTagCurrentClass(e.target.innerText)
+                editContain(e.target.innerText)
+            }
+        }
+        function addTagCurrentClass(value) {
+            for (let i = 0; i < allItem.length; i++) {
+                allItem[i].classList.remove("department-item-active")
+                if (allItem[i].innerText === value) {
+                    allItem[i].classList.add("department-item-active")
+                }
+            }
+        }
+        function editContain(value) {
+
+        }
+
+    </script>
+
+    @section script{
+    <script src="~/web/js/about.js"></script>
+ 
+    <script>
+        //var $ = layui.$
+        //$(".department-item").click(function () {
+        //       $(this).addClass("department-item-active").siblings().removeClass("department-item-active")
+        //})
+    </script>
+       <script>
+        layui.use('jquery', function () {
+            const $ = layui.$
+            $(function () {
+                let isScrollChangeColor = true
+                let sectionTopArr = [];
+                $('.section').each(function () {
+                    sectionTopArr[$(this).index()] = $(this).offset().top;
+                })
+                sectionTopArr = sectionTopArr.filter(item=>item) 
+                $(window).scroll(function () {
+                    if (!isScrollChangeColor) return
+                    let curScollTop = $(this).scrollTop();
+                    let key = [...sectionTopArr, curScollTop].sort(function (a, b) { return a - b }).findIndex(item => item === curScollTop);
+                    $('.left a').removeClass("active").eq(key).addClass("active")
+                })
+                $('.jump').on("click", function (e) {
+                    isScrollChangeColor = false
+                    const index = $('.jump').index(this);
+                    $('.jump').removeClass("active").eq(index).addClass("active")
+                    $('html,body').animate({scrollTop: sectionTopArr[index] - 70},500)
+                    setTimeout(() => {
+                        isScrollChangeColor = true
+                    }, 1000)
+                })
+            })
+        })
+    </script>
+}
