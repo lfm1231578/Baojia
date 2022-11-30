@@ -6,7 +6,9 @@
     var code = ViewBag.Code;
     var key = ViewBag.Key;
     var shenfen = ViewBag.Shenfen;//省份
+    var where2 = ViewBag.Where2;
     var k = 1;
+    //IList<Makeiteminfo> [] arrlist = { };
 }
 @section css{
     <link href="~/web/css/article.css" rel="stylesheet" />
@@ -18,6 +20,16 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
+        .article-title{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .article-right .projectBtn {
+            font-size: 14px !important;
+            color: #009688;
+        }
+ 
     </style>
 }
     @using App.Core.Entities.Blog
@@ -79,8 +91,14 @@
                     <div class="layui-input-block">
                             <select name="Dstag" lay-filter="aihao">
                             <option value=""></option>
-                                <option value="药物认定机构">药物认定机构</option>
-                            <option value="1" >药物备案机构</option>
+                                <option value="GCP中心标本库">GCP中心标本库</option>
+                                <option value="临床试验中心药房">临床试验中心药房</option>
+                                <option value="可牵头遗传办">可牵头遗传办</option>
+                                <option value="伦理前置审批">伦理前置审批</option>
+                                <option value="GCP中心标本库">GCP中心标本库</option>
+                                <option value="中心实验室">中心实验室</option>
+                                <option value="临床试验专用病房">临床试验专用病房</option>
+                                <option value="牵头项目伦理随到随审">牵头项目伦理随到随审</option>
                         </select>
                     </div>
                 </div>
@@ -102,9 +120,9 @@
                     <div class="layui-input-block">
                         <select name="interest3" lay-filter="aihao">
                             <option value=""></option>
-                            <option value="0">进行中-尚未招募</option>
-                            <option value="1" >进行中-招募中</option>
-                            <option value="2">进行中-招募完成</option>
+                                <option value="进行中-尚未招募">进行中-尚未招募</option>
+                                <option value="进行中-招募中">进行中-招募中</option>
+                                <option value="进行中-招募完成">进行中-招募完成</option>
                         </select>
                     </div>
                 </div>
@@ -197,15 +215,19 @@
                 </div>*@
                 @foreach (Articleiteminfo info in hospital)
                 {
+                    int i = 0;
+
+                    if (info.projectcount != "0") {
+
+                        k++;
                     <div class="article shadow animated zoomIn">
-                        <div class="article-left "> <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" alt="关于implicit 隐式转换的使用"> </div>
+                        <div class="article-left "> <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" alt=""> </div>
                         <div class="article-right">
                             <div class="article-title">
                                 @*                                <span class="article_is_top">置顶</span>&nbsp; <span class="article_is_yc">
                             原创
                             </span>*@
-                                &nbsp;
-                                <a href="/home/about?tid=@info.Syurl&sid=@shenfen" class="index-block"> @info.Syname</a>
+                                <a href="/home/about?tid=@info.Syurl&sid=@shenfen" class="index-block"> @info.Syname</a>  <a href="javascript:void(0)" data="@info.Syname" class="index-block projectBtn"> 符合项目： @info.projectcount</a>
                             </div>
                             <div class=" article-footer">
                                 @if (info.Sytag != "")
@@ -263,6 +285,7 @@
                         </div>
 
                     </div>
+                    }
                 }
                 共 ：<a class="index-block-jiguo">@count </a> 条
                 <div id="demo0" style="text-align:center;"></div>
@@ -322,6 +345,17 @@
         <div class="clear"></div>
     </div>
 </div>
+<div class="dialog">
+</div>
+<style>
+    .dialogBox #projectBox {
+        display: none;
+    }
+    #projectBox #page{
+        display: flex;
+        justify-content: center;
+    }
+</style>
 <script id="newsview" type="text/template">
     <div class="article shadow animated zoomIn">
         <div class="article-left ">
@@ -391,7 +425,7 @@
                 keyStr = keyStr + key + ':' + (formData[key] || 'null') + '$$'
             }
             keyStrAll = keyStr
-            const url = '/article/list?code=1&state=10&tag=2&' + keyStr
+            const url = '/article/list?tid=6&code=1&state=10&tag=2&' + keyStr
             window.location.href = url
             
         }
@@ -406,7 +440,7 @@
                                     , jump: function (obj, first) {
                     if (!first) {
                         curr = obj.curr
-                        window.location.href = "/article/list?state=10&code=" + obj.curr + "&" + keyStrAll
+                        window.location.href = "/article/list?tid=7&where2=@where2&state=10&code=" + obj.curr + "&" + keyStrAll
                         console.log(obj)
                     }
 
@@ -415,6 +449,29 @@
         })
     </script>
     <script type="text/javascript">
-
+        layui.use(['jquery', 'table', 'laypage'], function () {
+            var laypage1 = layui.laypage;
+            laypage1.render({
+                elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+                ,count: 50 //数据总数，从服务端得到
+            });
+            const $ = layui.$
+            $(function () {
+                $('.projectBtn').each(function(){
+                    console.log($(this).attr('data'))
+                    $(this).on().on("click", function () {
+                        var cid =  $(this).attr('data');
+                        var cc = '%进行中-尚未招募%';
+                        layer.open({
+                            type: 2,
+                            content: 'http://localhost:5003/article/ListDetail?tid=8&cc=11&where2=@where2' + '&cid=' + cid,
+                            area: ['65%', '580px'],
+                            title: '符合项目'
+                        });
+                        layui.table.init('demo6', {});
+                    })
+                })
+            })
+        })
     </script>
 }

@@ -31,6 +31,7 @@
            width: calc(100% - 20px);
           
         }
+        
     </style>
 }
     @using App.Core.Entities.Blog
@@ -250,6 +251,8 @@
     </div>
 </div>
 <script id="newsview" type="text/template">
+    console.log("------->");
+    alert(11);
     <div class="article shadow animated zoomIn">
         <div class="article-left ">
             <img src="{{d.Thumbnail}}" alt="{{d.Title}}">
@@ -301,6 +304,11 @@
 @section script{
     <script src="~/web/js/article.js"></script>
     <script>
+        console.log("------->");
+        var redClassElements = document.getElementsByClassName('.blog-nav layui-header')
+        for (var i = 0; i < redClassElements.length; i++) {
+            redClassElements[i].style.display = 'none'
+        }
         let keyStrAll = ''
         document.querySelector("#search-btn").onclick = function () {
             let arr = ['DJGXXshen', 'Dstag', 'interest2', 'interest3', 'interest3', 'sex', 'qishu', 'Dsname', 'DLCSYgcc'

@@ -12,11 +12,15 @@ namespace App.Core.Entities.Blog
     [Serializable]
     public class Articleiteminfo : Entity<string>, ISoftDelete
     {
+        public IList<Makeiteminfo> list { get; set; }
         /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
 
+        public string projectcount { get; set; }
+
+        public string hospitalname { get; set; }
         public string Hospitalid_Cra5 { get; set; }
         public string Hospitalid { get; set; }
         

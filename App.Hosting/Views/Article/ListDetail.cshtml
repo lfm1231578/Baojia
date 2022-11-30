@@ -1,0 +1,295 @@
+@{
+    ViewData["Title"] = "摘要";
+    var hospital = ViewBag.Yixue;//数据
+    var count = ViewBag.Count;//总条数
+    var page1 = ViewBag.PageNum;//当前页
+    var code = ViewBag.Code;
+    var key = ViewBag.Key;
+    var shenfen = ViewBag.Shenfen;//省份
+    var where2 = ViewBag.Where2;
+    var cid = ViewBag.cid;
+    var k = 0;
+}
+@section css{
+    <link href="~/web/css/article.css" rel="stylesheet" />
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+    <link href="~/web/css/index.css" rel="stylesheet" />
+    <style>
+        .item-base-info {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .blog-main { 
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+            .blog-main table {
+                margin: 15px auto;
+                width: calc(100% - 20px);
+            }
+
+        .blog-body {
+            margin-top:0;
+
+            min-height: 510px !important;
+        }
+
+        .blog-main{
+            maring-bottom: 0px !important;
+            padding-bottom: 0px !important;
+            padding-top: 0px !important;
+        }
+        .layui-header{
+            display: none;
+        }
+
+        .footer{
+            display: none;
+        }
+
+        .layui-fixbar{
+            display: none;
+        }
+    </style>
+}
+    @using App.Core.Entities.Blog
+    <div class="blog-body" >
+        <div class="blog-container">
+
+            <div style="background:#fff;padding: 10px; display:none">
+                <form class="layui-form layui-form-pane" id="advance-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">试验分类2222</label>
+                        <div class="layui-input-block">
+                            <select name="interest2" lay-filter="aihao">
+                                <option value=""></option>
+                                <option value="安全性">安全性</option>
+                                <option value="有效性">有效性</option>
+                                <option value="安全性和有效性">安全性和有效性</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">试验状态</label>
+                        <div class="layui-input-block">
+                            <select name="interest3" lay-filter="aihao">
+                                <option value=""></option>
+                                <option value="0">进行中-尚未招募</option>
+                                <option value="1">进行中-招募中</option>
+                                <option value="2">进行中-招募完成</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" pane="">
+                        <label class="layui-form-label">试验范围</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="国内试验" title="国内试验">
+                            <input type="radio" name="sex" value="国际多中心试验" title="国际多中心试验">
+                            <input type="radio" name="sex" value="NK" title="NK" title="NK">
+
+
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" pane="">
+                        <label class="layui-form-label">
+                            试验分期
+                        </label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="qishu" value="I 期" title="I 期">
+                            <input type="radio" name="qishu" value="II 期" title="II 期">
+                            <input type="radio" name="qishu" value="III 期" title="II 期">
+                        </div>
+                    </div>
+
+                    <div class="layui-row">
+                        <div class="layui-col-xs6">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">机构名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="Dsname" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-row">
+                        <div class="layui-col-xs6">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">药物名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" autocomplete="off" placeholder="请输入药物名称" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <button id="search-btn" class="layui-btn" lay-submit="" lay-filter="demo2">查询</button>
+            </div>
+            <div class="blog-main">
+                <table lay-filter="demo">
+                    <thead>
+                        <tr class="">
+                            <th lay-data="{field:'sort', width:80, sort: true}">序号</th>
+                            <th lay-data="{field:'no',sort:true, escape: false}">登记号</th>
+                            <th lay-data="{field:'username2',sort:true, escape: false}">试验状态</th>
+                            <th lay-data="{field:'username3',sort:true, escape: false}">药物名称</th>
+                            <th lay-data="{field:'username4',sort:true, escape: false}">适应症</th>
+                            <th lay-data="{field:'username5',sort:true, escape: false}">试验通俗题目</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (Makeiteminfo info in hospital)
+                    {
+                        k += 1;
+
+                        <tr style=" color:#535353">
+                            <td height="40">&nbsp;&nbsp;@k</td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1" target="_blank">
+                                    @info.JBXXdengjihao
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1" target="_blank">
+                                    @info.TitleStage
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1" target="_blank">
+                                    @info.TitleName
+                                </a>
+                            </td>
+                            <td><a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1" target="_blank">@info.JBXXshiyingzheng</a></td>
+                            <td><a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1" target="_blank">@info.JBXXshiyantongshutimu</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                共 @count 条
+                <div id="demo0" style="text-align:center;"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script id="newsview" type="text/template">
+    <div class="article shadow animated zoomIn">
+        <div class="article-left ">
+            <img src="{{d.Thumbnail}}" alt="{{d.Title}}">
+        </div>
+        <div class="article-right">
+            <div class="article-title">
+                {{# if(d.IsTop){}}
+                <span class="article_is_top">置顶</span>&nbsp;
+                {{#} }}
+
+
+                {{#  if(d.CreativeType == 0){ }}
+                <span class="article_is_yc">
+                    原创
+                </span>&nbsp;
+                {{#  }else{ }}
+                <span class="article_is_zz">
+                    转载
+                </span>&nbsp;
+                {{#} }}
+
+                <a href="/article/detail/{{d.Id}}">{{d.Title}}</a>
+            </div>
+            <div class="article-abstract">
+                {{d.Summary}}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="article-footer">
+            <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{d.PublishDate}}</span>
+            <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp; {{d.Author}}</span>
+            <span>
+                <i class="fa fa-tag"></i>&nbsp;&nbsp;
+                {{#  layui.each(d.Tags, function(i, curr){}}
+                <a href="/article/list?tid={{curr.Id}}" class="flag"> {{curr.TagName}}</a>
+                {{#  }); }}
+            </span>
+            <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;{{d.ReadTimes}}</span>
+            <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;{{d.MsgTimes}}</span>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="categoryview">
+    {{#  layui.each(d, function(index, item){ }}
+    <a href="/article/list?cid={{item.Id}}">{{item.CategoryName}}</a>
+    {{#  }); }}
+</script>
+
+@section script{
+    <script src="~/web/js/article.js"></script>
+    <script>
+        let keyStrAll = ''
+        document.querySelector("#search-btn").onclick = function () {
+            let arr = ['DJGXXshen', 'Dstag', 'interest2', 'interest3', 'interest3', 'sex', 'qishu', 'Dsname', 'DLCSYgcc'
+                , 'title'
+                , 'title1'
+                , 'title2'
+                , 'title3'
+            ]
+            let formData = {}
+            for (let item of arr) {
+                formData[item] = document.getElementsByName(item)[0].value
+            }
+            let keyStr = 'key='
+            for (const key in formData) {
+                keyStr = keyStr + key + ':' + (formData[key] || 'null') + '$$'
+            }
+            keyStrAll = keyStr
+            const url = '/article/listDetail?tid=19&code=1&state=10&tag=2&' + keyStr + "&where2=@where2&cid=@cid"
+            window.location.href = url
+
+        }
+        let curr = 1
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+            var dropdown = layui.dropdown
+            laypage.render({
+                elem: 'demo0'
+                , curr: @code
+                                        , count: @count //数据总数
+                                            , jump: function (obj, first) {
+                    if (!first) {
+                        curr = obj.curr
+                        window.location.href = "/article/listDetail?tid=9&state=10&code=" + obj.curr + "&" + keyStrAll
+                        console.log(obj)
+                    }
+
+                }
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        layui.use(['laypage', 'layer', 'table'], function () {
+            layui.table.init('demo', {});
+            var laypage = layui.laypage
+            var dropdown = layui.dropdown
+            laypage.render({
+                elem: 'demo0'
+                , curr: @code
+                                                , count: @count //数据总数
+                                                    , jump: function (obj, first) {
+                    if (!first) {
+                        curr = obj.curr
+                        window.location.href = "/article/listDetail?state=10&code=" + obj.curr + "&" + keyStrAll
+                        console.log(obj)
+                    }
+
+                }
+            });
+        })
+    </script>
+}

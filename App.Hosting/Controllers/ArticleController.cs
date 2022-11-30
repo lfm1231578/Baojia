@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using App.Core.Entities.Blog;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using SqlSugar;
+using SqlSugar.DistributedSystem.Snowflake;
 
 namespace App.Hosting.Controllers
 {
@@ -46,16 +48,14 @@ namespace App.Hosting.Controllers
                 pagesize = Convert.ToInt32(state);
             }
 
-            string shenfen = "";
+            string shenfen = "guangdong";
             if (key != null)
             {
+                if (key.Split("DJGXXshen:")[1].Split("$$Dstag:")[0] != "null")
                 shenfen = key.Split("DJGXXshen:")[1].Split("$$Dstag:")[0];
             }
-            string table = "AirtleTable";
-            if (shenfen != "")
-            {
-                table = table + "_" + shenfen;
-            }
+            string table = "AirtleTable" + "_" + shenfen;
+            string where2 = "";
             string str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  " + table + " order by Topdesc desc ";
             if (tag == "2")
             {
@@ -67,6 +67,22 @@ namespace App.Hosting.Controllers
                 foreach (string i in arr)
                 {
 
+                    if (i.Contains("Dsname") && i.Split(":")[1] != "null") _where += "  AND Dsname   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND( Dstag   like '%" + i.Split(":")[1] + @"%' " +
+                                                                                    "  OR  Dstag1   like '%" + i.Split(":")[1] + @"%' " +
+                                                                                    "   OR   Dstag2   like '%" + i.Split(":")[1] + @"%' " +
+                                                                                    "   OR   Dstag3   like '%" + i.Split(":")[1] + @"%' "+
+                                                                                    "   OR   Dstag4   like '%" + i.Split(":")[1] + @"%' )";
+
+                    if (i.Contains("DLCSYgcc") && i.Split(":")[1] != "null") _where += "  AND DLCSYgcc   like '%" + i.Split(":")[1] + @"%' ";
+
+
+                    if (i.Contains("interest2") && i.Split(":")[1] != "null") where2 += "  AND LCSYXXshiyanfenlie   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("interest3") && i.Split(":")[1] != "null") where2 += "  AND TitleStage   like '%" + i.Split(":")[1] + @"%' ";
+                    #region
+
+
+
                     //if (i.Contains("Syurl") && i.Split(":")[1]  != "null") _where += "  AND Syurl   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Sytag") && i.Split(":")[1]  != "null") _where += "  AND Sytag   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Sytag1") && i.Split(":")[1]  != "null") _where += "  AND Sytag1   like '%" + i.Split(":")[1] + @"%' ";
@@ -77,13 +93,9 @@ namespace App.Hosting.Controllers
                     //if (i.Contains("Syphnoe") && i.Split(":")[1]  != "null") _where += "  AND Syphnoe   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Syjiedaishijian") && i.Split(":")[1]  != "null") _where += "  AND Syjiedaishijian   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Syadress") && i.Split(":")[1]  != "null") _where += "  AND Syadress   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("Dsname") && i.Split(":")[1] != "null") _where += "  AND Dsname   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Dsshijian") && i.Split(":")[1]  != "null") _where += "  AND Dsshijian   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag1   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag2   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag3   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag4   like '%" + i.Split(":")[1] + @"%' ";
+
+
                     //if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag5   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Dstag") && i.Split(":")[1] != "null") _where += "  AND Dstag6   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("Dsphone") && i.Split(":")[1]  != "null") _where += "  AND Dsphone   like '%" + i.Split(":")[1] + @"%' ";
@@ -184,7 +196,6 @@ namespace App.Hosting.Controllers
                     //if (i.Contains("DKSZYZHX1keshi") && i.Split(":")[1]  != "null") _where += "  AND DKSZYZHX1keshi   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DKSZYZHX1yanjiutuandui") && i.Split(":")[1]  != "null") _where += "  AND DKSZYZHX1yanjiutuandui   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DLCSYqdlx") && i.Split(":")[1]  != "null") _where += "  AND DLCSYqdlx   like '%" + i.Split(":")[1] + @"%' ";
-                    if (i.Contains("DLCSYgcc") && i.Split(":")[1] != "null") _where += "  AND DLCSYgcc   like '%" + i.Split(":")[1] + @"%' ";
 
                     //if (i.Contains("DLCSYqdny") && i.Split(":")[1]  != "null") _where += "  AND DLCSYqdny   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DLCSYcjcws") && i.Split(":")[1]  != "null") _where += "  AND DLCSYcjcws   like '%" + i.Split(":")[1] + @"%' ";
@@ -222,18 +233,142 @@ namespace App.Hosting.Controllers
                     //if (i.Contains("DKSZYZHX2keshi1") && i.Split(":")[1]  != "null") _where += "  AND DKSZYZHX2keshi1   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DKSZYZHX2yanjiutuandui") && i.Split(":")[1]  != "null") _where += "  AND DKSZYZHX2yanjiutuandui   like '%" + i.Split(":")[1] + @"%' ";
                     //if (i.Contains("DKSZYZHX2yanjiutuandui1") && i.Split(":")[1]  != "null") _where += "  AND DKSZYZHX2yanjiutuandui1   like '%" + i.Split(":")[1] + @"%' ";
+                    #endregion
                 }
                 str = str + _where + _desc;
             }
             string name = string.Empty;
             var result = GetGoalsEntity(str);
+            #region
+            //string sqlzy = @"SELECT hospitalname from (SELECT   GCJJGmingcheng as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng UNION   SELECT   GCJJGmingcheng1 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng1 UNION   SELECT   GCJJGmingcheng2 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng2 UNION   SELECT   GCJJGmingcheng3 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng3 UNION   SELECT   GCJJGmingcheng4 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng4 UNION   SELECT   GCJJGmingcheng5 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng5 UNION   SELECT   GCJJGmingcheng6 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng6 UNION   SELECT   GCJJGmingcheng7 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng7 UNION   SELECT   GCJJGmingcheng8 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng8 UNION   SELECT   GCJJGmingcheng9 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng9 UNION   SELECT   GCJJGmingcheng10 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng10 UNION   SELECT   GCJJGmingcheng11 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng11 UNION   SELECT   GCJJGmingcheng12 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng12 UNION   SELECT   GCJJGmingcheng13 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng13 UNION   SELECT   GCJJGmingcheng14 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng14 UNION   SELECT   GCJJGmingcheng15 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng15 UNION   SELECT   GCJJGmingcheng16 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng16 UNION   SELECT   GCJJGmingcheng17 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng17 UNION   SELECT   GCJJGmingcheng18 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng18 UNION   SELECT   GCJJGmingcheng19 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng19 UNION   SELECT   GCJJGmingcheng20 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng20 UNION   SELECT   GCJJGmingcheng21 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng21 UNION   SELECT   GCJJGmingcheng22 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng22 UNION   SELECT   GCJJGmingcheng23 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng23 UNION   SELECT   GCJJGmingcheng24 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng24 UNION   SELECT   GCJJGmingcheng25 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng25 UNION   SELECT   GCJJGmingcheng26 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng26 UNION   SELECT   GCJJGmingcheng27 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng27 UNION   SELECT   GCJJGmingcheng28 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng28 UNION   SELECT   GCJJGmingcheng29 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng29 UNION   SELECT   GCJJGmingcheng30 as hospitalname FROM MakeTable GROUP BY  GCJJGmingcheng30 ) as t  where  hospitalname <> '' GROUP BY hospitalname";
+            //var resultzy = GetGoalHospitalEntity(sqlzy, "zhaiyao");
+            //IList<Articleiteminfo> newresult =new List<Articleiteminfo>();
+            //foreach (var item in result) {
+            //    var i = new Articleiteminfo();
+            //    foreach (var items in resultzy) {
+            //        if (item.Syname.ToString() == items.Syname.ToString()) {
+            //            i = item;
+            //        }
+            //    }
+            //    newresult.Add(i);
+            //}
+            #endregion
             var data = result.Skip((index - 1) * pagesize).Take(pagesize).ToList();
-            //List<BannerInfo> list = await _bannerService.GetListCacheAsync(null, o => o.SortCode, false);
+            IList<Articleiteminfo> listruslet = new List<Articleiteminfo>();
+            var  Stag = 0;
+            if (tag != null) { 
+                foreach (var item in data) {
+                    var Articleiteminfo = new Articleiteminfo();
+                    var hn = item.Syname;
+                    var stringname = "";
+                    string[] arrhnnn = { hn };
+                    if (hn != null)
+                    {
+                        if (hn.Contains("（"))
+                        {
+                            var arrhn = hn.Split("（");
+                            var hn1 = arrhn[0];
+                            var hn2 = arrhn[1];
+                            if (hn2 != null)
+                            {
+                                if (hn2.Contains("）"))
+                                {
+                                    var arrhnn = hn2.Split("）");
+                                    var hnn = arrhnn[0].ToString();
+                                    var hnn1 = arrhnn[1];
+                                    if (hnn1 == "")
+                                    {
+                                        if (hnn.Contains("、") || hnn.Contains("，"))
+                                        {
+                                            if (hnn.Contains("、"))
+                                            {
+                                                stringname = hn1 + "、" + hnn;
+                                                arrhnnn = stringname.Split("、");
+                                            }
+                                            if (hnn.Contains("，"))
+                                            {
+                                                stringname = hn1 + "，" + hnn;
+                                                arrhnnn = stringname.Split("，");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            stringname = hn1 + "，" + hnn;
+                                            arrhnnn = stringname.Split("，");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    foreach (var ntem in arrhnnn) {
+                        string sqlstr = " SELECT Other, TitleName, TitleStage,JBXXshiyingzheng,JBXXshiyantongshutimu,JBXXdengjihao,LCSYXXshiyanfenlie FROM MakeTable  where  " +
+                            "( GCJJGmingcheng  like  '%" + ntem.Trim().ToString().Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng1 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng2 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng3 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng4 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng5 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng6 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng7 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng8 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng9 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng10 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng11 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng12 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng13 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng14 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng15 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng16 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng17 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng18 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng19 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng20 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng21 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng22 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng23 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng24 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                            "GCJJGmingcheng25 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng26 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng27 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng28 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng29 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                            " GCJJGmingcheng30 like  '%" + ntem.Trim().ToString() + @"%' )";
+                        if (where2 != "") {
+                            sqlstr = sqlstr + where2;
+                        }
+                        var zyitem =  GetItemEntity(sqlstr);
+                        if (zyitem != null) {
+                            Stag = 1;
+                            item.list = zyitem;
+                            item.projectcount = zyitem.Count.ToString();
+                            Articleiteminfo = item;
+                            listruslet.Add(Articleiteminfo);
 
+                        }
+
+
+                    }
+                }
+            }
+            if (Stag == 0)
+            {
+                ViewBag.Yixue = data;
+                ViewBag.Count = result.Count();
+                ViewBag.PageNum = (result.Count() - 1) / pagesize + 1;
+
+            }
+            else
+            {
+                ViewBag.Yixue = listruslet;
+                ViewBag.Count = listruslet.Count();
+                ViewBag.PageNum = (listruslet.Count() - 1) / pagesize + 1;
+            }
+            //List<BannerInfo> list = await _bannerService.GetListCacheAsync(null, o => o.SortCode, false);
             //var article = await _articleService.GetListCacheAsync(null, o => o.CreatorTime, false);
-            ViewBag.Yixue = data;
-            ViewBag.Count = result.Count();
-            ViewBag.PageNum = (result.Count() - 1) / pagesize + 1;
+
+            //ViewBag.Yixue = data;
+            ViewBag.Where2 = where2;
             ViewBag.Code = index;
             ViewBag.Shenfen = shenfen;
             ViewBag.Key = key;
@@ -250,6 +385,127 @@ namespace App.Hosting.Controllers
             //ViewBag.CategoryName = "";
             return View();
         }
+
+        public IActionResult ListDetail(string cid, string tid, string code, string state, string tag, string key,string where2)
+        {
+
+            var a = tag;
+            var index = 1;
+            var pagesize = 10;
+            if (code != "" && code != null)
+            {
+                where2 = "  AND TitleStage   like '" + where2 + "' ";
+                index = Convert.ToInt32(code);
+            }
+            if (state != "" && state != null)
+            {
+                pagesize = Convert.ToInt32(state);
+            }
+
+            string name = string.Empty;
+            IList<Makeiteminfo> zyitem = new List<Makeiteminfo>();
+            IList<Makeiteminfo>[] arrzyitem =new IList<Makeiteminfo>[] { } ;
+
+            var hn = "暨南大学附属第一医院（广州华侨医院）";
+            if (cid != "" && cid != null)
+            {
+                hn = cid;
+            }
+            var stringname = "";
+            string[] arrhnnn = { hn };
+            if (hn != null)
+            {
+                if (hn.Contains("（"))
+                {
+                    var arrhn = hn.Split("（");
+                    var hn1 = arrhn[0];
+                    var hn2 = arrhn[1];
+                    if (hn2 != null)
+                    {
+                        if (hn2.Contains("）"))
+                        {
+                            var arrhnn = hn2.Split("）");
+                            var hnn = arrhnn[0].ToString();
+                            var hnn1 = arrhnn[1];
+                            if (hnn1 == "")
+                            {
+                                if (hnn.Contains("、") || hnn.Contains("，"))
+                                {
+                                    if (hnn.Contains("、"))
+                                    {
+                                        stringname = hn1 + "、" + hnn;
+                                        arrhnnn = stringname.Split("、");
+                                    }
+                                    if (hnn.Contains("，"))
+                                    {
+                                        stringname = hn1 + "，" + hnn;
+                                        arrhnnn = stringname.Split("，");
+                                    }
+                                }
+                                else {
+                                    stringname = hn1 + "，" + hnn;
+                                    arrhnnn = stringname.Split("，");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            int k = 0;
+            foreach (var ntem in arrhnnn)
+            {
+                string sqlstr = " SELECT Other, TitleName, TitleStage,JBXXshiyingzheng,JBXXshiyantongshutimu,JBXXdengjihao,LCSYXXshiyanfenlie FROM MakeTable  where  " +
+                    " ( GCJJGmingcheng  like  '%" + ntem.Trim().ToString().Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng1 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng2 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng3 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng4 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng5 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng6 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng7 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng8 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng9 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng10 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng11 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng12 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng13 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng14 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng15 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng16 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng17 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng18 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng19 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng20 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng21 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng22 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng23 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng24 like  '%" + ntem.Trim().ToString() + @"%' or   " +
+                    "GCJJGmingcheng25 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng26 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng27 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng28 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng29 like  '%" + ntem.Trim().ToString() + @"%' or  " +
+                    " GCJJGmingcheng30 like  '%" + ntem.Trim().ToString() + @"%' )";
+                if (where2 != "")
+                {
+                    sqlstr = sqlstr + where2;
+                }
+                zyitem = GetItemEntity(sqlstr);
+            }
+            var ruslut = zyitem;// arrzyitem.Union(arrzyitem);
+            var data = ruslut.Skip((index - 1) * pagesize).Take(pagesize).ToList();
+            ViewBag.Yixue = data;
+            ViewBag.Count = ruslut.Count();
+            ViewBag.PageNum = (ruslut.Count() - 1) / pagesize + 1;
+            ViewBag.Code = index;
+            ViewBag.Key = key;
+            ViewBag.cid = cid;
+            ViewBag.Where2 = where2;
+            code = "";
+            return View();
+        }
+
+        
         public IActionResult ListItem(string cid, string tid, string code, string state, string tag, string key)
         {
 
@@ -275,7 +531,7 @@ namespace App.Hosting.Controllers
             //{
             //    table = table + "_" + shenfen;
             //}
-            string str = " SELECT Other, TitleName, TitleStage,JBXXshiyingzheng,JBXXshiyantongshutimu,JBXXdengjihao FROM MakeTable order by Todesc desc ";
+            string str = " SELECT Other, TitleName, TitleStage,JBXXshiyingzheng,JBXXshiyantongshutimu,JBXXdengjihao,LCSYXXshiyanfenlie FROM MakeTable order by Todesc desc ";
         
             var result = GetItemEntity(str);
             var data = result.Skip((index - 1) * pagesize).Take(pagesize).ToList();
@@ -293,6 +549,31 @@ namespace App.Hosting.Controllers
             return View();
         }
 
+        private IList<Makeiteminfo> GetItemsEntity(string sqlstr, Articleiteminfo item)
+        {
+            var list1 = new List<Makeiteminfo>();
+            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+            conText.Open();//打开数据库  
+            string sqls = sqlstr;//创建统计语句  
+            SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+            SqlDataReader dr;//创建DataReader对象  
+            dr = comText.ExecuteReader();//执行查询  
+            while (dr.Read())//判断数据表中是否含有数据  
+            {
+                var i = new Makeiteminfo();
+                var date = dr;
+                i.Other = date["Other"].ToString();
+                i.TitleName = date["TitleName"].ToString();
+                i.TitleStage = date["TitleStage"].ToString();
+                i.JBXXshiyingzheng = date["JBXXshiyingzheng"].ToString();
+                i.JBXXshiyantongshutimu = date["JBXXshiyantongshutimu"].ToString();
+                i.JBXXdengjihao = date["JBXXdengjihao"].ToString();
+                list1.Add(i);
+            }
+            dr.Close();//关闭DataReader对象  
+            return list1;
+        }
         private IList<Makeiteminfo> GetItemEntity(string sqlstr, string filter = "")
         {
             var list1 = new List<Makeiteminfo>();
@@ -313,6 +594,29 @@ namespace App.Hosting.Controllers
                 i.JBXXshiyingzheng = date["JBXXshiyingzheng"].ToString();
                 i.JBXXshiyantongshutimu = date["JBXXshiyantongshutimu"].ToString();
                 i.JBXXdengjihao = date["JBXXdengjihao"].ToString();
+                i.LCSYXXshiyanfenlie = date["LCSYXXshiyanfenlie"].ToString();
+
+                list1.Add(i);
+            }
+            dr.Close();//关闭DataReader对象  
+            return list1;
+        }
+
+        private IList<Articleiteminfo> GetGoalHospitalEntity(string sqlstr, string filter = "")
+        {
+            var list1 = new List<Articleiteminfo>();
+            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+            conText.Open();//打开数据库  
+            string sqls = sqlstr;//创建统计语句  
+            SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+            SqlDataReader dr;//创建DataReader对象  
+            dr = comText.ExecuteReader();//执行查询  
+            while (dr.Read())//判断数据表中是否含有数据  
+            {
+                var i = new Articleiteminfo();
+                var date = dr;
+                i.Syname = date["hospitalname"].ToString();
 
                 list1.Add(i);
             }
