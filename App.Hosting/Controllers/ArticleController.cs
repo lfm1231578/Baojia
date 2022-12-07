@@ -394,7 +394,6 @@ namespace App.Hosting.Controllers
             var pagesize = 10;
             if (code != "" && code != null)
             {
-                where2 = "  AND TitleStage   like '" + where2 + "' ";
                 index = Convert.ToInt32(code);
             }
             if (state != "" && state != null)

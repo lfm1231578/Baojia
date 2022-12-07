@@ -7,6 +7,7 @@
     var key = ViewBag.Key;
     var shenfen = ViewBag.Shenfen;//省份
     var where2 = ViewBag.Where2;
+    var cid = ViewBag.cid;
     var k = 1;
     //IList<Makeiteminfo> [] arrlist = { };
 }
@@ -440,7 +441,7 @@
                                     , jump: function (obj, first) {
                     if (!first) {
                         curr = obj.curr
-                        window.location.href = "/article/list?tid=7&where2=@where2&state=10&code=" + obj.curr + "&" + keyStrAll
+                        window.location.href = "/article/list?tid=7&where2=@where2&state=10&code=" + 9999 + "&" + keyStrAll
                         console.log(obj)
                     }
 
@@ -449,6 +450,7 @@
         })
     </script>
     <script type="text/javascript">
+
         layui.use(['jquery', 'table', 'laypage'], function () {
             var laypage1 = layui.laypage;
             laypage1.render({
@@ -458,13 +460,14 @@
             const $ = layui.$
             $(function () {
                 $('.projectBtn').each(function(){
+
                     console.log($(this).attr('data'))
                     $(this).on().on("click", function () {
                         var cid =  $(this).attr('data');
                         var cc = '%进行中-尚未招募%';
                         layer.open({
                             type: 2,
-                            content: 'http://localhost:5003/article/ListDetail?tid=8&cc=11&where2=@where2' + '&cid=' + cid,
+                            content: 'http://localhost:5003/article/ListDetail?tid=8&cc=@cid&where2=@where2' + '&cid=' + cid,
                             area: ['65%', '580px'],
                             title: '符合项目'
                         });

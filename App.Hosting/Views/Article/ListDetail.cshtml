@@ -6,8 +6,8 @@
     var code = ViewBag.Code;
     var key = ViewBag.Key;
     var shenfen = ViewBag.Shenfen;//省份
-    var where2 = ViewBag.Where2;
-    var cid = ViewBag.cid;
+    var where21 = ViewBag.Where2;
+    var cid1 = ViewBag.cid;
     var k = 0;
 }
 @section css{
@@ -249,7 +249,7 @@
                 keyStr = keyStr + key + ':' + (formData[key] || 'null') + '$$'
             }
             keyStrAll = keyStr
-            const url = '/article/listDetail?tid=19&code=1&state=10&tag=2&' + keyStr + "&where2=@where2&cid=@cid"
+            const url = '/article/listDetail?tid=19&code=1&state=10&tag=2&' + keyStr 
             window.location.href = url
 
         }
@@ -264,7 +264,7 @@
                                             , jump: function (obj, first) {
                     if (!first) {
                         curr = obj.curr
-                        window.location.href = "/article/listDetail?tid=9&state=10&code=" + obj.curr + "&" + keyStrAll
+                        window.location.href = "http://localhost:5003/article/ListDetail?tid=9&state=20&code=" + 70+ "&" + keyStrAll
                         console.log(obj)
                     }
 
@@ -284,7 +284,7 @@
                                                     , jump: function (obj, first) {
                     if (!first) {
                         curr = obj.curr
-                        window.location.href = "/article/listDetail?state=10&code=" + obj.curr + "&" + keyStrAll
+                        window.location.href = "/article/listDetail?tid=33&where2=@where21&cid=@cid1&state=10&code=" + obj.curr + "&" + keyStrAll
                         console.log(obj)
                     }
 

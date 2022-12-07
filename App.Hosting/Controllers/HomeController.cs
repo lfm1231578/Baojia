@@ -55,6 +55,8 @@ using System.Xml;
 using System.Reflection.PortableExecutable;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient.Memcached;
+using Azure;
 
 namespace App.Hosting.Controllers
 {
@@ -93,9 +95,174 @@ namespace App.Hosting.Controllers
         /// 首页
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index11(string code, string state, string tag, string key)
+        public async Task<IActionResult> Index(string code, string state, string tag, string key)
         {
+            var u = 9;
+
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?_export=doc");
+
+            //Stream postStream = new MemoryStream();
+            //request.Method = "POST";
+            //string boundary = "----" + DateTime.Now.Ticks.ToString("x");
+            //string formdataTemplate = "\r\n--" + boundary + "\r\nContent-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: application/octet-stream\r\n\r\n";
+
+            //request.ContentType = string.Format("multipart/form-data; boundary={0}", boundary);
+            //request.ContentLength = postStream != null ? postStream.Length : 0;
+            //request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+            //request.KeepAlive = true;
+            //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
+            //Stream requestStream = request.GetRequestStream(); 
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            //HttpContext curContext = HttpContext.Current;
+            //curContext.Response.ContentType = "application/pdf";//设置类型
+            //curContext.Response.ContentEncoding = System.Text.Encoding.UTF8;
+            //curContext.Response.Charset = "";
+            //curContext.Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(filename + "." + _filename[_filename.Length - 1], System.Text.Encoding.UTF8));
+
+            //curContext.Response.AddHeader("Content-Length", remoteFileLength.ToString());
+            //string _url = string.Format("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?_export=doc");
+            ////json参数
+            //string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            //{
+            //    id = "4a7537df8def48f3b8eabe6f6d44a9b4_p"
+            //});
+            //var request = (HttpWebRequest)WebRequest.Create(_url);
+            //request.Method = "POST";
+            //request.ContentType = "application/json;charset=UTF-8";//ContentType
+            //byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            //int length = byteData.Length;
+            //request.ContentLength = length;
+            //Stream writer = request.GetRequestStream();
+            //writer.Write(byteData, 0, length);
+            //writer.Close();
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+
+            //        var client = new HttpClient();
+            //        var request = new HttpRequestMessage
+            //        {
+            //            Method = HttpMethod.Post,
+            //            RequestUri = new Uri("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?_export=doc"),
+            //            Headers =
+            //{
+            //    { "id", "4a7537df8def48f3b8eabe6f6d44a9b4_p" },
+            //},
+            //            Content = new MultipartFormDataContent
+            //            {
+            //            },
+            //        };
+
+            //        using (var response = await client.SendAsync(request))
+            //        {
+            //            response.EnsureSuccessStatusCode();
+            //            var body = await response.Content.ReadAsStringAsync();
+            //            Console.WriteLine(body);
+            //        }
+            var kt = 3;
+            //System.out.println(response.body());
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?_export=doc");
+            //request.Method = "POST";
+            ////request.Accept = "text/html, application/xhtml+xml, */*";
+            ////request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36";
+            ////request.ContentType = "application/x-www-form-urlencoded";
+            //request.ContentType = "application/json;charset=UTF-8";//ContentType"application/json";
+            //string strJson = JsonConvert.SerializeObject(new
+            //{
+            //    id = "4a7537df8def48f3b8eabe6f6d44a9b4_p"
+            //});
+            //string paraUrlCoded = strJson;
+            //byte[] payload;
+            //payload = System.Text.Encoding.UTF8.GetBytes(paraUrlCoded);
+            //request.ContentLength = payload.Length;
+            //Stream writer;
+            //writer = request.GetRequestStream();//获取用于写入请求数据的Stream对象
+            //writer.Write(payload, 0, payload.Length);
+            //writer.Close();
+            ////HttpWebResponse response;
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+            //Stream responseStream = response.GetResponseStream();
+            //Stream stream1 = new FileStream("D:\\88详细信息.doc", FileMode.Create);
+
+            //byte[] bArr = new byte[1024];
+            //int size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            //while (size > 0)
+            //{
+            //    stream1.Write(bArr, 0, size);
+            //    size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            //}
+            //stream1.Close();
+            //responseStream.Close();
+            var ii = 8;
+            //string _url = string.Format("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?_export=doc");
+            ////json参数
+            //string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            //{
+            //    id = "4a7537df8def48f3b8eabe6f6d44a9b4_p"
+            //});
+            //var request = (HttpWebRequest)WebRequest.Create(_url);
+            //request.Method = "POST";
+            //request.ContentType = "application/json;charset=UTF-8";//ContentType
+            ////CookieContainer cc = new CookieContainer();
+            ////cc.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
+            ////request.CookieContainer = cc;
+            //byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            //int length = byteData.Length;
+            //request.ContentLength = length;
+            //Stream writer = request.GetRequestStream();
+            //writer.Write(byteData, 0, length);
+            //writer.Close();
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            //HttpWebResponse response1 = (HttpWebResponse)request.GetResponse();
+
+            //string strWebData = string.Empty;
+            //Stream responseStream = response1.GetResponseStream();
+            ////创建本地文件写入流
+            //Stream stream1 = new FileStream("C:\\123.doc", FileMode.Create);
+
+            //byte[] bArr = new byte[1024];
+            //int size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            //while (size > 0)
+            //{
+            //    stream1.Write(bArr, 0, size);
+            //    size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            //}
+            //stream1.Close();
+            //responseStream.Close();
             var k = 1;
+            //var j = new Articleiteminfo();
+            //string _url = string.Format("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml?_export=xls");
+            ////json参数
+            //string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            //{
+            //    id = "4a7537df8def48f3b8eabe6f6d44a9b4_p"
+            //});
+            //var request = (HttpWebRequest)WebRequest.Create(_url);
+            //request.Method = "POST";
+            //request.ContentType = "application/json;charset=UTF-8";//ContentType
+            ////CookieContainer cc = new CookieContainer();
+            ////cc.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
+            ////request.CookieContainer = cc;
+            //byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            //int length = byteData.Length;
+            //request.ContentLength = length;
+            //Stream writer = request.GetRequestStream();
+            //writer.Write(byteData, 0, length);
+            //writer.Close();
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+
+
+
+            //JObject json1 = (JObject)JsonConvert.DeserializeObject(responseString);
+
+            var c = 2;
             // Total':0Rows'
             //string jsonText = "'Total':'0,'Rows':[id:31', project:6,project_name':一卡通,name':接口测试!assignedTo':zhangsan'" +
             //     "realname':张三'estStarted':2016/11/23,realStarted':2000/01/01'status':'wait”," + id:32,project: 6project name: 一卡通name: 测试服务器调通!assignedTo: lisi + "realname':李四,estStarted':2016/11/23realStarted':2016/11/23status':wait]]"; 
@@ -114,679 +281,679 @@ namespace App.Hosting.Controllers
             //Spire.Doc.Document doc = new Spire.Doc.Document();
             //doc.LoadFromFile("D:/Work/Software/EYB-备份/EYB/EYBWeb/EYBWeb/Uploads/Input.docx");
 
-            #region 有效
-            string _Sstring = "select hid FROM (\r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_beijing] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_tianjing] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hebei] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_shangxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_neimenggu] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_liaoning] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_jiling] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_heilongjiang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_shanghai] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_jiangshu] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_zhejiang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_anhui] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_fujian] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_jiangxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_shangdong] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_henan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hubei] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hunan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_guangdong] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_guangxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hainan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_chongqi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_sichuang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_guizhou] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_yunnan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_xizan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_sanxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_gansu] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_qinghai] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_ningxia] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_xinjiang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_xianggang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_taiwang]\r\n) AS C  ORDER BY Syname";
-            var list1 = new List<Articleiteminfo>();
-            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
-            SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
-            conText.Open();//打开数据库  
-            string sqls = _Sstring;//创建统计语句  
-            SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
-            SqlDataReader dr;//创建DataReader对象  
-            dr = comText.ExecuteReader();//执行查询  
-            while (dr.Read())//判断数据表中是否含有数据  
-            {
-                var i = new Articleiteminfo();
-                var date = dr;
-                i.Hospitalid = date["hid"].ToString();
+            //#region 有效
+            //string _Sstring = "select hid FROM (\r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_beijing] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_tianjing] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hebei] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_shangxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_neimenggu] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_liaoning] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_jiling] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_heilongjiang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_shanghai] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_jiangshu] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_zhejiang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_anhui] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_fujian] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_jiangxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_shangdong] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_henan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hubei] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hunan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_guangdong] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_guangxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_hainan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_chongqi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_sichuang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_guizhou] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_yunnan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_xizan] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_sanxi] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_gansu] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_qinghai] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_ningxia] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_xinjiang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_xianggang] UNION \r\nSELECT REPLACE(REPLACE(Syurl, 'https://www.yscro.com/org/', ''),'.html','') as hid , Syname  FROM [dbo].[AirtleTable_taiwang]\r\n) AS C  ORDER BY Syname";
+            //var list1 = new List<Articleiteminfo>();
+            //string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            //SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+            //conText.Open();//打开数据库  
+            //string sqls = _Sstring;//创建统计语句  
+            //SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+            //SqlDataReader dr;//创建DataReader对象  
+            //dr = comText.ExecuteReader();//执行查询  
+            //while (dr.Read())//判断数据表中是否含有数据  
+            //{
+            //    var i = new Articleiteminfo();
+            //    var date = dr;
+            //    i.Hospitalid = date["hid"].ToString();
 
-                list1.Add(i);
-            }
-            dr.Close();//关闭DataReader对象  
+            //    list1.Add(i);
+            //}
+            //dr.Close();//关闭DataReader对象  
 
-            var list2 = new List<Articleiteminfo>();
-            int re = 0;
-            foreach (var i in list1)
-            {
-                try
-                {
-                    var hospitalid = i.Hospitalid == "" ? "9999" : i.Hospitalid;
-                    var j = new Articleiteminfo();
-                    string _url = string.Format("https://www.yscro.com/api/organization/cdeorg");
-                    //json参数
-                    string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
-                    {
-                        test_range = 1,//用戶openid
-                        page = 1,
-                        limit = 10,
-                        orgid = i.Hospitalid
-                    });
-                    var request = (HttpWebRequest)WebRequest.Create(_url);
-                    request.Method = "POST";
-                    request.ContentType = "application/json;charset=UTF-8";//ContentType
-                    CookieContainer cc = new CookieContainer();
-                    cc.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
-                    request.CookieContainer = cc;
-                    byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
-                    int length = byteData.Length;
-                    request.ContentLength = length;
-                    Stream writer = request.GetRequestStream();
-                    writer.Write(byteData, 0, length);
-                    writer.Close();
-                    var response = (HttpWebResponse)request.GetResponse();
-                    var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
-
-
-
-
-                    JObject json1 = (JObject)JsonConvert.DeserializeObject(responseString);
+            //var list2 = new List<Articleiteminfo>();
+            //int re = 0;
+            //foreach (var i in list1)
+            //{
+            //    try
+            //    {
+            //        var hospitalid = i.Hospitalid == "" ? "9999" : i.Hospitalid;
+            //        var j = new Articleiteminfo();
+            //        string _url = string.Format("https://www.yscro.com/api/organization/cdeorg");
+            //        //json参数
+            //        string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            //        {
+            //            test_range = 1,//用戶openid
+            //            page = 1,
+            //            limit = 10,
+            //            orgid = i.Hospitalid
+            //        });
+            //        var request = (HttpWebRequest)WebRequest.Create(_url);
+            //        request.Method = "POST";
+            //        request.ContentType = "application/json;charset=UTF-8";//ContentType
+            //        CookieContainer cc = new CookieContainer();
+            //        cc.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
+            //        request.CookieContainer = cc;
+            //        byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            //        int length = byteData.Length;
+            //        request.ContentLength = length;
+            //        Stream writer = request.GetRequestStream();
+            //        writer.Write(byteData, 0, length);
+            //        writer.Close();
+            //        var response = (HttpWebResponse)request.GetResponse();
+            //        var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
 
 
 
-                    JObject jsonObj = (JObject)JsonConvert.DeserializeObject(responseString);
 
-                    JObject jo = JObject.Parse(responseString);
-
-                    //j.Hospitalid_Cra5 
-                    if (jo["data"]["list"].Count() > 0)
-                    {
-                        JArray array = (JArray)json1["data"]["list"];
-                        int iiii = array.Count;
-                        string aa = "";
-                        foreach (var jObject in array)
-                        {
-
-                            var make = new Makeiteminfo();
-                            //赋值属性
-                            aa = jObject["ctr_md5_id"].ToString();
-                            string strURL = "https://www.yscro.com/cde/" + aa;
-                            //string strURL = "http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?keywords=CTR20170414";
-                            System.Net.HttpWebRequest request1;
-                            request1 = (System.Net.HttpWebRequest)WebRequest.Create(strURL);
-                            CookieContainer cc1 = new CookieContainer();
-                            cc1.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
-                            request1.CookieContainer = cc1;
-                            request1.Method = "get";
-                            System.Net.HttpWebResponse response1;
-                            response1 = (System.Net.HttpWebResponse)request1.GetResponse();
-                            System.IO.StreamReader myreader = new System.IO.StreamReader(response1.GetResponseStream(), Encoding.UTF8);
-                            string responseText1 = myreader.ReadToEnd();
-                            //if (response1.StatusCode == "OK")
-                            //{
-                            //Console.WriteLine(responseText1);
-                            var htmlDoc = new HtmlDocument();
-                            htmlDoc.LoadHtml(responseText1);
-
-                            var name = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='col-xs-12 col-md-10']/div[1]/div[1]/h3[1]").InnerText.Trim().ToString().Split("｜")[0].ToString();
-                            var stage = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='col-xs-12 col-md-10']/div[1]/div[1]/h3[1]").InnerText.Trim().ToString().Split("｜")[1].ToString();
-                            if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[1]/div[2]") != null)
-                            {
-                                var strindext = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[1]/div[2]").InnerText;
-                                var arrlist = strindext.Split("\n                    ");
-                                make.JBXXdengjihao = arrlist[3].ToString();
-                                make.JBXXxiangguandengjihao = arrlist[5].ToString();
-                                make.JBXXchengyongming = arrlist[7].ToString();
-                                make.JBXXyaowuleixin = arrlist[10].ToString();
-                                make.JBXXlinchuangshoushenqing = arrlist[12].ToString();
-                                make.JBXXshiyingzheng = arrlist[14].ToString();
-                                make.JBXXshiyantongshutimu = arrlist[16].ToString();
-                                make.JBXXshiyanzhuanyetimu = arrlist[18].ToString();
-                                make.JBXXshiyanfanganbianhao = arrlist[20].ToString();
-                                make.JBXXfanganzuijing = arrlist[22].ToString();
-                                make.JBXXbanbenriqi = arrlist[24].ToString();
-                                make.JBXXfanganshifou = arrlist[26].ToString();
-                            }
-                            else
-                            {
-                                make.JBXXdengjihao = "";
-                                make.JBXXxiangguandengjihao = "";
-                                make.JBXXchengyongming = "";
-                                make.JBXXyaowuleixin = "";
-                                make.JBXXlinchuangshoushenqing = "";
-                                make.JBXXshiyingzheng = "";
-                                make.JBXXshiyantongshutimu = "";
-                                make.JBXXshiyanzhuanyetimu = "";
-                                make.JBXXshiyanfanganbianhao = "";
-                                make.JBXXfanganzuijing = "";
-                                make.JBXXbanbenriqi = "";
-                                make.JBXXfanganshifou = "";
-                            }
-
-                            if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[2]/div[2]") != null)
-                            {
-                                var strindextshenqingrenxinxi = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[2]/div[2]").InnerText;
-                                var _strindextshenqingrenxinxi = strindextshenqingrenxinxi.Split("\n                    ");
-                                make.SQRXXshengqingrenmingcheng = _strindextshenqingrenxinxi[3].ToString();
-                                make.SQRXXlianxirenxingming = _strindextshenqingrenxinxi[5].ToString();
-                                make.SQRXXlianxirenzuoji = _strindextshenqingrenxinxi[7].ToString();
-                                make.SQRXXlianxirenshoujihao = _strindextshenqingrenxinxi[9].ToString();
-                                make.SQRXXlianxirenemail = _strindextshenqingrenxinxi[11].ToString();
-                                make.SQRXXlianxirenyouzhendizhi = _strindextshenqingrenxinxi[13].ToString();
-                                make.SQRXXlianxirenyoubian = _strindextshenqingrenxinxi[15].ToString();
-                            }
-                            else
-                            {
-                                make.SQRXXshengqingrenmingcheng = "";
-                                make.SQRXXlianxirenxingming = "";
-                                make.SQRXXlianxirenzuoji = "";
-                                make.SQRXXlianxirenshoujihao = "";
-                                make.SQRXXlianxirenemail = "";
-                                make.SQRXXlianxirenyouzhendizhi = "";
-                                make.SQRXXlianxirenyoubian = "";
-                            }
-                            string biaozhun1 = "";
-                            string biaozhunValue = "";
-
-                            string paichubiazhun = "", paichubiazhunValue = "";
-                            if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[3]/div[2]") != null)
-                            {
-                                string strSyfenlie = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[3]/div[2]").InnerText;
-                                var _strSyfenlie = strSyfenlie.Split("\n                    ");
-                                make.LCSYXXshiyanfenlie = _strSyfenlie[4].ToString();
-                                make.LCSYXXshiyanfenqi = _strSyfenlie[7].ToString();
-                                make.LCSYXXshiyanmudi = _strSyfenlie[9].ToString();
-                                make.LCSYXXshuijihua = _strSyfenlie[12].ToString();
-                                make.LCSYXXmanfang = _strSyfenlie[15].ToString();
-                                make.LCSYXXshiyanfangwei = _strSyfenlie[18].ToString();
-                                make.LCSYXXshejiliexing = _strSyfenlie[21].ToString();
-                                make.LCSYXXninaliang = _strSyfenlie[23].ToString();
-                                make.LCSYXXxingbei = _strSyfenlie[25].ToString();
-                                make.LCSYXXjiankuangshoushizhen = _strSyfenlie[28].ToString();
-
-                                var strSyfenlieruxuanbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[0].Split("\n\t\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t\t");
-                                var strSyfenliepaichubiaozhunbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[1].Split("\n\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t");
-
-                                biaozhun1 = "";
-                                biaozhunValue = "";
-                                for (int ixp = 0; ixp < strSyfenlieruxuanbiaozhun.Count(); ixp++)
-                                {
-                                    if (ixp < 21)
-                                    {
-                                        string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
-                                        biaozhun1 += ",LCSYXXruxuanbiaozhun" + strixp;
-                                        biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "'";
-                                    }
-                                    else { break; }
-
-                                }
-
-                                for (int ixp = 0; ixp < strSyfenliepaichubiaozhunbiaozhun.Count(); ixp++)
-                                {
-                                    if (ixp < 21)
-                                    {
-                                        string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
-                                        paichubiazhun += ",LCSYXXpaichubiaozhun" + strixp;
-                                        paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "'";
-                                    }
-                                    else { break; }
-
-                                }
-
-                            }
-                            else
-                            {
-                                make.LCSYXXshiyanfenlie = "";
-                                make.LCSYXXshiyanfenqi = "";
-                                make.LCSYXXshiyanmudi = "";
-                                make.LCSYXXshuijihua = "";
-                                make.LCSYXXmanfang = "";
-                                make.LCSYXXshiyanfangwei = "";
-                                make.LCSYXXshejiliexing = "";
-                                make.LCSYXXninaliang = "";
-                                make.LCSYXXxingbei = "";
-                                make.LCSYXXjiankuangshoushizhen = "";
-                            }
-
-                            //var strSyfenlieruxuanbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[0].Split("\n\t\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t\t");
-                            //var strSyfenliepaichubiaozhunbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[1].Split("\n\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t");
-
-                            //var StrSYfenzhu = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]").InnerText;
-                            var strshiyanyao = "";
-
-                            if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]") != null)
-                            {
-                                strshiyanyao = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]").InnerText;
-                            }
-                            else
-                            {
-                                strshiyanyao = @"\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  \n                                            \n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  ";
-                            }
-                            var _strshiyanyao = strshiyanyao.Split("\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t");
-                            var strduizhaoyao = "";
-                            if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr[1]") != null)
-                            {
-                                strduizhaoyao = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr[1]").InnerText;
-                            }
-                            else
-                            {
-                                strduizhaoyao = @"\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  \n                                            \n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  ";
-                            }
-                            var _strduizhaoyao = strduizhaoyao.Split("\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t");
-
-                            var strZDZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]").InnerText;
-                            string[] strZYZBZD;
-                            if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]") != null)
-                            {
-                                strZYZBZD = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]").InnerText.Split("\n                                            ");
-                            }
-                            else
-                            {
-                                strZYZBZD = "\n                                            \n                                            \n                                            \n                                            ".Split("\n                                            ");
-                            }
-                            var strCYdzd = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr");
-                            var strCYdzdnode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr[1]/td");
-                            var strCYDZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr") != null ? htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr").InnerText : "\n                    \n                    \n                    ";
-                            var _strZDZB = strZDZB.Split("\n                    ");
-                            //var strYJZXX = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]").InnerText;
-                            var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
-                            //var _strYJZXX = strYJZXX.Split("\n                    ");
-                            //var strGCJJJ = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]").InnerText;
-                            var arrgcjj = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
-                            //var _strGCJJJ = strGCJJJ.Split("\n                    ");
-                            var LLWYH = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[8]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
-                            //var _LLWYH = LLWYH.Split("\n                    ");
-                            var SYZT = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[9]/div[2]/div[1]").SelectNodes("div");
-                            //var _SYZT = SYZT.Split("\n                    ");
-                            //var LCSYJG = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[10]/div[2]").InnerText;
-                            //var _LCSYJG = LCSYJG.Split("\n                    ");
-
-                            //make.JBXXdengjihao = arrlist[3].ToString();
-                            //make.JBXXxiangguandengjihao = arrlist[5].ToString();
-                            //make.JBXXchengyongming = arrlist[7].ToString();
-                            //make.JBXXyaowuleixin = arrlist[10].ToString();
-                            //make.JBXXlinchuangshoushenqing = arrlist[12].ToString();
-                            //make.JBXXshiyingzheng = arrlist[14].ToString();
-                            //make.JBXXshiyantongshutimu = arrlist[16].ToString();
-                            //make.JBXXshiyanzhuanyetimu = arrlist[18].ToString();
-                            //make.JBXXshiyanfanganbianhao = arrlist[20].ToString();
-                            //make.JBXXfanganzuijing = arrlist[22].ToString();
-                            //make.JBXXbanbenriqi = arrlist[24].ToString();
-                            //make.JBXXfanganshifou = arrlist[26].ToString();
-
-                            //make.SQRXXshengqingrenmingcheng = _strindextshenqingrenxinxi[3].ToString();
-                            //make.SQRXXlianxirenxingming = _strindextshenqingrenxinxi[5].ToString();
-                            //make.SQRXXlianxirenzuoji = _strindextshenqingrenxinxi[7].ToString();
-                            //make.SQRXXlianxirenshoujihao = _strindextshenqingrenxinxi[9].ToString();
-                            //make.SQRXXlianxirenemail = _strindextshenqingrenxinxi[11].ToString();
-                            //make.SQRXXlianxirenyouzhendizhi = _strindextshenqingrenxinxi[13].ToString();
-                            //make.SQRXXlianxirenyoubian = _strindextshenqingrenxinxi[15].ToString();
-
-                            //make.LCSYXXshiyanfenlie = _strSyfenlie[4].ToString();
-                            //make.LCSYXXshiyanfenqi = _strSyfenlie[7].ToString();
-                            //make.LCSYXXshiyanmudi = _strSyfenlie[9].ToString();
-                            //make.LCSYXXshuijihua = _strSyfenlie[12].ToString();
-                            //make.LCSYXXmanfang = _strSyfenlie[15].ToString();
-                            //make.LCSYXXshiyanfangwei = _strSyfenlie[18].ToString();
-                            //make.LCSYXXshejiliexing = _strSyfenlie[21].ToString();
-                            //make.LCSYXXninaliang = _strSyfenlie[23].ToString();
-                            //make.LCSYXXxingbei = _strSyfenlie[25].ToString();
-                            //make.LCSYXXjiankuangshoushizhen = _strSyfenlie[28].ToString();
+            //        JObject json1 = (JObject)JsonConvert.DeserializeObject(responseString);
 
 
-                            string strsql = @"INSERT INTO MakeTable (JBXXdengjihao
-	                                    , JBXXxiangguandengjihao
-	                                    , JBXXchengyongming
-	                                    , JBXXyaowuleixin
-	                                    , JBXXlinchuangshoushenqing
-	                                    , JBXXshiyingzheng
-	                                    , JBXXshiyantongshutimu
-	                                    , JBXXshiyanzhuanyetimu
-	                                    , JBXXshiyanfanganbianhao
-	                                    , JBXXfanganzuijing
-	                                    , JBXXbanbenriqi
-	                                    , JBXXfanganshifou
-	                                    , SQRXXshengqingrenmingcheng
-	                                    , SQRXXlianxirenxingming
-	                                    , SQRXXlianxirenzuoji
-	                                    , SQRXXlianxirenshoujihao
-	                                    , SQRXXlianxirenemail
-	                                    , SQRXXlianxirenyouzhendizhi
-	                                    , SQRXXlianxirenyoubian
-	                                    , LCSYXXshiyanfenlie
-	                                    , LCSYXXshiyanfenqi
-	                                    , LCSYXXshiyanmudi
-	                                    , LCSYXXshuijihua
-	                                    , LCSYXXmanfang
-	                                    , LCSYXXshiyanfangwei
-	                                    , LCSYXXshejiliexing
-	                                    , LCSYXXninaliang
-	                                    , LCSYXXxingbei
-	                                    , LCSYXXjiankuangshoushizhen";
-                            string slqint1 = @"INSERT INTO MakeTable (";
-                            string slqint11 = @"JBXXdengjihao
-	                                    , JBXXxiangguandengjihao
-	                                    , JBXXchengyongming
-	                                    , JBXXyaowuleixin
-	                                    , JBXXlinchuangshoushenqing
-	                                    , JBXXshiyingzheng
-	                                    , JBXXshiyantongshutimu
-	                                    , JBXXshiyanzhuanyetimu
-	                                    , JBXXshiyanfanganbianhao
-	                                    , JBXXfanganzuijing
-	                                    , JBXXbanbenriqi
-	                                    , JBXXfanganshifou
-	                                    , SQRXXshengqingrenmingcheng
-	                                    , SQRXXlianxirenxingming
-	                                    , SQRXXlianxirenzuoji
-	                                    , SQRXXlianxirenshoujihao
-	                                    , SQRXXlianxirenemail
-	                                    , SQRXXlianxirenyouzhendizhi
-	                                    , SQRXXlianxirenyoubian
-	                                    , LCSYXXshiyanfenlie
-	                                    , LCSYXXshiyanfenqi
-	                                    , LCSYXXshiyanmudi
-	                                    , LCSYXXshuijihua
-	                                    , LCSYXXmanfang
-	                                    , LCSYXXshiyanfangwei
-	                                    , LCSYXXshejiliexing
-	                                    , LCSYXXninaliang
-	                                    , LCSYXXxingbei
-	                                    , LCSYXXjiankuangshoushizhen";
-                            string slqint12 = @") VALUES ( ";
-                            //string biaozhun1 = "";
-                            string strsqlvalue = "";
 
-                            //string biaozhunValue = "";
-                            //for (int ixp = 0; ixp < strSyfenlieruxuanbiaozhun.Count() ; ixp++)
-                            //{
-                            //    if (ixp < 21)
-                            //    {
-                            //        string strixp = ixp.ToString() == "0" ? "": ixp.ToString();
-                            //        biaozhun1 += ",LCSYXXruxuanbiaozhun" + strixp;
-                            //        biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "'";
-                            //    }
-                            //    else { break; }
+            //        JObject jsonObj = (JObject)JsonConvert.DeserializeObject(responseString);
 
-                            //}
-                            strsql += biaozhun1;
-                            strsqlvalue += biaozhunValue;
-                            //string paichubiazhun = "", paichubiazhunValue ="";
+            //        JObject jo = JObject.Parse(responseString);
 
-                            //for (int ixp = 0; ixp < strSyfenliepaichubiaozhunbiaozhun.Count(); ixp++)
-                            //{
-                            //    if (ixp < 21)
-                            //    {
-                            //        string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
-                            //        paichubiazhun += ",LCSYXXpaichubiaozhun" + strixp;
-                            //        paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "'";
-                            //    }
-                            //    else { break; }
+            //        //j.Hospitalid_Cra5 
+            //        if (jo["data"]["list"].Count() > 0)
+            //        {
+            //            JArray array = (JArray)json1["data"]["list"];
+            //            int iiii = array.Count;
+            //            string aa = "";
+            //            foreach (var jObject in array)
+            //            {
 
-                            //}
+            //                var make = new Makeiteminfo();
+            //                //赋值属性
+            //                aa = jObject["ctr_md5_id"].ToString();
+            //                string strURL = "https://www.yscro.com/cde/" + aa;
+            //                //string strURL = "http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?keywords=CTR20170414";
+            //                System.Net.HttpWebRequest request1;
+            //                request1 = (System.Net.HttpWebRequest)WebRequest.Create(strURL);
+            //                CookieContainer cc1 = new CookieContainer();
+            //                cc1.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
+            //                request1.CookieContainer = cc1;
+            //                request1.Method = "get";
+            //                System.Net.HttpWebResponse response1;
+            //                response1 = (System.Net.HttpWebResponse)request1.GetResponse();
+            //                System.IO.StreamReader myreader = new System.IO.StreamReader(response1.GetResponseStream(), Encoding.UTF8);
+            //                string responseText1 = myreader.ReadToEnd();
+            //                //if (response1.StatusCode == "OK")
+            //                //{
+            //                //Console.WriteLine(responseText1);
+            //                var htmlDoc = new HtmlDocument();
+            //                htmlDoc.LoadHtml(responseText1);
 
-                            strsql += paichubiazhun;
-                            strsqlvalue += paichubiazhunValue;
-                            string zdzbcyzb = "", zdzbcyzbvalue = "", zdzbcyzb1 = "", zdzbcyzbvalue1 = "", zdzbcyzb2 = "", zdzbcyzbvalue2 = "";
-                            for (var izb = 0; izb < strCYdzd.Count(); izb++)
-                            {
+            //                var name = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='col-xs-12 col-md-10']/div[1]/div[1]/h3[1]").InnerText.Trim().ToString().Split("｜")[0].ToString();
+            //                var stage = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='col-xs-12 col-md-10']/div[1]/div[1]/h3[1]").InnerText.Trim().ToString().Split("｜")[1].ToString();
+            //                if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[1]/div[2]") != null)
+            //                {
+            //                    var strindext = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[1]/div[2]").InnerText;
+            //                    var arrlist = strindext.Split("\n                    ");
+            //                    make.JBXXdengjihao = arrlist[3].ToString();
+            //                    make.JBXXxiangguandengjihao = arrlist[5].ToString();
+            //                    make.JBXXchengyongming = arrlist[7].ToString();
+            //                    make.JBXXyaowuleixin = arrlist[10].ToString();
+            //                    make.JBXXlinchuangshoushenqing = arrlist[12].ToString();
+            //                    make.JBXXshiyingzheng = arrlist[14].ToString();
+            //                    make.JBXXshiyantongshutimu = arrlist[16].ToString();
+            //                    make.JBXXshiyanzhuanyetimu = arrlist[18].ToString();
+            //                    make.JBXXshiyanfanganbianhao = arrlist[20].ToString();
+            //                    make.JBXXfanganzuijing = arrlist[22].ToString();
+            //                    make.JBXXbanbenriqi = arrlist[24].ToString();
+            //                    make.JBXXfanganshifou = arrlist[26].ToString();
+            //                }
+            //                else
+            //                {
+            //                    make.JBXXdengjihao = "";
+            //                    make.JBXXxiangguandengjihao = "";
+            //                    make.JBXXchengyongming = "";
+            //                    make.JBXXyaowuleixin = "";
+            //                    make.JBXXlinchuangshoushenqing = "";
+            //                    make.JBXXshiyingzheng = "";
+            //                    make.JBXXshiyantongshutimu = "";
+            //                    make.JBXXshiyanzhuanyetimu = "";
+            //                    make.JBXXshiyanfanganbianhao = "";
+            //                    make.JBXXfanganzuijing = "";
+            //                    make.JBXXbanbenriqi = "";
+            //                    make.JBXXfanganshifou = "";
+            //                }
 
-                                if (izb < 6)
-                                {
-                                    string strixp = izb.ToString() == "0" ? "" : izb.ToString();
-                                    int jzb = izb + 1;
-                                    zdzbcyzb += ",ZDZBCYZDZBzhibiao" + strixp;
-                                    zdzbcyzb1 += ",ZDZBCYZDZBpingjiashijian" + strixp;
-                                    zdzbcyzb2 += ",ZDZBCYZDZBzongdianzhibiaoxuanzhe" + strixp;
-                                    //zdzbcyzbvalue += ",'" + strSyfenliepaichubiaozhunbiaozhun[izb] + "'";
-                                    var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-                                    zdzbcyzbvalue += ",'" + OItemZB[0].InnerText + "'";
-                                    zdzbcyzbvalue1 += ",'" + OItemZB[1].InnerText + "'";
-                                    zdzbcyzbvalue2 += ",'" + OItemZB[2].InnerText + "'";
-                                }
-                                else { break; }
-                            }
+            //                if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[2]/div[2]") != null)
+            //                {
+            //                    var strindextshenqingrenxinxi = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[2]/div[2]").InnerText;
+            //                    var _strindextshenqingrenxinxi = strindextshenqingrenxinxi.Split("\n                    ");
+            //                    make.SQRXXshengqingrenmingcheng = _strindextshenqingrenxinxi[3].ToString();
+            //                    make.SQRXXlianxirenxingming = _strindextshenqingrenxinxi[5].ToString();
+            //                    make.SQRXXlianxirenzuoji = _strindextshenqingrenxinxi[7].ToString();
+            //                    make.SQRXXlianxirenshoujihao = _strindextshenqingrenxinxi[9].ToString();
+            //                    make.SQRXXlianxirenemail = _strindextshenqingrenxinxi[11].ToString();
+            //                    make.SQRXXlianxirenyouzhendizhi = _strindextshenqingrenxinxi[13].ToString();
+            //                    make.SQRXXlianxirenyoubian = _strindextshenqingrenxinxi[15].ToString();
+            //                }
+            //                else
+            //                {
+            //                    make.SQRXXshengqingrenmingcheng = "";
+            //                    make.SQRXXlianxirenxingming = "";
+            //                    make.SQRXXlianxirenzuoji = "";
+            //                    make.SQRXXlianxirenshoujihao = "";
+            //                    make.SQRXXlianxirenemail = "";
+            //                    make.SQRXXlianxirenyouzhendizhi = "";
+            //                    make.SQRXXlianxirenyoubian = "";
+            //                }
+            //                string biaozhun1 = "";
+            //                string biaozhunValue = "";
 
-                            string yj = "", yj1 = "", yj2 = "", yj3 = "", yj4 = "", yj5 = "", yj6 = "", yj7 = "", yj8 = "",
-                                yjv = "", yjv1 = "", yjv2 = "", yjv3 = "", yjv4 = "", yjv5 = "", yjv6 = "", yjv7 = "", yjv8 = "";
-                            for (var izb = 0; izb < arryjzxx.Count(); izb++)
-                            {
+            //                string paichubiazhun = "", paichubiazhunValue = "";
+            //                if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[3]/div[2]") != null)
+            //                {
+            //                    string strSyfenlie = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[3]/div[2]").InnerText;
+            //                    var _strSyfenlie = strSyfenlie.Split("\n                    ");
+            //                    make.LCSYXXshiyanfenlie = _strSyfenlie[4].ToString();
+            //                    make.LCSYXXshiyanfenqi = _strSyfenlie[7].ToString();
+            //                    make.LCSYXXshiyanmudi = _strSyfenlie[9].ToString();
+            //                    make.LCSYXXshuijihua = _strSyfenlie[12].ToString();
+            //                    make.LCSYXXmanfang = _strSyfenlie[15].ToString();
+            //                    make.LCSYXXshiyanfangwei = _strSyfenlie[18].ToString();
+            //                    make.LCSYXXshejiliexing = _strSyfenlie[21].ToString();
+            //                    make.LCSYXXninaliang = _strSyfenlie[23].ToString();
+            //                    make.LCSYXXxingbei = _strSyfenlie[25].ToString();
+            //                    make.LCSYXXjiankuangshoushizhen = _strSyfenlie[28].ToString();
 
-                                if (izb < 2)
-                                {
-                                    string strixp = izb.ToString() == "0" ? "" : izb.ToString();
-                                    int jzb = izb + 1;
-                                    yj += ",YJZXXxingming" + strixp;
-                                    yj1 += ",YJZXXxuewei" + strixp;
-                                    yj2 += ",YJZXXzhicheng" + strixp;
-                                    yj3 += ",YJZXXdianhuan" + strixp;
-                                    yj4 += ",YJZXXemail" + strixp;
-                                    yj5 += ",YJZXXyouzhenbiaoma" + strixp;
-                                    yj6 += ",YJZXXyoubian" + strixp;
-                                    yj7 += ",YJZXXdangweimingcheng" + strixp;
+            //                    var strSyfenlieruxuanbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[0].Split("\n\t\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t\t");
+            //                    var strSyfenliepaichubiaozhunbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[1].Split("\n\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t");
 
-                                    // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
-                                    var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-                                    yjv += ",'" + OItemZB[0].InnerText + "'";
-                                    yjv1 += ",'" + OItemZB[1].InnerText + "'";
-                                    yjv2 += ",'" + OItemZB[2].InnerText + "'";
-                                    yjv3 += ",'" + OItemZB[3].InnerText + "'";
-                                    yjv4 += ",'" + OItemZB[4].InnerText + "'";
-                                    yjv5 += ",'" + OItemZB[5].InnerText + "'";
-                                    yjv6 += ",'" + OItemZB[6].InnerText + "'";
-                                    yjv7 += ",'" + OItemZB[7].InnerText + "'";
-                                }
-                                else { break; }
-                            }
-                            string gc = "", gc1 = "", gc2 = "", gc3 = "", gc4 = "",
-                                   gcv = "", gcv1 = "", gcv2 = "", gcv3 = "", gcv4 = "";
-                            for (var izb = 0; izb < arrgcjj.Count(); izb++)
-                            {
-                                if (izb < 31)
-                                {
-                                    string strixp = izb.ToString() == "0" ? "" : izb.ToString();
-                                    int jzb = izb + 1;
-                                    gc += ",GCJJGmingcheng" + strixp;
-                                    gc1 += ",GCJJGzhuyaoyanjiuzhe" + strixp;
-                                    gc2 += ",GCJJGguojia" + strixp;
-                                    gc3 += ",GCJJGdiqu" + strixp;
-                                    gc4 += ",GCJJGchengshi" + strixp;
+            //                    biaozhun1 = "";
+            //                    biaozhunValue = "";
+            //                    for (int ixp = 0; ixp < strSyfenlieruxuanbiaozhun.Count(); ixp++)
+            //                    {
+            //                        if (ixp < 21)
+            //                        {
+            //                            string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
+            //                            biaozhun1 += ",LCSYXXruxuanbiaozhun" + strixp;
+            //                            biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "'";
+            //                        }
+            //                        else { break; }
 
-                                    // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
-                                    var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-                                    gcv += ",'" + OItemZB[0].InnerText + "'";
-                                    gcv1 += ",'" + OItemZB[1].InnerText + "'";
-                                    gcv2 += ",'" + OItemZB[2].InnerText + "'";
-                                    gcv3 += ",'" + OItemZB[3].InnerText + "'";
-                                    gcv4 += ",'" + OItemZB[4].InnerText + "'";
-                                }
-                                else { break; }
-                            }
-                            string ll = "", ll1 = "", ll2 = "",
-                                 llv = "", llv1 = "", llv2 = "";
-                            for (var izb = 1; izb < LLWYH.Count() + 1; izb++)
-                            {
-                                if (izb < 6)
-                                {
-                                    string strixp = izb.ToString() == "0" ? "" : izb.ToString();
-                                    int jzb = izb;
-                                    ll += ",LLWYHmingcheng" + strixp;
-                                    ll1 += ",LLWYHshechajiruan" + strixp;
-                                    ll2 += ",LLWYHchachariqi" + strixp;
+            //                    }
 
-                                    // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
-                                    var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[8]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-                                    llv += ",'" + OItemZB[0].InnerText.Trim().ToString() + "'";
-                                    llv1 += ",'" + OItemZB[1].InnerText.Trim().ToString() + "'";
-                                    llv2 += ",'" + OItemZB[2].InnerText.Trim().ToString() + "'";
-                                }
-                                else { break; }
-                            }
-                            string lla = ll + ll1 + ll2;
-                            string llva = llv + llv1 + llv2;
-                            string gca = gc + gc1 + gc2 + gc3 + gc4;
-                            string gcva = gcv + gcv1 + gcv2 + gcv3 + gcv4;
-                            string yja = yj + yj1 + yj2 + yj3 + yj4 + yj5 + yj6 + yj7;
-                            string yjva = yjv + yjv1 + yjv2 + yjv3 + yjv4 + yjv5 + yjv6 + yjv7;
-                            string stringZB = zdzbcyzb + zdzbcyzb1 + zdzbcyzb2;
-                            string stringzbvalue = zdzbcyzbvalue + zdzbcyzbvalue1 + zdzbcyzbvalue2;
+            //                    for (int ixp = 0; ixp < strSyfenliepaichubiaozhunbiaozhun.Count(); ixp++)
+            //                    {
+            //                        if (ixp < 21)
+            //                        {
+            //                            string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
+            //                            paichubiazhun += ",LCSYXXpaichubiaozhun" + strixp;
+            //                            paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "'";
+            //                        }
+            //                        else { break; }
 
-                            string aaa = "";
-                            string biaoben = @"
-	                                    , SYFZshiyanyaomingcheng
-	                                    , SYFZshiyanyaoyongfa
-	                                    , SYFZduizhaomyaomingcheng
-	                                    , SYFZduizhaoyaoyongfa
-	                                    , ZDZBZDZBzhibiao
-	                                    , ZDZBZDZBzhibiao1
-	                                    , ZDZBZDZBzhibiao2
-	                                    , ZDZBZDZBpingjiashijian
-	                                    , ZDZBZDZBpingjiashijian1
-	                                    , ZDZBZDZBpingjiashijian2
-	                                    , ZDZBZDZBzongdianzhibiaoxuanzhe
-	                                    , ZDZBZDZBzongdianzhibiaoxuanzhe1
-	                                    , ZDZBZDZBzongdianzhibiaoxuanzhe2";
+            //                    }
 
-                            strsql += biaoben;
-                            strsql += stringZB;
-                            string strzb = @", ZDZBshujuanquanjianchaweiyuanhui
-	                                    , ZDZBweishouzhezheguomaishiyan";
-                            strsql += strzb;
-                            strsql += yja;
-                            strsql += gca;
-                            strsql += lla;
-                            string systr = strsql + @", SYZTXXshiyanzhuantai
-	                                    , SYZTXXmubiaoruzhurenshu
-	                                    , SYZTXXyiruzhulishu
-	                                    , SYZTXXshijiruzhuzonglishu
-	                                    , SYZTXXdiyilieshoushizheqianshu
-	                                    , SYZTXXdiyilieshoushizheruzhuriqi
-	                                    , SYZTXXshiyanzongzhiriqi
-	                                    , LCSYJGZYbanbenhao
-	                                    , LCSYJGZYbanbenriqi
-	                                    , Other
-	                                    , TitleName
-                                        , TitleStage) VALUES ( ";
+            //                }
+            //                else
+            //                {
+            //                    make.LCSYXXshiyanfenlie = "";
+            //                    make.LCSYXXshiyanfenqi = "";
+            //                    make.LCSYXXshiyanmudi = "";
+            //                    make.LCSYXXshuijihua = "";
+            //                    make.LCSYXXmanfang = "";
+            //                    make.LCSYXXshiyanfangwei = "";
+            //                    make.LCSYXXshejiliexing = "";
+            //                    make.LCSYXXninaliang = "";
+            //                    make.LCSYXXxingbei = "";
+            //                    make.LCSYXXjiankuangshoushizhen = "";
+            //                }
 
-                            #region
-                            string strvule =
-                                           @" '" + make.JBXXdengjihao + @"'
-	                                    , ' " + make.JBXXxiangguandengjihao + @"'
-	                                    , ' " + make.JBXXchengyongming + @"'
-	                                    , ' " + make.JBXXyaowuleixin + @"'
-	                                    , ' " + make.JBXXlinchuangshoushenqing + @"'
-	                                    , ' " + make.JBXXshiyingzheng + @"'
-	                                    , ' " + make.JBXXshiyantongshutimu + @"'
-	                                    , ' " + make.JBXXshiyanzhuanyetimu + @"'
-	                                    , ' " + make.JBXXshiyanfanganbianhao + @"'
-	                                    , ' " + make.JBXXfanganzuijing + @"'
-	                                    , ' " + make.JBXXbanbenriqi + @"'
-	                                    , ' " + make.JBXXfanganshifou + @"'
-	                                    , ' " + make.SQRXXshengqingrenmingcheng + @"'
-	                                    , ' " + make.SQRXXlianxirenxingming + @"'
-	                                    , ' " + make.SQRXXlianxirenzuoji + @"'
-	                                    , ' " + make.SQRXXlianxirenshoujihao + @"'
-	                                    , ' " + make.SQRXXlianxirenemail + @"'
-	                                    , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
-	                                    , ' " + make.SQRXXlianxirenyoubian + @"'
-	                                    , ' " + make.LCSYXXshiyanfenlie + @"'
-	                                    , ' " + make.LCSYXXshiyanfenqi + @"'
-	                                    , ' " + make.LCSYXXshiyanmudi + @"'
-	                                    , ' " + make.LCSYXXshuijihua + @"'
-	                                    , ' " + make.LCSYXXmanfang + @"'
-	                                    , ' " + make.LCSYXXshiyanfangwei + @"'
-	                                    , ' " + make.LCSYXXshejiliexing + @"'
-	                                    , ' " + make.LCSYXXninaliang + @"'
-	                                    , ' " + make.LCSYXXxingbei + @"'
-	                                    , ' " + make.LCSYXXjiankuangshoushizhen + @"'";
-                            string slqint13 = @" '" + make.JBXXdengjihao + @"'
-	                                    , ' " + make.JBXXxiangguandengjihao + @"'
-	                                    , ' " + make.JBXXchengyongming + @"'
-	                                    , ' " + make.JBXXyaowuleixin + @"'
-	                                    , ' " + make.JBXXlinchuangshoushenqing + @"'
-	                                    , ' " + make.JBXXshiyingzheng + @"'
-	                                    , ' " + make.JBXXshiyantongshutimu + @"'
-	                                    , ' " + make.JBXXshiyanzhuanyetimu + @"'
-	                                    , ' " + make.JBXXshiyanfanganbianhao + @"'
-	                                    , ' " + make.JBXXfanganzuijing + @"'
-	                                    , ' " + make.JBXXbanbenriqi + @"'
-	                                    , ' " + make.JBXXfanganshifou + @"'
-	                                    , ' " + make.SQRXXshengqingrenmingcheng + @"'
-	                                    , ' " + make.SQRXXlianxirenxingming + @"'
-	                                    , ' " + make.SQRXXlianxirenzuoji + @"'
-	                                    , ' " + make.SQRXXlianxirenshoujihao + @"'
-	                                    , ' " + make.SQRXXlianxirenemail + @"'
-	                                    , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
-	                                    , ' " + make.SQRXXlianxirenyoubian + @"'
-	                                    , ' " + make.LCSYXXshiyanfenlie + @"'
-	                                    , ' " + make.LCSYXXshiyanfenqi + @"'
-	                                    , ' " + make.LCSYXXshiyanmudi + @"'
-	                                    , ' " + make.LCSYXXshuijihua + @"'
-	                                    , ' " + make.LCSYXXmanfang + @"'
-	                                    , ' " + make.LCSYXXshiyanfangwei + @"'
-	                                    , ' " + make.LCSYXXshejiliexing + @"'
-	                                    , ' " + make.LCSYXXninaliang + @"'
-	                                    , ' " + make.LCSYXXxingbei + @"'
-	                                    , ' " + make.LCSYXXjiankuangshoushizhen + @"'";
-                            string slqint14 = ");";
-                            #endregion
-                            strvule = strvule + strsqlvalue;
+            //                //var strSyfenlieruxuanbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[0].Split("\n\t\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t\t");
+            //                //var strSyfenliepaichubiaozhunbiaozhun = strSyfenlie.Split("\n                                入选标准")[1].Split("\n                                排除标准")[1].Split("\n\t\t\t\t\t\t\t\t\t\t\n                                                                                \n\t\t\t\t\t\t\t\t\t\t");
 
-                            string str2 = @"
-                                    , '" + _strshiyanyao[1] + @"'
-                                    , '" + _strshiyanyao[2] + @"'
-                                    , '" + _strduizhaoyao[1] + @"'
-                                    , '" + _strduizhaoyao[2] + @"'
-                                    , '" + strZYZBZD[1] + @"'
-                                    , 'ZDZBZDZBzhibiao1'
-                                    , 'ZDZBZDZBzhibiao2'
-                                    , '" + strZYZBZD[2] + @"'
-                                    , 'ZDZBZDZBpingjiashijian1'
-                                    , 'ZDZBZDZBpingjiashijian2'
-                                    , '" + strZYZBZD[3] + @"'
-                                    , 'ZDZBZDZBzongdianzhibiaoxuanzhe1'
-                                    , 'ZDZBZDZBzongdianzhibiaoxuanzhe2'";
-                            strvule += str2;
+            //                //var StrSYfenzhu = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]").InnerText;
+            //                var strshiyanyao = "";
 
-                            strvule += stringzbvalue;
-                            string zdzbstr = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[6]").InnerText;
-                            string zdzbweishoustr = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[8]").InnerText;
-                            string stryj =
-                                     @" , '" + zdzbstr + @"'
-                                    , '" + zdzbweishoustr + @"'";
-                            strvule += stryj;
-                            strvule += yjva;
-                            strvule += gcva;
-                            strvule += llva;
-                            string SYZ = strvule + @", '" + SYZT[1].InnerText + @"'
-                                    , '" + SYZT[3].InnerText + @"'
-                                    , '" + SYZT[5].InnerText + @"'
-                                    , '" + SYZT[7].InnerText + @"'
-                                    , '" + SYZT[9].InnerText + @"'
-                                    , '" + SYZT[11].InnerText + @"'
-                                    , '" + SYZT[13].InnerText + @"'
-                                    , 'LCSYJGZYbanbenhao'
-                                    , 'LCSYJGZYbanbenriqi'
-                                    , '" + hospitalid + @"'
-                                    , '" + name + @"'
-                                    , '" + stage + @"'
-                                    );";
+            //                if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]") != null)
+            //                {
+            //                    strshiyanyao = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]").InnerText;
+            //                }
+            //                else
+            //                {
+            //                    strshiyanyao = @"\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  \n                                            \n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  ";
+            //                }
+            //                var _strshiyanyao = strshiyanyao.Split("\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t");
+            //                var strduizhaoyao = "";
+            //                if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr[1]") != null)
+            //                {
+            //                    strduizhaoyao = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[4]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr[1]").InnerText;
+            //                }
+            //                else
+            //                {
+            //                    strduizhaoyao = @"\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  \n                                            \n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t  ";
+            //                }
+            //                var _strduizhaoyao = strduizhaoyao.Split("\n                                            \n                                                \n\t\t\t\t\t\t\t\t\t\t\t\t\t");
 
-                            string slq = systr + SYZ;
-                            re += 1;
-                            changeSqlData(slq);
-                            Console.WriteLine("机构id：" + hospitalid + "--->> " + re);
-                            string sqlin = slqint1 + slqint11 + slqint12 + slqint13 + slqint14;
-                            myreader.Close();
-                            //var kk = 1;
-                        }
+            //                var strZDZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]").InnerText;
+            //                string[] strZYZBZD;
+            //                if (htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]") != null)
+            //                {
+            //                    strZYZBZD = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]").InnerText.Split("\n                                            ");
+            //                }
+            //                else
+            //                {
+            //                    strZYZBZD = "\n                                            \n                                            \n                                            \n                                            ".Split("\n                                            ");
+            //                }
+            //                var strCYdzd = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr");
+            //                var strCYdzdnode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr[1]/td");
+            //                var strCYDZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr") != null ? htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]/tr").InnerText : "\n                    \n                    \n                    ";
+            //                var _strZDZB = strZDZB.Split("\n                    ");
+            //                //var strYJZXX = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]").InnerText;
+            //                var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
+            //                //var _strYJZXX = strYJZXX.Split("\n                    ");
+            //                //var strGCJJJ = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]").InnerText;
+            //                var arrgcjj = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
+            //                //var _strGCJJJ = strGCJJJ.Split("\n                    ");
+            //                var LLWYH = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[8]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
+            //                //var _LLWYH = LLWYH.Split("\n                    ");
+            //                var SYZT = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[9]/div[2]/div[1]").SelectNodes("div");
+            //                //var _SYZT = SYZT.Split("\n                    ");
+            //                //var LCSYJG = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[10]/div[2]").InnerText;
+            //                //var _LCSYJG = LCSYJG.Split("\n                    ");
+
+            //                //make.JBXXdengjihao = arrlist[3].ToString();
+            //                //make.JBXXxiangguandengjihao = arrlist[5].ToString();
+            //                //make.JBXXchengyongming = arrlist[7].ToString();
+            //                //make.JBXXyaowuleixin = arrlist[10].ToString();
+            //                //make.JBXXlinchuangshoushenqing = arrlist[12].ToString();
+            //                //make.JBXXshiyingzheng = arrlist[14].ToString();
+            //                //make.JBXXshiyantongshutimu = arrlist[16].ToString();
+            //                //make.JBXXshiyanzhuanyetimu = arrlist[18].ToString();
+            //                //make.JBXXshiyanfanganbianhao = arrlist[20].ToString();
+            //                //make.JBXXfanganzuijing = arrlist[22].ToString();
+            //                //make.JBXXbanbenriqi = arrlist[24].ToString();
+            //                //make.JBXXfanganshifou = arrlist[26].ToString();
+
+            //                //make.SQRXXshengqingrenmingcheng = _strindextshenqingrenxinxi[3].ToString();
+            //                //make.SQRXXlianxirenxingming = _strindextshenqingrenxinxi[5].ToString();
+            //                //make.SQRXXlianxirenzuoji = _strindextshenqingrenxinxi[7].ToString();
+            //                //make.SQRXXlianxirenshoujihao = _strindextshenqingrenxinxi[9].ToString();
+            //                //make.SQRXXlianxirenemail = _strindextshenqingrenxinxi[11].ToString();
+            //                //make.SQRXXlianxirenyouzhendizhi = _strindextshenqingrenxinxi[13].ToString();
+            //                //make.SQRXXlianxirenyoubian = _strindextshenqingrenxinxi[15].ToString();
+
+            //                //make.LCSYXXshiyanfenlie = _strSyfenlie[4].ToString();
+            //                //make.LCSYXXshiyanfenqi = _strSyfenlie[7].ToString();
+            //                //make.LCSYXXshiyanmudi = _strSyfenlie[9].ToString();
+            //                //make.LCSYXXshuijihua = _strSyfenlie[12].ToString();
+            //                //make.LCSYXXmanfang = _strSyfenlie[15].ToString();
+            //                //make.LCSYXXshiyanfangwei = _strSyfenlie[18].ToString();
+            //                //make.LCSYXXshejiliexing = _strSyfenlie[21].ToString();
+            //                //make.LCSYXXninaliang = _strSyfenlie[23].ToString();
+            //                //make.LCSYXXxingbei = _strSyfenlie[25].ToString();
+            //                //make.LCSYXXjiankuangshoushizhen = _strSyfenlie[28].ToString();
 
 
-                        var c = 1;
-                    }
-                    list2.Add(j);
-                }
-                catch
-                {
-                }
-            }
-            //string strURL = "https://www.yscro.com/cde/6ba2cee4c301a4b8b7073fd4e4ec2a7f";
-            //string strURL = "http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?keywords=CTR20170414";
-            //System.Net.HttpWebRequest request;
-            //request = (System.Net.HttpWebRequest)WebRequest.Create(strURL);
-            //CookieContainer cc = new CookieContainer();
-            //cc.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
-            //request.CookieContainer = cc;
-            //request.Method = "get";
-            //System.Net.HttpWebResponse response;
-            //response = (System.Net.HttpWebResponse)request.GetResponse();
-            //System.IO.StreamReader myreader = new System.IO.StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            //string responseText = myreader.ReadToEnd();
-            //myreader.Close();
-            #endregion
+            //                string strsql = @"INSERT INTO MakeTable (JBXXdengjihao
+	           //                         , JBXXxiangguandengjihao
+	           //                         , JBXXchengyongming
+	           //                         , JBXXyaowuleixin
+	           //                         , JBXXlinchuangshoushenqing
+	           //                         , JBXXshiyingzheng
+	           //                         , JBXXshiyantongshutimu
+	           //                         , JBXXshiyanzhuanyetimu
+	           //                         , JBXXshiyanfanganbianhao
+	           //                         , JBXXfanganzuijing
+	           //                         , JBXXbanbenriqi
+	           //                         , JBXXfanganshifou
+	           //                         , SQRXXshengqingrenmingcheng
+	           //                         , SQRXXlianxirenxingming
+	           //                         , SQRXXlianxirenzuoji
+	           //                         , SQRXXlianxirenshoujihao
+	           //                         , SQRXXlianxirenemail
+	           //                         , SQRXXlianxirenyouzhendizhi
+	           //                         , SQRXXlianxirenyoubian
+	           //                         , LCSYXXshiyanfenlie
+	           //                         , LCSYXXshiyanfenqi
+	           //                         , LCSYXXshiyanmudi
+	           //                         , LCSYXXshuijihua
+	           //                         , LCSYXXmanfang
+	           //                         , LCSYXXshiyanfangwei
+	           //                         , LCSYXXshejiliexing
+	           //                         , LCSYXXninaliang
+	           //                         , LCSYXXxingbei
+	           //                         , LCSYXXjiankuangshoushizhen";
+            //                string slqint1 = @"INSERT INTO MakeTable (";
+            //                string slqint11 = @"JBXXdengjihao
+	           //                         , JBXXxiangguandengjihao
+	           //                         , JBXXchengyongming
+	           //                         , JBXXyaowuleixin
+	           //                         , JBXXlinchuangshoushenqing
+	           //                         , JBXXshiyingzheng
+	           //                         , JBXXshiyantongshutimu
+	           //                         , JBXXshiyanzhuanyetimu
+	           //                         , JBXXshiyanfanganbianhao
+	           //                         , JBXXfanganzuijing
+	           //                         , JBXXbanbenriqi
+	           //                         , JBXXfanganshifou
+	           //                         , SQRXXshengqingrenmingcheng
+	           //                         , SQRXXlianxirenxingming
+	           //                         , SQRXXlianxirenzuoji
+	           //                         , SQRXXlianxirenshoujihao
+	           //                         , SQRXXlianxirenemail
+	           //                         , SQRXXlianxirenyouzhendizhi
+	           //                         , SQRXXlianxirenyoubian
+	           //                         , LCSYXXshiyanfenlie
+	           //                         , LCSYXXshiyanfenqi
+	           //                         , LCSYXXshiyanmudi
+	           //                         , LCSYXXshuijihua
+	           //                         , LCSYXXmanfang
+	           //                         , LCSYXXshiyanfangwei
+	           //                         , LCSYXXshejiliexing
+	           //                         , LCSYXXninaliang
+	           //                         , LCSYXXxingbei
+	           //                         , LCSYXXjiankuangshoushizhen";
+            //                string slqint12 = @") VALUES ( ";
+            //                //string biaozhun1 = "";
+            //                string strsqlvalue = "";
+
+            //                //string biaozhunValue = "";
+            //                //for (int ixp = 0; ixp < strSyfenlieruxuanbiaozhun.Count() ; ixp++)
+            //                //{
+            //                //    if (ixp < 21)
+            //                //    {
+            //                //        string strixp = ixp.ToString() == "0" ? "": ixp.ToString();
+            //                //        biaozhun1 += ",LCSYXXruxuanbiaozhun" + strixp;
+            //                //        biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "'";
+            //                //    }
+            //                //    else { break; }
+
+            //                //}
+            //                strsql += biaozhun1;
+            //                strsqlvalue += biaozhunValue;
+            //                //string paichubiazhun = "", paichubiazhunValue ="";
+
+            //                //for (int ixp = 0; ixp < strSyfenliepaichubiaozhunbiaozhun.Count(); ixp++)
+            //                //{
+            //                //    if (ixp < 21)
+            //                //    {
+            //                //        string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
+            //                //        paichubiazhun += ",LCSYXXpaichubiaozhun" + strixp;
+            //                //        paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "'";
+            //                //    }
+            //                //    else { break; }
+
+            //                //}
+
+            //                strsql += paichubiazhun;
+            //                strsqlvalue += paichubiazhunValue;
+            //                string zdzbcyzb = "", zdzbcyzbvalue = "", zdzbcyzb1 = "", zdzbcyzbvalue1 = "", zdzbcyzb2 = "", zdzbcyzbvalue2 = "";
+            //                for (var izb = 0; izb < strCYdzd.Count(); izb++)
+            //                {
+
+            //                    if (izb < 6)
+            //                    {
+            //                        string strixp = izb.ToString() == "0" ? "" : izb.ToString();
+            //                        int jzb = izb + 1;
+            //                        zdzbcyzb += ",ZDZBCYZDZBzhibiao" + strixp;
+            //                        zdzbcyzb1 += ",ZDZBCYZDZBpingjiashijian" + strixp;
+            //                        zdzbcyzb2 += ",ZDZBCYZDZBzongdianzhibiaoxuanzhe" + strixp;
+            //                        //zdzbcyzbvalue += ",'" + strSyfenliepaichubiaozhunbiaozhun[izb] + "'";
+            //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
+            //                        zdzbcyzbvalue += ",'" + OItemZB[0].InnerText + "'";
+            //                        zdzbcyzbvalue1 += ",'" + OItemZB[1].InnerText + "'";
+            //                        zdzbcyzbvalue2 += ",'" + OItemZB[2].InnerText + "'";
+            //                    }
+            //                    else { break; }
+            //                }
+
+            //                string yj = "", yj1 = "", yj2 = "", yj3 = "", yj4 = "", yj5 = "", yj6 = "", yj7 = "", yj8 = "",
+            //                    yjv = "", yjv1 = "", yjv2 = "", yjv3 = "", yjv4 = "", yjv5 = "", yjv6 = "", yjv7 = "", yjv8 = "";
+            //                for (var izb = 0; izb < arryjzxx.Count(); izb++)
+            //                {
+
+            //                    if (izb < 2)
+            //                    {
+            //                        string strixp = izb.ToString() == "0" ? "" : izb.ToString();
+            //                        int jzb = izb + 1;
+            //                        yj += ",YJZXXxingming" + strixp;
+            //                        yj1 += ",YJZXXxuewei" + strixp;
+            //                        yj2 += ",YJZXXzhicheng" + strixp;
+            //                        yj3 += ",YJZXXdianhuan" + strixp;
+            //                        yj4 += ",YJZXXemail" + strixp;
+            //                        yj5 += ",YJZXXyouzhenbiaoma" + strixp;
+            //                        yj6 += ",YJZXXyoubian" + strixp;
+            //                        yj7 += ",YJZXXdangweimingcheng" + strixp;
+
+            //                        // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
+            //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
+            //                        yjv += ",'" + OItemZB[0].InnerText + "'";
+            //                        yjv1 += ",'" + OItemZB[1].InnerText + "'";
+            //                        yjv2 += ",'" + OItemZB[2].InnerText + "'";
+            //                        yjv3 += ",'" + OItemZB[3].InnerText + "'";
+            //                        yjv4 += ",'" + OItemZB[4].InnerText + "'";
+            //                        yjv5 += ",'" + OItemZB[5].InnerText + "'";
+            //                        yjv6 += ",'" + OItemZB[6].InnerText + "'";
+            //                        yjv7 += ",'" + OItemZB[7].InnerText + "'";
+            //                    }
+            //                    else { break; }
+            //                }
+            //                string gc = "", gc1 = "", gc2 = "", gc3 = "", gc4 = "",
+            //                       gcv = "", gcv1 = "", gcv2 = "", gcv3 = "", gcv4 = "";
+            //                for (var izb = 0; izb < arrgcjj.Count(); izb++)
+            //                {
+            //                    if (izb < 31)
+            //                    {
+            //                        string strixp = izb.ToString() == "0" ? "" : izb.ToString();
+            //                        int jzb = izb + 1;
+            //                        gc += ",GCJJGmingcheng" + strixp;
+            //                        gc1 += ",GCJJGzhuyaoyanjiuzhe" + strixp;
+            //                        gc2 += ",GCJJGguojia" + strixp;
+            //                        gc3 += ",GCJJGdiqu" + strixp;
+            //                        gc4 += ",GCJJGchengshi" + strixp;
+
+            //                        // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
+            //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
+            //                        gcv += ",'" + OItemZB[0].InnerText + "'";
+            //                        gcv1 += ",'" + OItemZB[1].InnerText + "'";
+            //                        gcv2 += ",'" + OItemZB[2].InnerText + "'";
+            //                        gcv3 += ",'" + OItemZB[3].InnerText + "'";
+            //                        gcv4 += ",'" + OItemZB[4].InnerText + "'";
+            //                    }
+            //                    else { break; }
+            //                }
+            //                string ll = "", ll1 = "", ll2 = "",
+            //                     llv = "", llv1 = "", llv2 = "";
+            //                for (var izb = 1; izb < LLWYH.Count() + 1; izb++)
+            //                {
+            //                    if (izb < 6)
+            //                    {
+            //                        string strixp = izb.ToString() == "0" ? "" : izb.ToString();
+            //                        int jzb = izb;
+            //                        ll += ",LLWYHmingcheng" + strixp;
+            //                        ll1 += ",LLWYHshechajiruan" + strixp;
+            //                        ll2 += ",LLWYHchachariqi" + strixp;
+
+            //                        // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
+            //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[8]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
+            //                        llv += ",'" + OItemZB[0].InnerText.Trim().ToString() + "'";
+            //                        llv1 += ",'" + OItemZB[1].InnerText.Trim().ToString() + "'";
+            //                        llv2 += ",'" + OItemZB[2].InnerText.Trim().ToString() + "'";
+            //                    }
+            //                    else { break; }
+            //                }
+            //                string lla = ll + ll1 + ll2;
+            //                string llva = llv + llv1 + llv2;
+            //                string gca = gc + gc1 + gc2 + gc3 + gc4;
+            //                string gcva = gcv + gcv1 + gcv2 + gcv3 + gcv4;
+            //                string yja = yj + yj1 + yj2 + yj3 + yj4 + yj5 + yj6 + yj7;
+            //                string yjva = yjv + yjv1 + yjv2 + yjv3 + yjv4 + yjv5 + yjv6 + yjv7;
+            //                string stringZB = zdzbcyzb + zdzbcyzb1 + zdzbcyzb2;
+            //                string stringzbvalue = zdzbcyzbvalue + zdzbcyzbvalue1 + zdzbcyzbvalue2;
+
+            //                string aaa = "";
+            //                string biaoben = @"
+	           //                         , SYFZshiyanyaomingcheng
+	           //                         , SYFZshiyanyaoyongfa
+	           //                         , SYFZduizhaomyaomingcheng
+	           //                         , SYFZduizhaoyaoyongfa
+	           //                         , ZDZBZDZBzhibiao
+	           //                         , ZDZBZDZBzhibiao1
+	           //                         , ZDZBZDZBzhibiao2
+	           //                         , ZDZBZDZBpingjiashijian
+	           //                         , ZDZBZDZBpingjiashijian1
+	           //                         , ZDZBZDZBpingjiashijian2
+	           //                         , ZDZBZDZBzongdianzhibiaoxuanzhe
+	           //                         , ZDZBZDZBzongdianzhibiaoxuanzhe1
+	           //                         , ZDZBZDZBzongdianzhibiaoxuanzhe2";
+
+            //                strsql += biaoben;
+            //                strsql += stringZB;
+            //                string strzb = @", ZDZBshujuanquanjianchaweiyuanhui
+	           //                         , ZDZBweishouzhezheguomaishiyan";
+            //                strsql += strzb;
+            //                strsql += yja;
+            //                strsql += gca;
+            //                strsql += lla;
+            //                string systr = strsql + @", SYZTXXshiyanzhuantai
+	           //                         , SYZTXXmubiaoruzhurenshu
+	           //                         , SYZTXXyiruzhulishu
+	           //                         , SYZTXXshijiruzhuzonglishu
+	           //                         , SYZTXXdiyilieshoushizheqianshu
+	           //                         , SYZTXXdiyilieshoushizheruzhuriqi
+	           //                         , SYZTXXshiyanzongzhiriqi
+	           //                         , LCSYJGZYbanbenhao
+	           //                         , LCSYJGZYbanbenriqi
+	           //                         , Other
+	           //                         , TitleName
+            //                            , TitleStage) VALUES ( ";
+
+            //                #region
+            //                string strvule =
+            //                               @" '" + make.JBXXdengjihao + @"'
+	           //                         , ' " + make.JBXXxiangguandengjihao + @"'
+	           //                         , ' " + make.JBXXchengyongming + @"'
+	           //                         , ' " + make.JBXXyaowuleixin + @"'
+	           //                         , ' " + make.JBXXlinchuangshoushenqing + @"'
+	           //                         , ' " + make.JBXXshiyingzheng + @"'
+	           //                         , ' " + make.JBXXshiyantongshutimu + @"'
+	           //                         , ' " + make.JBXXshiyanzhuanyetimu + @"'
+	           //                         , ' " + make.JBXXshiyanfanganbianhao + @"'
+	           //                         , ' " + make.JBXXfanganzuijing + @"'
+	           //                         , ' " + make.JBXXbanbenriqi + @"'
+	           //                         , ' " + make.JBXXfanganshifou + @"'
+	           //                         , ' " + make.SQRXXshengqingrenmingcheng + @"'
+	           //                         , ' " + make.SQRXXlianxirenxingming + @"'
+	           //                         , ' " + make.SQRXXlianxirenzuoji + @"'
+	           //                         , ' " + make.SQRXXlianxirenshoujihao + @"'
+	           //                         , ' " + make.SQRXXlianxirenemail + @"'
+	           //                         , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
+	           //                         , ' " + make.SQRXXlianxirenyoubian + @"'
+	           //                         , ' " + make.LCSYXXshiyanfenlie + @"'
+	           //                         , ' " + make.LCSYXXshiyanfenqi + @"'
+	           //                         , ' " + make.LCSYXXshiyanmudi + @"'
+	           //                         , ' " + make.LCSYXXshuijihua + @"'
+	           //                         , ' " + make.LCSYXXmanfang + @"'
+	           //                         , ' " + make.LCSYXXshiyanfangwei + @"'
+	           //                         , ' " + make.LCSYXXshejiliexing + @"'
+	           //                         , ' " + make.LCSYXXninaliang + @"'
+	           //                         , ' " + make.LCSYXXxingbei + @"'
+	           //                         , ' " + make.LCSYXXjiankuangshoushizhen + @"'";
+            //                string slqint13 = @" '" + make.JBXXdengjihao + @"'
+	           //                         , ' " + make.JBXXxiangguandengjihao + @"'
+	           //                         , ' " + make.JBXXchengyongming + @"'
+	           //                         , ' " + make.JBXXyaowuleixin + @"'
+	           //                         , ' " + make.JBXXlinchuangshoushenqing + @"'
+	           //                         , ' " + make.JBXXshiyingzheng + @"'
+	           //                         , ' " + make.JBXXshiyantongshutimu + @"'
+	           //                         , ' " + make.JBXXshiyanzhuanyetimu + @"'
+	           //                         , ' " + make.JBXXshiyanfanganbianhao + @"'
+	           //                         , ' " + make.JBXXfanganzuijing + @"'
+	           //                         , ' " + make.JBXXbanbenriqi + @"'
+	           //                         , ' " + make.JBXXfanganshifou + @"'
+	           //                         , ' " + make.SQRXXshengqingrenmingcheng + @"'
+	           //                         , ' " + make.SQRXXlianxirenxingming + @"'
+	           //                         , ' " + make.SQRXXlianxirenzuoji + @"'
+	           //                         , ' " + make.SQRXXlianxirenshoujihao + @"'
+	           //                         , ' " + make.SQRXXlianxirenemail + @"'
+	           //                         , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
+	           //                         , ' " + make.SQRXXlianxirenyoubian + @"'
+	           //                         , ' " + make.LCSYXXshiyanfenlie + @"'
+	           //                         , ' " + make.LCSYXXshiyanfenqi + @"'
+	           //                         , ' " + make.LCSYXXshiyanmudi + @"'
+	           //                         , ' " + make.LCSYXXshuijihua + @"'
+	           //                         , ' " + make.LCSYXXmanfang + @"'
+	           //                         , ' " + make.LCSYXXshiyanfangwei + @"'
+	           //                         , ' " + make.LCSYXXshejiliexing + @"'
+	           //                         , ' " + make.LCSYXXninaliang + @"'
+	           //                         , ' " + make.LCSYXXxingbei + @"'
+	           //                         , ' " + make.LCSYXXjiankuangshoushizhen + @"'";
+            //                string slqint14 = ");";
+            //                #endregion
+            //                strvule = strvule + strsqlvalue;
+
+            //                string str2 = @"
+            //                        , '" + _strshiyanyao[1] + @"'
+            //                        , '" + _strshiyanyao[2] + @"'
+            //                        , '" + _strduizhaoyao[1] + @"'
+            //                        , '" + _strduizhaoyao[2] + @"'
+            //                        , '" + strZYZBZD[1] + @"'
+            //                        , 'ZDZBZDZBzhibiao1'
+            //                        , 'ZDZBZDZBzhibiao2'
+            //                        , '" + strZYZBZD[2] + @"'
+            //                        , 'ZDZBZDZBpingjiashijian1'
+            //                        , 'ZDZBZDZBpingjiashijian2'
+            //                        , '" + strZYZBZD[3] + @"'
+            //                        , 'ZDZBZDZBzongdianzhibiaoxuanzhe1'
+            //                        , 'ZDZBZDZBzongdianzhibiaoxuanzhe2'";
+            //                strvule += str2;
+
+            //                strvule += stringzbvalue;
+            //                string zdzbstr = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[6]").InnerText;
+            //                string zdzbweishoustr = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[8]").InnerText;
+            //                string stryj =
+            //                         @" , '" + zdzbstr + @"'
+            //                        , '" + zdzbweishoustr + @"'";
+            //                strvule += stryj;
+            //                strvule += yjva;
+            //                strvule += gcva;
+            //                strvule += llva;
+            //                string SYZ = strvule + @", '" + SYZT[1].InnerText + @"'
+            //                        , '" + SYZT[3].InnerText + @"'
+            //                        , '" + SYZT[5].InnerText + @"'
+            //                        , '" + SYZT[7].InnerText + @"'
+            //                        , '" + SYZT[9].InnerText + @"'
+            //                        , '" + SYZT[11].InnerText + @"'
+            //                        , '" + SYZT[13].InnerText + @"'
+            //                        , 'LCSYJGZYbanbenhao'
+            //                        , 'LCSYJGZYbanbenriqi'
+            //                        , '" + hospitalid + @"'
+            //                        , '" + name + @"'
+            //                        , '" + stage + @"'
+            //                        );";
+
+            //                string slq = systr + SYZ;
+            //                re += 1;
+            //                changeSqlData(slq);
+            //                Console.WriteLine("机构id：" + hospitalid + "--->> " + re);
+            //                string sqlin = slqint1 + slqint11 + slqint12 + slqint13 + slqint14;
+            //                myreader.Close();
+            //                //var kk = 1;
+            //            }
+
+
+            //            var c = 1;
+            //        }
+            //        list2.Add(j);
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
+            ////string strURL = "https://www.yscro.com/cde/6ba2cee4c301a4b8b7073fd4e4ec2a7f";
+            ////string strURL = "http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?keywords=CTR20170414";
+            ////System.Net.HttpWebRequest request;
+            ////request = (System.Net.HttpWebRequest)WebRequest.Create(strURL);
+            ////CookieContainer cc = new CookieContainer();
+            ////cc.Add(new System.Uri("https://www.yscro.com"), new Cookie("token", "242b494f-c62d-47ca-807f-c78b6ae314b4"));
+            ////request.CookieContainer = cc;
+            ////request.Method = "get";
+            ////System.Net.HttpWebResponse response;
+            ////response = (System.Net.HttpWebResponse)request.GetResponse();
+            ////System.IO.StreamReader myreader = new System.IO.StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            ////string responseText = myreader.ReadToEnd();
+            ////myreader.Close();
+            //#endregion
 
 
             #region
-            var a = tag;
+            //var a = tag;
             var index = 1;
             var pagesize = 10;
             List<BannerInfo> list = null;
@@ -1179,7 +1346,7 @@ namespace App.Hosting.Controllers
             string[] arr = html.Split(' ');
             return arr[0];
         }
-        public async Task<IActionResult> Index(string code, string state,string tag,string key)
+        public async Task<IActionResult> Index34(string code, string state,string tag,string key)
         {
 
             #region
