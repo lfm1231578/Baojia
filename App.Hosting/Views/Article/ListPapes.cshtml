@@ -1,0 +1,383 @@
+@{
+    ViewData["Title"] = "摘要";
+    var hospital = ViewBag.Yixue;//数据
+    var count = ViewBag.Count;//总条数
+    var page1 = ViewBag.PageNum;//当前页
+    var code = ViewBag.Code;
+    var key = ViewBag.Key;
+    var shenfen = ViewBag.Shenfen;//省份
+    var k = 0;
+}
+@section css{
+    <link href="~/web/css/article.css" rel="stylesheet" />
+    <link href="~/web/css/blog.css" rel="stylesheet" />
+    <link href="~/web/css/index.css" rel="stylesheet" />
+    <style>
+        .item-base-info {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .blog-main{
+            background: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .blog-main table{
+           margin: 15px auto;
+           width: calc(100% - 20px);
+          
+        }
+        
+    </style>
+}
+    @using App.Core.Entities.Blog
+    @model List<App.Core.Entities.Blog.BannerInfo>
+<div class="blog-body">
+    <div class="blog-container">
+        <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
+            <a href="/" title="网站首页">首页1<span class="layui-box">&gt;</span></a>
+                <a><cite>摘要数据库</cite></a>
+          
+
+
+        </blockquote>
+        <div style="background:#fff;padding: 10px;">
+                <form class="layui-form layui-form-pane" id="advance-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文献类型</label>
+                        <div class="layui-input-block">
+                            <select name="Dstag" lay-filter="aihao">
+                                <option value=""></option>
+                                <option value="PDF">PDF</option>
+                                <option value="Word">Word</option>
+                            </select>
+                        </div>
+                    </div>
+                <div class="layui-form-item" style=""> 
+                    <label class="layui-form-label">省份地区</label>
+                    <div class="layui-input-block">
+                            <select name="DJGXXshen" lay-filter="aihao" id="area">
+                                <option value=""></option>
+                                <option value="guangdong">广东</option>
+                                <option value="beijing">北京</option>
+                                <option value="tianjing">天津</option>
+                                <option value="hebei">河北</option>
+                                <option value="shangxi">山西</option>
+                                <option value="neimenggu">内蒙古</option>
+                                <option value="liaoning">辽宁</option>
+                                <option value="jiling">吉林</option>
+                                <option value="heilongjiang">黑龙江</option>
+                                <option value="shanghai">上海</option>
+                                <option value="jiangshu">江苏</option>
+                                <option value="zhejiang">浙江</option>
+                                <option value="anhui">安徽</option>
+                                <option value="fujian">福建</option>
+                                <option value="jiangxi">江西</option>
+                                <option value="shangdong">山东</option>
+                                <option value="henan">河南</option>
+                                <option value="hubei">湖北</option>
+                                <option value="hunan">湖南</option>
+                                <option value="guangxi">广西</option>
+                                <option value="hainan">海南</option>
+                                <option value="chongqi">重庆</option>
+                                <option value="sichuang">四川</option>
+                                <option value="guizhou">贵州</option>
+                                <option value="yunnan">云南</option>
+                                <option value="xizan">西藏</option>
+                                <option value="sanxi">陕西</option>
+                                <option value="gansu">甘肃</option>
+                                <option value="qinghai">青海</option>
+                                <option value="ningxia">宁夏</option>
+                                <option value="xinjiang">新疆</option>
+                                <option value="xianggang">香港</option>
+                                <option value="taiwang">台湾</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div class="layui-form-item" style="display:none">
+                    <label class="layui-form-label">试验分类</label>
+                    <div class="layui-input-block">
+                        <select name="interest2" lay-filter="aihao">
+                            <option value=""></option>
+                                <option value="安全性">安全性</option>
+                                <option value="有效性" >有效性</option>
+                                <option value="安全性和有效性">安全性和有效性</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div class="layui-form-item" style="display:none">
+                    <label class="layui-form-label" >试验状态</label>
+                    <div class="layui-input-block">
+                        <select name="interest3" lay-filter="aihao">
+                            <option value=""></option>
+                                <option value="进行中-尚未招募">进行中-尚未招募</option>
+                                <option value="进行中-招募中">进行中-招募中</option>
+                                <option value="进行中-招募完成">进行中-招募完成</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div class="layui-form-item" pane="" style="display:none">
+                    <label class="layui-form-label">试验范围</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="国内试验" title="国内试验" >
+                        <input type="radio" name="sex" value="国际多中心试验" title="国际多中心试验">
+                        <input type="radio" name="sex" value="NK" title="NK" title="NK">
+                        
+
+                    </div>
+                </div>
+
+                    <div class="layui-form-item" pane="" style="display:none">
+                    <label class="layui-form-label">
+                        试验分期
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="qishu" value="I 期" title="I 期" >
+                            <input type="radio" name="qishu" value="II 期" title="II 期">
+                            <input type="radio" name="qishu" value="III 期" title="III 期">
+                    </div>
+                </div>
+
+                <div class="layui-row" style="display:none">
+                    <div class="layui-col-xs6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">机构名称</label>
+                            <div class="layui-input-block">
+                                    <input type="text" name="Dsname" autocomplete="off" placeholder="请输入机构名称" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">病房床位</label>
+                            <div class="layui-input-block">
+                                    <input type="text" name="DLCSYgcc" autocomplete="off" placeholder="请输入病房床位" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-col-xs6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" autocomplete="off" placeholder="请输入药物名称" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">通俗题目</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title1" autocomplete="off" placeholder="请输入适应症" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      
+                <div class="layui-row" style="display:none">
+                    <div class="layui-col-xs6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">申请人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title2" autocomplete="off" placeholder="请输入申请人" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">主要研究者</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title3" autocomplete="off" placeholder="请输入主要研究者" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button id="search-btn" class="layui-btn" lay-submit="" lay-filter="demo2">查询</button>
+        </div>
+        <div class="blog-main">
+                <table lay-filter="demo">
+                    <thead>
+                        <tr class="">
+                            <th lay-data="{field:'sort', width:80, sort: true}">序号</th>
+                            <th lay-data="{field:'no',width:150,sort:true, escape: false}">登记号</th>
+                            <th lay-data="{field:'username2',sort:true, escape: false}">药物名称</th>
+                            <th lay-data="{field:'username5',sort:true, escape: false}">试验通俗题目</th>
+                            <th lay-data="{field:'username3',width:250,sort:true, escape: false}">文件名称</th>
+                            <th lay-data="{field:'username21',sort:true, escape: false}">路径</th>
+                        </tr>
+                    </thead>
+			            <tbody>
+                             @foreach (Makeiteminfo info in hospital)
+                            {
+                                k += 1;
+
+				            <tr style=" color:#535353">
+                            <td height="40">&nbsp;&nbsp;@k</td>
+				            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.JBXXdengjihao
+					            </a>
+                            </td>
+				            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.TitleName
+					            </a>
+                            </td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.JBXXshiyantongshutimu
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.PathName
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/sofofiter/@info.PathName" style="color: Blue;">下载查看详情</a>
+@*                                <a href="@info.Pathpapes"   name="1">
+                                    @info.Pathpapes
+                                </a>*@
+                            </td>
+                            
+				            </tr>
+                            }
+	            </tbody>
+                </table>
+                <div>
+                    <div id="demo0" style="text-align:center;"></div>
+                </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script id="newsview" type="text/template">
+    console.log("------->");
+    alert(11);
+    <div class="article shadow animated zoomIn">
+        <div class="article-left ">
+            <img src="{{d.Thumbnail}}" alt="{{d.Title}}">
+        </div>
+        <div class="article-right">
+            <div class="article-title">
+                {{# if(d.IsTop){}}
+                <span class="article_is_top">置顶</span>&nbsp;
+                {{#} }}
+
+
+                {{#  if(d.CreativeType == 0){ }}
+                <span class="article_is_yc">
+                    原创
+                </span>&nbsp;
+                {{#  }else{ }}
+                <span class="article_is_zz">
+                    转载
+                </span>&nbsp;
+                {{#} }}
+
+                <a href="/article/detail/{{d.Id}}">{{d.Title}}</a>
+            </div>
+            <div class="article-abstract">
+                {{d.Summary}}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="article-footer">
+            <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{d.PublishDate}}</span>
+            <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp; {{d.Author}}</span>
+            <span>
+                <i class="fa fa-tag"></i>&nbsp;&nbsp;
+                {{#  layui.each(d.Tags, function(i, curr){}}
+                <a href="/article/list?tid={{curr.Id}}" class="flag"> {{curr.TagName}}</a>
+                {{#  }); }}
+            </span>
+            <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;{{d.ReadTimes}}</span>
+            <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;{{d.MsgTimes}}</span>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="categoryview">
+    {{#  layui.each(d, function(index, item){ }}
+    <a href="/article/list?cid={{item.Id}}">{{item.CategoryName}}</a>
+    {{#  }); }}
+</script>
+
+@section script{
+    <script src="~/web/js/article.js"></script>
+    <script>
+        console.log("------->");
+        var redClassElements = document.getElementsByClassName('.blog-nav layui-header')
+        for (var i = 0; i < redClassElements.length; i++) {
+            redClassElements[i].style.display = 'none'
+        }
+        let keyStrAll = ''
+        document.querySelector("#search-btn").onclick = function () {
+            let arr = ['DJGXXshen', 'Dstag', 'interest2', 'interest3', 'interest3', 'sex', 'qishu', 'Dsname', 'DLCSYgcc'
+            , 'title'
+            , 'title1'
+            , 'title2'
+            , 'title3'
+        ]
+            let formData = {}
+            for(let item of arr) {
+                formData[item] = document.getElementsByName(item)[0].value
+            }
+            let keyStr = 'key='
+            for (const key in formData) {
+                keyStr = keyStr + key + ':' + (formData[key] || 'null') + '$$'
+            }
+            keyStrAll = keyStr
+            const url = '/article/ListPapes?code=1&state=10&tag=2&' + keyStr
+            window.location.href = url
+            
+        }
+        let curr = 1
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+            var dropdown = layui.dropdown
+            laypage.render({
+                elem: 'demo0'
+                , curr: @code
+                                , count: @count //数据总数
+                                    , jump: function (obj, first) {
+                    if (!first) {
+                        curr = obj.curr
+                        window.location.href = "/article/ListPapes?state=10&code=" + obj.curr + "&" + keyStrAll
+                        console.log(obj)
+                    }
+
+                }
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        layui.use(['laypage', 'layer', 'table'], function () {
+            layui.table.init('demo', {});
+            var laypage = layui.laypage
+            var dropdown = layui.dropdown
+            laypage.render({
+                elem: 'demo0'
+                , curr: @code
+                                        , count: @count //数据总数
+                                            , jump: function (obj, first) {
+                    if (!first) {
+                        curr = obj.curr
+                        window.location.href = "/article/ListPapes?state=10&code=" + obj.curr + "&" + keyStrAll
+                        console.log(obj)
+                    }
+
+                }
+            });
+        })
+    </script>
+}

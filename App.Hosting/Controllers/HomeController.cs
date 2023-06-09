@@ -35,7 +35,7 @@ using Google.Protobuf.WellKnownTypes;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using System.Net;
-using Microsoft.Graph;
+//using Microsoft.Graph;
 using Spire.Doc;
 
 using Spire.CompoundFile;
@@ -49,14 +49,42 @@ using Newtonsoft.Json.Linq;
 using SqlSugar.Extensions;
 using System.Text.Json.Nodes;
 using Spire.Pdf.Exporting.XPS.Schema;
-using HtmlAgilityPack;
-using Spire.Presentation;
+//using HtmlAgilityPack;
+//using Spire.Presentation;
 using System.Xml;
 using System.Reflection.PortableExecutable;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient.Memcached;
-using Azure;
+//using Azure;
+using MySqlX.XDevAPI.Common;
+using NetTaste;
+//using org.pdfbox.pdmodel;
+//using org.pdfbox.util;
+using System.Drawing;
+//using org.pdfbox;
+using Spire.Pdf.Exporting.Text;
+using Spire.Pdf.Texts;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using Document = iTextSharp.text.Document;
+using PageSize = iTextSharp.text.PageSize;
+using Spire.Xls.Core;
+using Spire.Xls;
+using MySqlX.XDevAPI.Relational;
+using Org.BouncyCastle.Utilities.Collections;
+using NPOI;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using IWorkbook = NPOI.SS.UserModel.IWorkbook;
+using Spire.Pdf;
+using PdfDocument = Spire.Pdf.PdfDocument;
+using FileFormat = Spire.Pdf.FileFormat;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Diagnostics;
+using System.IO;
 
 namespace App.Hosting.Controllers
 {
@@ -95,10 +123,42 @@ namespace App.Hosting.Controllers
         /// 首页
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index(string code, string state, string tag, string key)
+        public async Task<IActionResult> Index99(string code, string state, string tag, string key)
         {
-            var u = 9;
 
+
+
+
+
+
+
+
+            var u = 9;
+            var srcPdfFile = "https://zc-tender.oss-cn-beijing.aliyuncs.com/a_product/tech_perf/guangdong/%E7%B2%A4%E6%A2%B0%E6%B3%A8%E5%87%8620192090463.pdf";
+            byte[] arraryByte;
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(srcPdfFile);
+            req.Method = "GET";
+            using (WebResponse wr = req.GetResponse())
+            {
+                StreamReader responseStream = new StreamReader(wr.GetResponseStream(), Encoding.UTF8);
+                int length = (int)wr.ContentLength;
+                byte[] bs = new byte[length];
+
+                HttpWebResponse response = wr as HttpWebResponse;
+                Stream stream = response.GetResponseStream();
+
+                //读取到内存
+                MemoryStream stmMemory = new MemoryStream();
+                byte[] buffer1 = new byte[length];
+                int i;
+                //将字节逐个放入到Byte 中
+                while ((i = stream.Read(buffer1, 0, buffer1.Length)) > 0)
+                {
+                    stmMemory.Write(buffer1, 0, i);
+                }
+                arraryByte = stmMemory.ToArray();
+                stmMemory.Close();
+            }
             //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml?_export=doc");
 
             //Stream postStream = new MemoryStream();
@@ -111,7 +171,7 @@ namespace App.Hosting.Controllers
             //request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
             //request.KeepAlive = true;
             //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36";
-            //Stream requestStream = request.GetRequestStream(); 
+            //Stream requestStream = request.GetRequestStream();
             //var response = (HttpWebResponse)request.GetResponse();
             //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
 
@@ -461,7 +521,7 @@ namespace App.Hosting.Controllers
             //                        {
             //                            string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
             //                            biaozhun1 += ",LCSYXXruxuanbiaozhun" + strixp;
-            //                            biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "'";
+            //                            biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "';";
             //                        }
             //                        else { break; }
 
@@ -473,7 +533,7 @@ namespace App.Hosting.Controllers
             //                        {
             //                            string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
             //                            paichubiazhun += ",LCSYXXpaichubiaozhun" + strixp;
-            //                            paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "'";
+            //                            paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "';";
             //                        }
             //                        else { break; }
 
@@ -581,64 +641,64 @@ namespace App.Hosting.Controllers
 
 
             //                string strsql = @"INSERT INTO MakeTable (JBXXdengjihao
-	           //                         , JBXXxiangguandengjihao
-	           //                         , JBXXchengyongming
-	           //                         , JBXXyaowuleixin
-	           //                         , JBXXlinchuangshoushenqing
-	           //                         , JBXXshiyingzheng
-	           //                         , JBXXshiyantongshutimu
-	           //                         , JBXXshiyanzhuanyetimu
-	           //                         , JBXXshiyanfanganbianhao
-	           //                         , JBXXfanganzuijing
-	           //                         , JBXXbanbenriqi
-	           //                         , JBXXfanganshifou
-	           //                         , SQRXXshengqingrenmingcheng
-	           //                         , SQRXXlianxirenxingming
-	           //                         , SQRXXlianxirenzuoji
-	           //                         , SQRXXlianxirenshoujihao
-	           //                         , SQRXXlianxirenemail
-	           //                         , SQRXXlianxirenyouzhendizhi
-	           //                         , SQRXXlianxirenyoubian
-	           //                         , LCSYXXshiyanfenlie
-	           //                         , LCSYXXshiyanfenqi
-	           //                         , LCSYXXshiyanmudi
-	           //                         , LCSYXXshuijihua
-	           //                         , LCSYXXmanfang
-	           //                         , LCSYXXshiyanfangwei
-	           //                         , LCSYXXshejiliexing
-	           //                         , LCSYXXninaliang
-	           //                         , LCSYXXxingbei
-	           //                         , LCSYXXjiankuangshoushizhen";
+            //                         , JBXXxiangguandengjihao
+            //                         , JBXXchengyongming
+            //                         , JBXXyaowuleixin
+            //                         , JBXXlinchuangshoushenqing
+            //                         , JBXXshiyingzheng
+            //                         , JBXXshiyantongshutimu
+            //                         , JBXXshiyanzhuanyetimu
+            //                         , JBXXshiyanfanganbianhao
+            //                         , JBXXfanganzuijing
+            //                         , JBXXbanbenriqi
+            //                         , JBXXfanganshifou
+            //                         , SQRXXshengqingrenmingcheng
+            //                         , SQRXXlianxirenxingming
+            //                         , SQRXXlianxirenzuoji
+            //                         , SQRXXlianxirenshoujihao
+            //                         , SQRXXlianxirenemail
+            //                         , SQRXXlianxirenyouzhendizhi
+            //                         , SQRXXlianxirenyoubian
+            //                         , LCSYXXshiyanfenlie
+            //                         , LCSYXXshiyanfenqi
+            //                         , LCSYXXshiyanmudi
+            //                         , LCSYXXshuijihua
+            //                         , LCSYXXmanfang
+            //                         , LCSYXXshiyanfangwei
+            //                         , LCSYXXshejiliexing
+            //                         , LCSYXXninaliang
+            //                         , LCSYXXxingbei
+            //                         , LCSYXXjiankuangshoushizhen";
             //                string slqint1 = @"INSERT INTO MakeTable (";
             //                string slqint11 = @"JBXXdengjihao
-	           //                         , JBXXxiangguandengjihao
-	           //                         , JBXXchengyongming
-	           //                         , JBXXyaowuleixin
-	           //                         , JBXXlinchuangshoushenqing
-	           //                         , JBXXshiyingzheng
-	           //                         , JBXXshiyantongshutimu
-	           //                         , JBXXshiyanzhuanyetimu
-	           //                         , JBXXshiyanfanganbianhao
-	           //                         , JBXXfanganzuijing
-	           //                         , JBXXbanbenriqi
-	           //                         , JBXXfanganshifou
-	           //                         , SQRXXshengqingrenmingcheng
-	           //                         , SQRXXlianxirenxingming
-	           //                         , SQRXXlianxirenzuoji
-	           //                         , SQRXXlianxirenshoujihao
-	           //                         , SQRXXlianxirenemail
-	           //                         , SQRXXlianxirenyouzhendizhi
-	           //                         , SQRXXlianxirenyoubian
-	           //                         , LCSYXXshiyanfenlie
-	           //                         , LCSYXXshiyanfenqi
-	           //                         , LCSYXXshiyanmudi
-	           //                         , LCSYXXshuijihua
-	           //                         , LCSYXXmanfang
-	           //                         , LCSYXXshiyanfangwei
-	           //                         , LCSYXXshejiliexing
-	           //                         , LCSYXXninaliang
-	           //                         , LCSYXXxingbei
-	           //                         , LCSYXXjiankuangshoushizhen";
+            //                         , JBXXxiangguandengjihao
+            //                         , JBXXchengyongming
+            //                         , JBXXyaowuleixin
+            //                         , JBXXlinchuangshoushenqing
+            //                         , JBXXshiyingzheng
+            //                         , JBXXshiyantongshutimu
+            //                         , JBXXshiyanzhuanyetimu
+            //                         , JBXXshiyanfanganbianhao
+            //                         , JBXXfanganzuijing
+            //                         , JBXXbanbenriqi
+            //                         , JBXXfanganshifou
+            //                         , SQRXXshengqingrenmingcheng
+            //                         , SQRXXlianxirenxingming
+            //                         , SQRXXlianxirenzuoji
+            //                         , SQRXXlianxirenshoujihao
+            //                         , SQRXXlianxirenemail
+            //                         , SQRXXlianxirenyouzhendizhi
+            //                         , SQRXXlianxirenyoubian
+            //                         , LCSYXXshiyanfenlie
+            //                         , LCSYXXshiyanfenqi
+            //                         , LCSYXXshiyanmudi
+            //                         , LCSYXXshuijihua
+            //                         , LCSYXXmanfang
+            //                         , LCSYXXshiyanfangwei
+            //                         , LCSYXXshejiliexing
+            //                         , LCSYXXninaliang
+            //                         , LCSYXXxingbei
+            //                         , LCSYXXjiankuangshoushizhen";
             //                string slqint12 = @") VALUES ( ";
             //                //string biaozhun1 = "";
             //                string strsqlvalue = "";
@@ -650,7 +710,7 @@ namespace App.Hosting.Controllers
             //                //    {
             //                //        string strixp = ixp.ToString() == "0" ? "": ixp.ToString();
             //                //        biaozhun1 += ",LCSYXXruxuanbiaozhun" + strixp;
-            //                //        biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "'";
+            //                //        biaozhunValue += ",'" + strSyfenlieruxuanbiaozhun[ixp] + "';";
             //                //    }
             //                //    else { break; }
 
@@ -665,7 +725,7 @@ namespace App.Hosting.Controllers
             //                //    {
             //                //        string strixp = ixp.ToString() == "0" ? "" : ixp.ToString();
             //                //        paichubiazhun += ",LCSYXXpaichubiaozhun" + strixp;
-            //                //        paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "'";
+            //                //        paichubiazhunValue += ",'" + strSyfenliepaichubiaozhunbiaozhun[ixp] + "';";
             //                //    }
             //                //    else { break; }
 
@@ -684,11 +744,11 @@ namespace App.Hosting.Controllers
             //                        zdzbcyzb += ",ZDZBCYZDZBzhibiao" + strixp;
             //                        zdzbcyzb1 += ",ZDZBCYZDZBpingjiashijian" + strixp;
             //                        zdzbcyzb2 += ",ZDZBCYZDZBzongdianzhibiaoxuanzhe" + strixp;
-            //                        //zdzbcyzbvalue += ",'" + strSyfenliepaichubiaozhunbiaozhun[izb] + "'";
+            //                        //zdzbcyzbvalue += ",'" + strSyfenliepaichubiaozhunbiaozhun[izb] + "';";
             //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[4]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-            //                        zdzbcyzbvalue += ",'" + OItemZB[0].InnerText + "'";
-            //                        zdzbcyzbvalue1 += ",'" + OItemZB[1].InnerText + "'";
-            //                        zdzbcyzbvalue2 += ",'" + OItemZB[2].InnerText + "'";
+            //                        zdzbcyzbvalue += ",'" + OItemZB[0].InnerText + "';";
+            //                        zdzbcyzbvalue1 += ",'" + OItemZB[1].InnerText + "';";
+            //                        zdzbcyzbvalue2 += ",'" + OItemZB[2].InnerText + "';";
             //                    }
             //                    else { break; }
             //                }
@@ -713,14 +773,14 @@ namespace App.Hosting.Controllers
 
             //                        // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
             //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-            //                        yjv += ",'" + OItemZB[0].InnerText + "'";
-            //                        yjv1 += ",'" + OItemZB[1].InnerText + "'";
-            //                        yjv2 += ",'" + OItemZB[2].InnerText + "'";
-            //                        yjv3 += ",'" + OItemZB[3].InnerText + "'";
-            //                        yjv4 += ",'" + OItemZB[4].InnerText + "'";
-            //                        yjv5 += ",'" + OItemZB[5].InnerText + "'";
-            //                        yjv6 += ",'" + OItemZB[6].InnerText + "'";
-            //                        yjv7 += ",'" + OItemZB[7].InnerText + "'";
+            //                        yjv += ",'" + OItemZB[0].InnerText + "';";
+            //                        yjv1 += ",'" + OItemZB[1].InnerText + "';";
+            //                        yjv2 += ",'" + OItemZB[2].InnerText + "';";
+            //                        yjv3 += ",'" + OItemZB[3].InnerText + "';";
+            //                        yjv4 += ",'" + OItemZB[4].InnerText + "';";
+            //                        yjv5 += ",'" + OItemZB[5].InnerText + "';";
+            //                        yjv6 += ",'" + OItemZB[6].InnerText + "';";
+            //                        yjv7 += ",'" + OItemZB[7].InnerText + "';";
             //                    }
             //                    else { break; }
             //                }
@@ -740,11 +800,11 @@ namespace App.Hosting.Controllers
 
             //                        // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
             //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[7]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-            //                        gcv += ",'" + OItemZB[0].InnerText + "'";
-            //                        gcv1 += ",'" + OItemZB[1].InnerText + "'";
-            //                        gcv2 += ",'" + OItemZB[2].InnerText + "'";
-            //                        gcv3 += ",'" + OItemZB[3].InnerText + "'";
-            //                        gcv4 += ",'" + OItemZB[4].InnerText + "'";
+            //                        gcv += ",'" + OItemZB[0].InnerText + "';";
+            //                        gcv1 += ",'" + OItemZB[1].InnerText + "';";
+            //                        gcv2 += ",'" + OItemZB[2].InnerText + "';";
+            //                        gcv3 += ",'" + OItemZB[3].InnerText + "';";
+            //                        gcv4 += ",'" + OItemZB[4].InnerText + "';";
             //                    }
             //                    else { break; }
             //                }
@@ -762,9 +822,9 @@ namespace App.Hosting.Controllers
 
             //                        // var arryjzxx = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[6]/div[2]/table[1]/tbody[1]").SelectNodes("tr");
             //                        var OItemZB = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[8]/div[2]/table[1]/tbody[1]").SelectNodes("tr[" + jzb + "]/td");
-            //                        llv += ",'" + OItemZB[0].InnerText.Trim().ToString() + "'";
-            //                        llv1 += ",'" + OItemZB[1].InnerText.Trim().ToString() + "'";
-            //                        llv2 += ",'" + OItemZB[2].InnerText.Trim().ToString() + "'";
+            //                        llv += ",'" + OItemZB[0].InnerText.Trim().ToString() + "';";
+            //                        llv1 += ",'" + OItemZB[1].InnerText.Trim().ToString() + "';";
+            //                        llv2 += ",'" + OItemZB[2].InnerText.Trim().ToString() + "';";
             //                    }
             //                    else { break; }
             //                }
@@ -779,101 +839,101 @@ namespace App.Hosting.Controllers
 
             //                string aaa = "";
             //                string biaoben = @"
-	           //                         , SYFZshiyanyaomingcheng
-	           //                         , SYFZshiyanyaoyongfa
-	           //                         , SYFZduizhaomyaomingcheng
-	           //                         , SYFZduizhaoyaoyongfa
-	           //                         , ZDZBZDZBzhibiao
-	           //                         , ZDZBZDZBzhibiao1
-	           //                         , ZDZBZDZBzhibiao2
-	           //                         , ZDZBZDZBpingjiashijian
-	           //                         , ZDZBZDZBpingjiashijian1
-	           //                         , ZDZBZDZBpingjiashijian2
-	           //                         , ZDZBZDZBzongdianzhibiaoxuanzhe
-	           //                         , ZDZBZDZBzongdianzhibiaoxuanzhe1
-	           //                         , ZDZBZDZBzongdianzhibiaoxuanzhe2";
+            //                         , SYFZshiyanyaomingcheng
+            //                         , SYFZshiyanyaoyongfa
+            //                         , SYFZduizhaomyaomingcheng
+            //                         , SYFZduizhaoyaoyongfa
+            //                         , ZDZBZDZBzhibiao
+            //                         , ZDZBZDZBzhibiao1
+            //                         , ZDZBZDZBzhibiao2
+            //                         , ZDZBZDZBpingjiashijian
+            //                         , ZDZBZDZBpingjiashijian1
+            //                         , ZDZBZDZBpingjiashijian2
+            //                         , ZDZBZDZBzongdianzhibiaoxuanzhe
+            //                         , ZDZBZDZBzongdianzhibiaoxuanzhe1
+            //                         , ZDZBZDZBzongdianzhibiaoxuanzhe2";
 
             //                strsql += biaoben;
             //                strsql += stringZB;
             //                string strzb = @", ZDZBshujuanquanjianchaweiyuanhui
-	           //                         , ZDZBweishouzhezheguomaishiyan";
+            //                         , ZDZBweishouzhezheguomaishiyan";
             //                strsql += strzb;
             //                strsql += yja;
             //                strsql += gca;
             //                strsql += lla;
             //                string systr = strsql + @", SYZTXXshiyanzhuantai
-	           //                         , SYZTXXmubiaoruzhurenshu
-	           //                         , SYZTXXyiruzhulishu
-	           //                         , SYZTXXshijiruzhuzonglishu
-	           //                         , SYZTXXdiyilieshoushizheqianshu
-	           //                         , SYZTXXdiyilieshoushizheruzhuriqi
-	           //                         , SYZTXXshiyanzongzhiriqi
-	           //                         , LCSYJGZYbanbenhao
-	           //                         , LCSYJGZYbanbenriqi
-	           //                         , Other
-	           //                         , TitleName
+            //                         , SYZTXXmubiaoruzhurenshu
+            //                         , SYZTXXyiruzhulishu
+            //                         , SYZTXXshijiruzhuzonglishu
+            //                         , SYZTXXdiyilieshoushizheqianshu
+            //                         , SYZTXXdiyilieshoushizheruzhuriqi
+            //                         , SYZTXXshiyanzongzhiriqi
+            //                         , LCSYJGZYbanbenhao
+            //                         , LCSYJGZYbanbenriqi
+            //                         , Other
+            //                         , TitleName
             //                            , TitleStage) VALUES ( ";
 
             //                #region
             //                string strvule =
             //                               @" '" + make.JBXXdengjihao + @"'
-	           //                         , ' " + make.JBXXxiangguandengjihao + @"'
-	           //                         , ' " + make.JBXXchengyongming + @"'
-	           //                         , ' " + make.JBXXyaowuleixin + @"'
-	           //                         , ' " + make.JBXXlinchuangshoushenqing + @"'
-	           //                         , ' " + make.JBXXshiyingzheng + @"'
-	           //                         , ' " + make.JBXXshiyantongshutimu + @"'
-	           //                         , ' " + make.JBXXshiyanzhuanyetimu + @"'
-	           //                         , ' " + make.JBXXshiyanfanganbianhao + @"'
-	           //                         , ' " + make.JBXXfanganzuijing + @"'
-	           //                         , ' " + make.JBXXbanbenriqi + @"'
-	           //                         , ' " + make.JBXXfanganshifou + @"'
-	           //                         , ' " + make.SQRXXshengqingrenmingcheng + @"'
-	           //                         , ' " + make.SQRXXlianxirenxingming + @"'
-	           //                         , ' " + make.SQRXXlianxirenzuoji + @"'
-	           //                         , ' " + make.SQRXXlianxirenshoujihao + @"'
-	           //                         , ' " + make.SQRXXlianxirenemail + @"'
-	           //                         , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
-	           //                         , ' " + make.SQRXXlianxirenyoubian + @"'
-	           //                         , ' " + make.LCSYXXshiyanfenlie + @"'
-	           //                         , ' " + make.LCSYXXshiyanfenqi + @"'
-	           //                         , ' " + make.LCSYXXshiyanmudi + @"'
-	           //                         , ' " + make.LCSYXXshuijihua + @"'
-	           //                         , ' " + make.LCSYXXmanfang + @"'
-	           //                         , ' " + make.LCSYXXshiyanfangwei + @"'
-	           //                         , ' " + make.LCSYXXshejiliexing + @"'
-	           //                         , ' " + make.LCSYXXninaliang + @"'
-	           //                         , ' " + make.LCSYXXxingbei + @"'
-	           //                         , ' " + make.LCSYXXjiankuangshoushizhen + @"'";
+            //                         , ' " + make.JBXXxiangguandengjihao + @"'
+            //                         , ' " + make.JBXXchengyongming + @"'
+            //                         , ' " + make.JBXXyaowuleixin + @"'
+            //                         , ' " + make.JBXXlinchuangshoushenqing + @"'
+            //                         , ' " + make.JBXXshiyingzheng + @"'
+            //                         , ' " + make.JBXXshiyantongshutimu + @"'
+            //                         , ' " + make.JBXXshiyanzhuanyetimu + @"'
+            //                         , ' " + make.JBXXshiyanfanganbianhao + @"'
+            //                         , ' " + make.JBXXfanganzuijing + @"'
+            //                         , ' " + make.JBXXbanbenriqi + @"'
+            //                         , ' " + make.JBXXfanganshifou + @"'
+            //                         , ' " + make.SQRXXshengqingrenmingcheng + @"'
+            //                         , ' " + make.SQRXXlianxirenxingming + @"'
+            //                         , ' " + make.SQRXXlianxirenzuoji + @"'
+            //                         , ' " + make.SQRXXlianxirenshoujihao + @"'
+            //                         , ' " + make.SQRXXlianxirenemail + @"'
+            //                         , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
+            //                         , ' " + make.SQRXXlianxirenyoubian + @"'
+            //                         , ' " + make.LCSYXXshiyanfenlie + @"'
+            //                         , ' " + make.LCSYXXshiyanfenqi + @"'
+            //                         , ' " + make.LCSYXXshiyanmudi + @"'
+            //                         , ' " + make.LCSYXXshuijihua + @"'
+            //                         , ' " + make.LCSYXXmanfang + @"'
+            //                         , ' " + make.LCSYXXshiyanfangwei + @"'
+            //                         , ' " + make.LCSYXXshejiliexing + @"'
+            //                         , ' " + make.LCSYXXninaliang + @"'
+            //                         , ' " + make.LCSYXXxingbei + @"'
+            //                         , ' " + make.LCSYXXjiankuangshoushizhen + @"';";
             //                string slqint13 = @" '" + make.JBXXdengjihao + @"'
-	           //                         , ' " + make.JBXXxiangguandengjihao + @"'
-	           //                         , ' " + make.JBXXchengyongming + @"'
-	           //                         , ' " + make.JBXXyaowuleixin + @"'
-	           //                         , ' " + make.JBXXlinchuangshoushenqing + @"'
-	           //                         , ' " + make.JBXXshiyingzheng + @"'
-	           //                         , ' " + make.JBXXshiyantongshutimu + @"'
-	           //                         , ' " + make.JBXXshiyanzhuanyetimu + @"'
-	           //                         , ' " + make.JBXXshiyanfanganbianhao + @"'
-	           //                         , ' " + make.JBXXfanganzuijing + @"'
-	           //                         , ' " + make.JBXXbanbenriqi + @"'
-	           //                         , ' " + make.JBXXfanganshifou + @"'
-	           //                         , ' " + make.SQRXXshengqingrenmingcheng + @"'
-	           //                         , ' " + make.SQRXXlianxirenxingming + @"'
-	           //                         , ' " + make.SQRXXlianxirenzuoji + @"'
-	           //                         , ' " + make.SQRXXlianxirenshoujihao + @"'
-	           //                         , ' " + make.SQRXXlianxirenemail + @"'
-	           //                         , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
-	           //                         , ' " + make.SQRXXlianxirenyoubian + @"'
-	           //                         , ' " + make.LCSYXXshiyanfenlie + @"'
-	           //                         , ' " + make.LCSYXXshiyanfenqi + @"'
-	           //                         , ' " + make.LCSYXXshiyanmudi + @"'
-	           //                         , ' " + make.LCSYXXshuijihua + @"'
-	           //                         , ' " + make.LCSYXXmanfang + @"'
-	           //                         , ' " + make.LCSYXXshiyanfangwei + @"'
-	           //                         , ' " + make.LCSYXXshejiliexing + @"'
-	           //                         , ' " + make.LCSYXXninaliang + @"'
-	           //                         , ' " + make.LCSYXXxingbei + @"'
-	           //                         , ' " + make.LCSYXXjiankuangshoushizhen + @"'";
+            //                         , ' " + make.JBXXxiangguandengjihao + @"'
+            //                         , ' " + make.JBXXchengyongming + @"'
+            //                         , ' " + make.JBXXyaowuleixin + @"'
+            //                         , ' " + make.JBXXlinchuangshoushenqing + @"'
+            //                         , ' " + make.JBXXshiyingzheng + @"'
+            //                         , ' " + make.JBXXshiyantongshutimu + @"'
+            //                         , ' " + make.JBXXshiyanzhuanyetimu + @"'
+            //                         , ' " + make.JBXXshiyanfanganbianhao + @"'
+            //                         , ' " + make.JBXXfanganzuijing + @"'
+            //                         , ' " + make.JBXXbanbenriqi + @"'
+            //                         , ' " + make.JBXXfanganshifou + @"'
+            //                         , ' " + make.SQRXXshengqingrenmingcheng + @"'
+            //                         , ' " + make.SQRXXlianxirenxingming + @"'
+            //                         , ' " + make.SQRXXlianxirenzuoji + @"'
+            //                         , ' " + make.SQRXXlianxirenshoujihao + @"'
+            //                         , ' " + make.SQRXXlianxirenemail + @"'
+            //                         , ' " + make.SQRXXlianxirenyouzhendizhi + @"'
+            //                         , ' " + make.SQRXXlianxirenyoubian + @"'
+            //                         , ' " + make.LCSYXXshiyanfenlie + @"'
+            //                         , ' " + make.LCSYXXshiyanfenqi + @"'
+            //                         , ' " + make.LCSYXXshiyanmudi + @"'
+            //                         , ' " + make.LCSYXXshuijihua + @"'
+            //                         , ' " + make.LCSYXXmanfang + @"'
+            //                         , ' " + make.LCSYXXshiyanfangwei + @"'
+            //                         , ' " + make.LCSYXXshejiliexing + @"'
+            //                         , ' " + make.LCSYXXninaliang + @"'
+            //                         , ' " + make.LCSYXXxingbei + @"'
+            //                         , ' " + make.LCSYXXjiankuangshoushizhen + @"';";
             //                string slqint14 = ");";
             //                #endregion
             //                strvule = strvule + strsqlvalue;
@@ -899,7 +959,7 @@ namespace App.Hosting.Controllers
             //                string zdzbweishoustr = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='panel panel-default mt-4']/div[5]/div[2]/div[1]/div[8]").InnerText;
             //                string stryj =
             //                         @" , '" + zdzbstr + @"'
-            //                        , '" + zdzbweishoustr + @"'";
+            //                        , '" + zdzbweishoustr + @"';";
             //                strvule += stryj;
             //                strvule += yjva;
             //                strvule += gcva;
@@ -1346,14 +1406,535 @@ namespace App.Hosting.Controllers
             string[] arr = html.Split(' ');
             return arr[0];
         }
-        public async Task<IActionResult> Index34(string code, string state,string tag,string key)
+        public static void pdf2txt(FileInfo pdffile, FileInfo txtfile)
         {
+            //PDDocument doc = PDDocument.load(pdffile.FullName);
+            //PDFTextStripper pdfStripper = new PDFTextStripper();
+            //string text = pdfStripper.getText(doc);
+            //文件转存
+            StreamWriter swPdfChange = new StreamWriter(txtfile.FullName, false, Encoding.GetEncoding("gb2312"));
+            //swPdfChange.Write(text);
+            swPdfChange.Close();
+        }
+        static void Main(string args = "")
+        {
+            int r = 1;
+            //C:\Users\dell\Desktop
+            pdf2txt(new FileInfo(@"C:/Users/dell/Desktop/111.pdf"), new FileInfo(@"C:/Users/dell/Desktop/222.txt"));
+            int r4 = 1;
+        }
+        //public Bitmap CropImage(Bitmap source, Rectangle section)
+        //{
+        //    // An empty bitmap which will hold the cropped image
+        //    Bitmap bmp = new Bitmap(section.Width, section.Height);
+
+        //    Graphics g = Graphics.FromImage(bmp);
+
+        //    // Draw the given area (section) of the source image
+        //    // at location 0,0 on the empty bitmap (bmp)
+        //    g.DrawImage(source, 0, 0, section, GraphicsUnit.Pixel);
+
+        //    return bmp;
+        //}
+
+        private string GetIntegralByMonth341(string sqlstr, int filter = 0)
+        {
+
+            string month = "失败";
+            try
+            {
+                string conStr = "server=192.168.10.12;user=sa;pwd=123456;database=Blog;connection timeout=1000";//连接字符串   
+                SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+                conText.Open();//打开数据库  
+                string sqls = sqlstr;//创建统计语句  
+                SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+                SqlDataReader dr;//创建DataReader对象  
+                dr = comText.ExecuteReader();//执行查询
+                month = "成功";
+                dr.Close();//关闭DataReader对象  
+                System.Threading.Thread.Sleep(1 * 1000); //休眠30秒
+            }
+            catch
+            {
+
+            }
+            return month;
+
+        }
+        public async Task<IActionResult> Index55555(string code, string state, string tag, string key)
+        {
+
 
             #region
             var a = tag;
+
+            string name = "";
+
+            string path = @"D:\文献\pdf3";
+            DirectoryInfo root = new DirectoryInfo(path);
+            foreach (FileInfo f in root.GetFiles())
+            {
+                //name = f.Name.Replace(".pdf", "") ;
+                name = f.Name;//.Replace(".pdf", "");
+                              //string fullName = f.FullName;
+
+                string name1 = "";
+                try
+                {
+                    PdfReader pdfReader = new PdfReader(@"D:\\文献\\pdf3\\" + name);
+
+                    for (int page = 1; page <= pdfReader.NumberOfPages; page++)
+                    {
+
+                        ITextExtractionStrategy strategy = new iTextSharp.text.pdf.parser.SimpleTextExtractionStrategy();
+
+                        string currentText = iTextSharp.text.pdf.parser.PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
+                        name1 += currentText;
+
+                    }
+                    pdfReader.Close();
+
+                    string cc = name1.Replace("\r", "").Replace("\n", "").Replace("\t", "").Replace(" ", "").Replace("'", "").Trim();
+                    var dd = cc.Length;
+                    string str1 = "", str2 = "", str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = "", str12 = "", str13 = "", str14 = "";
+                    if (dd > 0)
+                    {
+                        name = f.Name.Replace(".pdf", "");//.Replace("_", "/");
+                        //name = f.Name.Replace(".pdf", "").Replace("_", "/");
+                        //string insql = "INSERT INTO PaperPDF (技术审评报告名称) VALUES ( '" + name + "') ";
+                        //string inrr = GetIntegralByMonth341(insql);
+                        //Console.WriteLine(name);
+                        string sql = "";
+                        string rr = "";
+                        if (dd > 4000)
+                        {
+                            str1 = cc.Substring(0, 4000);
+                            sql += "UPDATE PaperPDF SET  详细内容1 ='" + str1 + "' WHERE other = '" + name + "';";
+
+
+                            if (dd > 8000)
+                            {
+                                str2 = cc.Remove(0, 4000).Substring(0, 4000);
+                                sql += "UPDATE PaperPDF SET  详细内容2 ='" + str2 + "' WHERE other = '" + name + "';";
+
+
+                                if (dd > 12000)
+                                {
+                                    str3 = cc.Remove(0, 8000).Substring(0, 4000);
+                                    sql += "UPDATE PaperPDF SET  详细内容3 ='" + str3 + "' WHERE other = '" + name + "';";
+
+
+                                    if (dd > 16000)
+                                    {
+                                        str4 = cc.Remove(0, 12000).Substring(0, 4000);
+                                        sql += "UPDATE PaperPDF SET  详细内容4 ='" + str4 + "' WHERE other = '" + name + "';";
+
+
+                                        if (dd > 20000)
+                                        {
+                                            str5 = cc.Remove(0, 16000).Substring(0, 4000);
+                                            sql += "UPDATE PaperPDF SET  详细内容5 ='" + str5 + "' WHERE other = '" + name + "';";
+
+
+                                            if (dd > 24000)
+                                            {
+                                                str6 = cc.Remove(0, 20000).Substring(0, 4000);
+                                                sql += "UPDATE PaperPDF SET  详细内容6 ='" + str6 + "' WHERE other = '" + name + "';";
+
+
+                                                if (dd > 28000)
+                                                {
+                                                    str7 = cc.Remove(0, 24000).Substring(0, 4000);
+                                                    sql += "UPDATE PaperPDF SET  详细内容7 ='" + str7 + "' WHERE other = '" + name + "';";
+
+
+                                                    if (dd > 32000)
+                                                    {
+                                                        str8 = cc.Remove(0, 28000).Substring(0, 4000);
+                                                        sql += "UPDATE PaperPDF SET  详细内容8 ='" + str8 + "' WHERE other = '" + name + "';";
+
+
+                                                        if (dd > 36000)
+                                                        {
+                                                            str9 = cc.Remove(0, 32000).Substring(0, 4000);
+                                                            sql += "UPDATE PaperPDF SET  详细内容9 ='" + str9 + "' WHERE other = '" + name + "';";
+
+
+                                                            if (dd > 40000)
+                                                            {
+
+                                                                str10 = cc.Remove(0, 36000).Substring(0, 4000);
+                                                                sql += "UPDATE PaperPDF SET  详细内容10 ='" + str10 + "' WHERE other = '" + name + "';";
+
+
+                                                                if (dd > 44000)
+                                                                {
+
+                                                                    str11 = cc.Remove(0, 40000).Substring(0, 4000);
+                                                                    sql += "UPDATE PaperPDF SET  详细内容11 ='" + str11 + "' WHERE other = '" + name + "';";
+
+
+                                                                    if (dd > 48000)
+                                                                    {
+
+                                                                        str12 = cc.Remove(0, 44000).Substring(0, 4000);
+                                                                        sql += "UPDATE PaperPDF SET  详细内容12 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                        if (dd > 52000)
+                                                                        {
+
+                                                                            str12 = cc.Remove(0, 48000).Substring(0, 4000);
+                                                                            sql += "UPDATE PaperPDF SET  详细内容13 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                            if (dd > 56000)
+                                                                            {
+
+                                                                                str12 = cc.Remove(0, 52000).Substring(0, 4000);
+                                                                                sql += "UPDATE PaperPDF SET  详细内容14 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                if (dd > 60000)
+                                                                                {
+                                                                                    str12 = cc.Remove(0, 56000).Substring(0, 4000);
+                                                                                    sql += "UPDATE PaperPDF SET  详细内容15 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                    if (dd > 64000)
+                                                                                    {
+                                                                                        str12 = cc.Remove(0, 60000).Substring(0, 4000);
+                                                                                        sql += "UPDATE PaperPDF SET  详细内容16 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                        if (dd > 68000)
+                                                                                        {
+
+                                                                                            str12 = cc.Remove(0, 64000).Substring(0, 4000);
+                                                                                            sql += "UPDATE PaperPDF SET  详细内容17 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                            if (dd > 72000)
+                                                                                            {
+
+                                                                                                str12 = cc.Remove(0, 68000).Substring(0, 4000);
+                                                                                                sql += "UPDATE PaperPDF SET  详细内容18 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                                if (dd > 78000)
+                                                                                                {
+                                                                                                    str12 = cc.Remove(0, 72000).Substring(0, 4000);
+                                                                                                    sql += "UPDATE PaperPDF SET  详细内容19 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                                    if (dd > 82000)
+                                                                                                    {
+
+                                                                                                        str12 = cc.Remove(0, 78000).Substring(0, 4000);
+                                                                                                        sql += "UPDATE PaperPDF SET  详细内容20 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+
+                                                                                                        str12 = cc.Remove(0, 78000);
+                                                                                                        sql += "UPDATE PaperPDF SET  详细内容20 ='" + str12 + "' WHERE other = '" + name + "';";
+
+                                                                                                    }
+
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    str12 = cc.Remove(0, 72000);
+                                                                                                    sql += "UPDATE PaperPDF SET  详细内容19 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                                }
+
+                                                                                            }
+                                                                                            else
+                                                                                            {
+
+                                                                                                str12 = cc.Remove(0, 68000);
+                                                                                                sql += "UPDATE PaperPDF SET  详细内容18 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                            }
+
+                                                                                        }
+                                                                                        else
+                                                                                        {
+
+                                                                                            str12 = cc.Remove(0, 64000);
+                                                                                            sql += "UPDATE PaperPDF SET  详细内容17 ='" + str12 + "' WHERE other = '" + name + "';";
+
+                                                                                        }
+
+                                                                                    }
+                                                                                    else
+                                                                                    {
+
+                                                                                        str12 = cc.Remove(0, 60000);
+                                                                                        sql += "UPDATE PaperPDF SET  详细内容16 ='" + str12 + "' WHERE other = '" + name + "';";
+
+
+                                                                                    }
+
+
+                                                                                }
+                                                                                else
+                                                                                {
+
+                                                                                    str12 = cc.Remove(0, 56000);
+                                                                                    sql += "UPDATE PaperPDF SET  详细内容15 ='" + str12 + "' WHERE other = '" + name + "';";
+
+                                                                                }
+
+                                                                            }
+                                                                            else
+                                                                            {
+
+                                                                                str12 = cc.Remove(0, 52000);
+                                                                                sql += "UPDATE PaperPDF SET  详细内容14 ='" + str12 + "' WHERE other = '" + name + "';";
+
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+
+                                                                            str12 = cc.Remove(0, 48000);
+                                                                            sql += "UPDATE PaperPDF SET  详细内容13 ='" + str12 + "' WHERE other = '" + name + "';";
+
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        str12 = cc.Remove(0, 44000);
+                                                                        sql += "UPDATE PaperPDF SET  详细内容12 ='" + str12 + "' WHERE other = '" + name + "';";
+
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    str11 = cc.Remove(0, 38000);
+                                                                    sql += "UPDATE PaperPDF SET  详细内容11 ='" + str11 + "' WHERE other = '" + name + "';";
+
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                str10 = cc.Remove(0, 34000);
+                                                                sql += "UPDATE PaperPDF SET  详细内容10 ='" + str10 + "' WHERE other = '" + name + "';";
+
+
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            str9 = cc.Remove(0, 32000);
+                                                            sql += "UPDATE PaperPDF SET  详细内容9 ='" + str9 + "' WHERE other = '" + name + "';";
+
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        str8 = cc.Remove(0, 28000);
+                                                        sql += "UPDATE PaperPDF SET  详细内容8 ='" + str8 + "' WHERE other = '" + name + "';";
+
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    str7 = cc.Remove(0, 24000);
+                                                    sql += "UPDATE PaperPDF SET  详细内容7 ='" + str7 + "' WHERE other = '" + name + "';";
+
+
+                                                }
+                                            }
+                                            else
+                                            {
+
+                                                str6 = cc.Remove(0, 20000);
+                                                sql += "UPDATE PaperPDF SET  详细内容6 ='" + str6 + "' WHERE other = '" + name + "';";
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            str5 = cc.Remove(0, 16000);
+                                            sql += "UPDATE PaperPDF SET  详细内容5 ='" + str5 + "' WHERE other = '" + name + "';";
+
+
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        str4 = cc.Remove(0, 12000);
+                                        sql += "UPDATE PaperPDF SET  详细内容4 ='" + str4 + "' WHERE other = '" + name + "';";
+
+                                    }
+                                }
+                                else
+                                {
+                                    str3 = cc.Remove(0, 8000);
+                                    sql += "UPDATE PaperPDF SET  详细内容3 ='" + str3 + "' WHERE other = '" + name + "';";
+
+
+                                }
+                            }
+                            else
+                            {
+                                str2 = cc.Remove(0, 4000);
+                                sql += "UPDATE PaperPDF SET  详细内容2 ='" + str2 + "' WHERE other = '" + name + "';";
+
+                            }
+                        }
+                        else
+                        {
+                            sql += "UPDATE PaperPDF SET  详细内容1 ='" + cc + "' WHERE other = '" + name + "';";
+
+                        }
+
+                        rr = GetIntegralByMonth341(sql);
+                        Console.WriteLine("解析入库 ----->" + name + "----->" + rr);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+
+            //for (var i = 0; i < 100; i++)
+            //{
+            //    Console.WriteLine("下载 ----->" + i);
+            //}
+            //Bitmap source = new Bitmap(@"C:\Users\dell\Desktop\18060447631.png");
+            //Rectangle section = new Rectangle(new Point(1, 1), new Size(1363, 1240));
+
+            //Bitmap CroppedImage = CropImage(source, section);
+            //CroppedImage.Save(@"C:\Users\dell\Desktop\1806044763111.png");
+
+            //bitmap.Save(@"D:\bmp\test.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
             var index = 1;
 
-            
+            var jj = 4;
+
+            //var j = new Articleiteminfo();
+            ////string _url = string.Format("https://yiyan.baidu.com/eb/chat/query");
+            //string _url = string.Format("https://modelscope.cn/api/v1/models/damo/cv_diffusion_text-to-image-synthesis/widgets/submit");
+            ////json参数
+            ////string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            ////{
+            ////    chatId = "15187477",
+            ////    parentChatId = "15187475",
+            ////    sentenceId =0,
+            ////    stop = 0,
+            ////    timestamp = 1679368929167,
+            ////    deviceType = "pc",
+            ////    sign = "1679288415966_1679368029164_13iqOlPG28VuKkzRh9alRF0wVQ8WjvSsu2iuGokzD/ujqvrj/wmAD6A2a0hENZFH7YCZlX+DeNZQGooNjQW2zNPoR6TeAN9MD/GVfzUy8OJ081yg0f5dk8yFT7IPiBGAGLWozEdQQCEyXN20sR3gtYHrgniwxx5YFr69v+8WLBE77iFx7/dsJDjFi3tv78MFVWxgO5wywWJdv1kqWVQJqzwCqcwJ1wW2N5VngvNKyIy9r2953aEzK60VCc1TExjLY/bm+Pyu+v8uqMjGZZMlK4O93B3hTw+26raJkXxazDabx8b6s7adC9ymYANKqaWKwjx66+GGso2qaq9OHN2acg=="
+
+            ////});
+            //var valuestr = "1只老虎和小鸟";
+            //string jsonParam = "\r\n{\"task\":\"text-to-image-synthesis\",\"inputs\":[\""+ valuestr + "\"],\"parameters\":{\"tokenizer\":\"xglm\",\"batch_size\":2},\"urlPaths\":{\"inUrls\":[{\"value\":\""+ valuestr + "\",\"type\":\"text\",\"displayProps\":{\"size\":\"small\"},\"displayType\":\"TextArea\",\"name\":\"text\",\"title\":\"输入prompt\",\"validator\":{\"max_words\":\"75\"}}],\"outUrls\":[{\"fileType\":\"png-list\",\"outputKey\":\"output_imgs\"}]}}";
+            //var request = (HttpWebRequest)WebRequest.Create(_url);
+            //request.Method = "POST";
+            //request.ContentType = "application/json;charset=UTF-8";//ContentType
+            //request.Headers.Add("cookie", "uuid_tt_dd=11_27076939590-1679470980362-017728; dc_session_id=11_1679470980362.638130; c_segment=0; c_page_id=default; cna=ffxkG9VIjgkCAXBeH6SxVDo+; xlly_s=1; dp_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTkwNzAwNywiZXhwIjoxNjgwMDc1Nzg5LCJpYXQiOjE2Nzk0NzA5ODksInVzZXJuYW1lIjoid2VpeGluXzM5MjY5NzQwIn0.RV9_FW84VdXJM0roKBuzUwglc5DrpFdRA687nRC1gRA; UserName=weixin_39269740; UN=weixin_39269740; c_ref=https%3A//community.modelscope.cn/; c_first_ref=community.modelscope.cn; c_pref=https%3A//community.modelscope.cn/; c_first_page=https%3A//community.modelscope.cn/%3F; c_dsid=11_1679470991475.861447; dc_tos=rrww3z; log_Id_pv=3; _samesite_flag_=true; cookie2=1d1928d7774c4ae1fcdc9391baf7953c; t=cb3738081446cb99b5a4dbf3415aa368; _tb_token_=75ea6a93eb370; csg=ed524eae; m_session_id=d12d527f-624f-40ae-8cf6-bcb76e634ef1; h_uid=2215618637015; log_Id_view=7; log_Id_click=3; isg=BNHR29IOUfrlB73ukpEUmXac4N1rPkWw2OHdS7NIDB9jWqKsT4l7gIf8_C680t3o");
+            ////request.Headers.Add("Cookie", "BIDUPSID=7891B647FEF86D67510769E8D37EA33E; BAIDUID=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; PSTM=1658661266; BDUSS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; BDUSS_BFESS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; MCITY=-257%3A; Hm_lvt_01e907653ac089993ee83ed00ef9c2f3=1679276132; BDSFRCVID=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BA_HECTOR=a10h8l25a120ag8ka08080c81i1i5k51n; delPer=0; PSINO=6; ZFY=xeG8XGnodAhNOH37maKvpHgvVS4yWCQShEruX4R6o2w:C; BAIDUID_BFESS=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; BDSFRCVID_BFESS=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF_BFESS=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; H_PS_PSSID=38185_36558_38410_38349_38307_37862_38174_38290_37922_38425_38314_38383_38285_26350_38420_38283_37881; __bid_n=186fca84a5b9216b5752e1; XFI=bf261800-c796-11ed-9e7c-993a1e2bd1b9; Hm_lpvt_01e907653ac089993ee83ed00ef9c2f3=1679368579; ab_sr=1.0.1_N2YyOTA1NTAyMjI2NmViYzQ3NjMxZjg3OTE4ZTQ3ODg1NGJiNDgxOWZhZjAyYjU5YTk4NDIyMmZlZmI4NGFiYTA5MDg1YzZiOTdiMGNkNzc5NjZlOGI5ZTBiYTY5ZjBkZmZjNTE1NjhkMzExMmRjZGU1MzEyYmNjOTVjYTBiMDhhNjgwMjA0YmQxMjM5M2VjMjRhMGE4ZWZiNmNhZTVkYzViYjMxNGFhYzE4ZDJkMzNkZDBiMmIyMmZlYjI0MmQz; XFCS=EED03EFAACD1A34C9A95B676A5742E986961084A1D66E5C82F7FDBF66FFF6525; XFT=YIBAwYbCQVTX/hBmbFSk3pokc8vmvt9MmWTTIO60MVk=");
+            ////request.Headers.Add("Acs-Token", "1679288415966_1679369409945_H2S6+gSGuHdouzSnuYXZt9m6M5kauNTIZXpHl6c5/p+ky0VMWplii+uwH2E+JsD1c0Z2Wu58VGKzVUJYrqlyfr/b7NEqKCVQUbNp47RIRZtwfSNLueUDK/pidv5MvU8cJe8LFzjfAuJ1t+2ujjkn403zZnT+V+6QsuO1P4Mpk3YM+z/ulNVN6hCOdG17KnB9alyB7XcceKCBmghYIbFrICf40Lw10FUqxtGo2QHUgCYOMC/Ev3baG6pNIMrjYdaiGFFjug9Kx7sAS7k8dfjADk7H3W80kuq4d6/AyXELYQ+hylZLQVgzyqa9lDBsd1C26fl102rgY47dLfkjwOpfIw==");
+            ////CookieContainer cc = new CookieContainer();
+            ////cc.Add(new System.Uri("https://yiyan.baidu.com"), new Cookie("Cookie", "BIDUPSID=7891B647FEF86D67510769E8D37EA33E; BAIDUID=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; PSTM=1658661266; BDUSS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; BDUSS_BFESS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; MCITY=-257%3A; Hm_lvt_01e907653ac089993ee83ed00ef9c2f3=1679276132; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BA_HECTOR=8h8k002h050g01048k8g840s1i1i3g31n; BDRCVFR[feWj1Vr5u3D]=I67x6TjHwwYf0; delPer=0; PSINO=6; BAIDUID_BFESS=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; ZFY=xeG8XGnodAhNOH37maKvpHgvVS4yWCQShEruX4R6o2w:C; BCLID=4201984001025888909; BCLID_BFESS=4201984001025888909; BDSFRCVID=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; BDSFRCVID_BFESS=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; H_BDCLCKID_SF_BFESS=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; XFI=d8cdfac0-c78c-11ed-9363-11fb77acfb22; Hm_lpvt_01e907653ac089993ee83ed00ef9c2f3=1679364327; __bid_n=186fca84a5b9216b5752e1; ab_sr=1.0.1_MDhlMzhhZjkyZDJiYWNlOGRhMjdkNjQ1YzczYjkzNDA0YzAyODQ1ZDhhNjNmMDAzZTZkMDM2ZmVhNGEzMzUwZTcwOTc3ODlmMWU0NjgzYzY1OWMyOWE2YTYyMjcxMDA3N2IwNTBkZTEzZGJiMTc4MjM4YjkzOTEwMmFmYjlhNzI4NzA5ZjY4ZjQxMmFiYWJjNDRiN2NjM2ZjNTBlNjQyNGQ0NTFiZGNlYmVkZjc0MWRmMDg5MWJiZTI5ODlhNzlm; XFCS=D4DA282258F7335484898A2AF69DC41EA15E3806075C8AAFEA6DDBE278479D6E; XFT=s25AHfKy5Z9kcvgUrcryF3aCf5jg21c06GlfhkXUHWw=; BDRCVFR[VXHUG3ZuJnT]=mk3SLVN4HKm; H_PS_PSSID=26350"));
+            ////cc.Add(new System.Uri("https://yiyan.baidu.com"), new Cookie("token", "1679288415966_1679364661713_iUtUdtoyITmXeBfte7MCnnK8oI/JVoX8qSHD7dEk/qtqgG5DD1JKOgEqQGD+msq4GuE05P//gtrrZjQxk0dwRuFPCSdlrfU9duyrDWkp0PeyFljeboqFVso55q4it+VrbQPUW34pdj80wLEIty8YrBGL7NvlqnmDTly+w/my5pvhAFPr4YD7RzY/xMP//Agyxi/wMj8bJP8rcozzEmWbaLOxslIZPgO5PFN/KBVN/tj9ZYJJDt5xvYk8ZwHHFgA4039fco4g20z32qhEs5JEM4Jtwuyyd7Jas0esf6GC36Af+FGzKL/hMbd3kFS3giu0DNLBz4CEY01UoqqVCSkBgA=="));
+            ////request.CookieContainer = cc;
+            //byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            //int length = byteData.Length;
+            //request.ContentLength = length;
+            //Stream writer = request.GetRequestStream();
+            //writer.Write(byteData, 0, length);
+            //writer.Close();
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            //JObject jo = JObject.Parse(responseString);
+            //JObject joo = (JObject)JsonConvert.DeserializeObject(responseString);
+            //string zone = jo["Data"]["id"].ToString();
+            //System.Threading.Thread.Sleep(1 * 30 * 1000); //休眠30秒
+            //string _url2 = string.Format("https://modelscope.cn/api/v1/models/damo/cv_diffusion_text-to-image-synthesis/widgets/query");
+            //string jsonParam2 = "{\"id\":\""+ zone + "\"}";
+            //var request2 = (HttpWebRequest)WebRequest.Create(_url2);
+            //request2.Method = "POST";
+            //request2.ContentType = "application/json;charset=UTF-8";//ContentType
+            //request2.Headers.Add("cookie", "uuid_tt_dd=11_27076939590-1679470980362-017728; dc_session_id=11_1679470980362.638130; c_segment=0; c_page_id=default; cna=ffxkG9VIjgkCAXBeH6SxVDo+; xlly_s=1; dp_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTkwNzAwNywiZXhwIjoxNjgwMDc1Nzg5LCJpYXQiOjE2Nzk0NzA5ODksInVzZXJuYW1lIjoid2VpeGluXzM5MjY5NzQwIn0.RV9_FW84VdXJM0roKBuzUwglc5DrpFdRA687nRC1gRA; UserName=weixin_39269740; UN=weixin_39269740; c_ref=https%3A//community.modelscope.cn/; c_first_ref=community.modelscope.cn; c_pref=https%3A//community.modelscope.cn/; c_first_page=https%3A//community.modelscope.cn/%3F; c_dsid=11_1679470991475.861447; dc_tos=rrww3z; log_Id_pv=3; _samesite_flag_=true; cookie2=1d1928d7774c4ae1fcdc9391baf7953c; t=cb3738081446cb99b5a4dbf3415aa368; _tb_token_=75ea6a93eb370; csg=ed524eae; m_session_id=d12d527f-624f-40ae-8cf6-bcb76e634ef1; h_uid=2215618637015; log_Id_view=7; log_Id_click=3; isg=BGZmIhFXPusWM-pPMfirKMXVt9zoR6oBS9jq6lA9Pw6w01LtDNDWEb_tL8_f-6IZ");
+            //byte[] byteData2 = Encoding.UTF8.GetBytes(jsonParam2);
+            //int length2 = byteData2.Length;
+            //request2.ContentLength = length2;
+            //Stream writer2 = request2.GetRequestStream();
+            //writer2.Write(byteData2, 0, length2);
+            //writer2.Close();
+            //var response2 = (HttpWebResponse)request2.GetResponse();
+            //var responseString2 = new StreamReader(response2.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+            //JObject jooo = (JObject)JsonConvert.DeserializeObject(responseString2);
+            //string zoneo = jooo["Data"]["data"]["output_imgs"][0].ToString();
+            //string zone1 = jooo["Data"]["data"]["output_imgs"][1].ToString();
+            //WebRequest imgRequest0 = WebRequest.Create(zoneo);
+            //WebRequest imgRequest1 = WebRequest.Create(zone1);
+            //System.Drawing.Image downImage = System.Drawing.Image.FromStream(imgRequest0.GetResponse().GetResponseStream());
+            //System.Drawing.Image downImage1 = System.Drawing.Image.FromStream(imgRequest1.GetResponse().GetResponseStream());
+            //string deerory = string.Format(@"D:\img\{0}\", DateTime.Now.ToString("yyyy-MM-dd"));
+            //string fileName = string.Format("{0}.png", DateTime.Now.ToString("HHmmssffff"));
+            //string fileName1 = string.Format("{0}.png", DateTime.Now.ToString("HHmmssffff")+ "1");
+            //if (!System.IO.Directory.Exists(deerory)) {
+            //    System.IO.Directory.CreateDirectory(deerory);
+            //}
+            //downImage.Save(deerory + fileName);
+            //downImage.Dispose();
+            //downImage1.Save(deerory + fileName1);
+            //downImage1.Dispose();
+
+            //var m0 = deerory + fileName;
+            //var m1 = deerory + fileName1;
+
+            //var reslut = "{\r\n  \"jiutai_imgs\": [\r\n    \""+ m0 + "\",\r\n    \""+ m1  + "\"\r\n  ]\r\n}";
+            //var ff = 1;
+
+
+
+
+
+
+
+
+
+            //var iii = 1;
+            //var strsql = "SELECT  postkeyurl,other FROM PaperPDF  WHERE postkey LIKE '%京械注准%'  ";
+            //var result1 = GetItemEntityCore1(strsql);
+            //foreach (var item in result1) {
+            //    var url = item.Title;
+            //    var save = @"D:\文献\pdf-beijing\" + item.projectcount + ".docx";
+            //    using (var web = new WebClient())
+            //    {
+            //        web.DownloadFile(url, save);
+            //    }
+            //    iii = iii + 1;
+            //    Console.WriteLine("下载 ----->" + iii);
+            //    Thread.Sleep(1000);
+            //}
+            //var kk = 44;
+            //var url = "https://zc-tender.oss-cn-beijing.aliyuncs.com/a_product/tech_perf/beijing/京械注准20152090310.docx";
+            //var save = @"D:\22.docx";
+            //using (var web = new WebClient())
+            //{
+            //    web.DownloadFile(url, save);
+            //}
+
             //try
             //{
             //    string hostName = Dns.GetHostName();
@@ -1369,7 +1950,8 @@ namespace App.Hosting.Controllers
 
             var pagesize = 10;
             List<BannerInfo> list = null;
-            if (code != "" && code != null) {
+            if (code != "" && code != null)
+            {
                 index = Convert.ToInt32(code);
             }
             if (state != "" && state != null)
@@ -1537,13 +2119,14 @@ namespace App.Hosting.Controllers
                                         order by Topdesc desc";
             }
             else if (tag == "2")
-            { 
+            {
                 //Sytag2:333@@Sytag4:888*@
                 str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  AirtleTable_guangdong";
                 string _where = "where 1= 1";
                 string _desc = "order by Topdesc desc";
                 var arr = key.Split("@@");
-                foreach (string i in arr) {
+                foreach (string i in arr)
+                {
                     if (i.Contains("Syurl")) _where += "  AND Syurl   like '%" + i.Split(":")[1] + @"%' ";
                     if (i.Contains("Sytag")) _where += "  AND Sytag   like '%" + i.Split(":")[1] + @"%' ";
                     if (i.Contains("Sytag1")) _where += "  AND Sytag1   like '%" + i.Split(":")[1] + @"%' ";
@@ -1715,12 +2298,659 @@ namespace App.Hosting.Controllers
             return View(list);
             #endregion
         }
+        private void ExportSuccessTips(string filePathAndName)
+        {
+            if (string.IsNullOrEmpty(filePathAndName)) return;
 
+
+            System.Diagnostics.Process.Start(filePathAndName);
+        }
+        public async Task<IActionResult> Index(string code, string state, string tag, string key)
+        {
+
+
+            //#region
+            var a = tag;
+
+            //Document doc = new Document();
+            //PdfWriter.GetInstance(doc, new FileStream("", FileMode.Create));
+            //doc.Open();
+            //string text = "";
+
+
+            //PdfDocument doc = new PdfDocument();
+            //doc.LoadFromFile(@"D:\\Work\\" + "/6666661.pdf");
+            //doc.SaveToFile(@"D:\\Work\\" + "/6666661.doc", FileFormat.DOC);
+            var kk = 2;
+
+            ////创建workbook，说白了就是在内存中创建一个Excel文件
+            //IWorkbook workbook = new HSSFWorkbook();
+            ////要添加至少一个sheet,没有sheet的excel是打不开的
+            //ISheet sheet1 = workbook.CreateSheet("sheet1");
+            //IRow row1 = sheet1.CreateRow(0);//添加第1行,注意行列的索引都是从0开始的
+            //ICell cell1 = row1.CreateCell(0);//给第1行添加第1个单元格
+            //cell1.SetCellValue("hello345234 ");//给单元格赋值
+
+
+            //System.Diagnostics.Process.Start(@"D:\\Work\\" + "/999.xls");
+            //导出成功提示
+
+            //创建excel工作簿
+            //Document document = new Document(PageSize.A3, 10, 10, 10, 10);
+            //PdfWriter writer;
+            //writer = PdfWriter.GetInstance(document, new FileStream(@"D:\\Work\\" + "/55.pdf", FileMode.Createfangb));
+            //document.Open();
+            //PdfPTable table = new PdfPTable(4);
+            //table.AddCell(new Phrase("111"));
+            //table.AddCell(new Phrase("22"));
+            //table.AddCell(new Phrase("Lab 33"));
+            //table.AddCell(new Phrase("Cost 44"));
+            //document.Add(table);
+            //document.Close();
+
+            //string name1 = "";
+            //string name = "";
+
+
+            //for (var i = 0; i < 100; i++)
+            //{
+            //    Console.WriteLine("下载 ----->" + i);
+            //}
+            //Bitmap source = new Bitmap(@"C:\Users\dell\Desktop\18060447631.png");
+            //Rectangle section = new Rectangle(new Point(1, 1), new Size(1363, 1240));
+
+            //Bitmap CroppedImage = CropImage(source, section);
+            //CroppedImage.Save(@"C:\Users\dell\Desktop\1806044763111.png");
+
+            //bitmap.Save(@"D:\bmp\test.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
+            var index = 1;
+
+            var jj = 4;
+
+            //var j = new Articleiteminfo();
+            ////string _url = string.Format("https://yiyan.baidu.com/eb/chat/query");
+            //string _url = string.Format("https://modelscope.cn/api/v1/models/damo/cv_diffusion_text-to-image-synthesis/widgets/submit");
+            ////json参数
+            ////string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            ////{
+            ////    chatId = "15187477",
+            ////    parentChatId = "15187475",
+            ////    sentenceId =0,
+            ////    stop = 0,
+            ////    timestamp = 1679368929167,
+            ////    deviceType = "pc",
+            ////    sign = "1679288415966_1679368029164_13iqOlPG28VuKkzRh9alRF0wVQ8WjvSsu2iuGokzD/ujqvrj/wmAD6A2a0hENZFH7YCZlX+DeNZQGooNjQW2zNPoR6TeAN9MD/GVfzUy8OJ081yg0f5dk8yFT7IPiBGAGLWozEdQQCEyXN20sR3gtYHrgniwxx5YFr69v+8WLBE77iFx7/dsJDjFi3tv78MFVWxgO5wywWJdv1kqWVQJqzwCqcwJ1wW2N5VngvNKyIy9r2953aEzK60VCc1TExjLY/bm+Pyu+v8uqMjGZZMlK4O93B3hTw+26raJkXxazDabx8b6s7adC9ymYANKqaWKwjx66+GGso2qaq9OHN2acg=="
+
+            ////});
+            //var valuestr = "1只老虎和小鸟";
+            //string jsonParam = "\r\n{\"task\":\"text-to-image-synthesis\",\"inputs\":[\""+ valuestr + "\"],\"parameters\":{\"tokenizer\":\"xglm\",\"batch_size\":2},\"urlPaths\":{\"inUrls\":[{\"value\":\""+ valuestr + "\",\"type\":\"text\",\"displayProps\":{\"size\":\"small\"},\"displayType\":\"TextArea\",\"name\":\"text\",\"title\":\"输入prompt\",\"validator\":{\"max_words\":\"75\"}}],\"outUrls\":[{\"fileType\":\"png-list\",\"outputKey\":\"output_imgs\"}]}}";
+            //var request = (HttpWebRequest)WebRequest.Create(_url);
+            //request.Method = "POST";
+            //request.ContentType = "application/json;charset=UTF-8";//ContentType
+            //request.Headers.Add("cookie", "uuid_tt_dd=11_27076939590-1679470980362-017728; dc_session_id=11_1679470980362.638130; c_segment=0; c_page_id=default; cna=ffxkG9VIjgkCAXBeH6SxVDo+; xlly_s=1; dp_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTkwNzAwNywiZXhwIjoxNjgwMDc1Nzg5LCJpYXQiOjE2Nzk0NzA5ODksInVzZXJuYW1lIjoid2VpeGluXzM5MjY5NzQwIn0.RV9_FW84VdXJM0roKBuzUwglc5DrpFdRA687nRC1gRA; UserName=weixin_39269740; UN=weixin_39269740; c_ref=https%3A//community.modelscope.cn/; c_first_ref=community.modelscope.cn; c_pref=https%3A//community.modelscope.cn/; c_first_page=https%3A//community.modelscope.cn/%3F; c_dsid=11_1679470991475.861447; dc_tos=rrww3z; log_Id_pv=3; _samesite_flag_=true; cookie2=1d1928d7774c4ae1fcdc9391baf7953c; t=cb3738081446cb99b5a4dbf3415aa368; _tb_token_=75ea6a93eb370; csg=ed524eae; m_session_id=d12d527f-624f-40ae-8cf6-bcb76e634ef1; h_uid=2215618637015; log_Id_view=7; log_Id_click=3; isg=BNHR29IOUfrlB73ukpEUmXac4N1rPkWw2OHdS7NIDB9jWqKsT4l7gIf8_C680t3o");
+            ////request.Headers.Add("Cookie", "BIDUPSID=7891B647FEF86D67510769E8D37EA33E; BAIDUID=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; PSTM=1658661266; BDUSS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; BDUSS_BFESS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; MCITY=-257%3A; Hm_lvt_01e907653ac089993ee83ed00ef9c2f3=1679276132; BDSFRCVID=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BA_HECTOR=a10h8l25a120ag8ka08080c81i1i5k51n; delPer=0; PSINO=6; ZFY=xeG8XGnodAhNOH37maKvpHgvVS4yWCQShEruX4R6o2w:C; BAIDUID_BFESS=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; BDSFRCVID_BFESS=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF_BFESS=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; H_PS_PSSID=38185_36558_38410_38349_38307_37862_38174_38290_37922_38425_38314_38383_38285_26350_38420_38283_37881; __bid_n=186fca84a5b9216b5752e1; XFI=bf261800-c796-11ed-9e7c-993a1e2bd1b9; Hm_lpvt_01e907653ac089993ee83ed00ef9c2f3=1679368579; ab_sr=1.0.1_N2YyOTA1NTAyMjI2NmViYzQ3NjMxZjg3OTE4ZTQ3ODg1NGJiNDgxOWZhZjAyYjU5YTk4NDIyMmZlZmI4NGFiYTA5MDg1YzZiOTdiMGNkNzc5NjZlOGI5ZTBiYTY5ZjBkZmZjNTE1NjhkMzExMmRjZGU1MzEyYmNjOTVjYTBiMDhhNjgwMjA0YmQxMjM5M2VjMjRhMGE4ZWZiNmNhZTVkYzViYjMxNGFhYzE4ZDJkMzNkZDBiMmIyMmZlYjI0MmQz; XFCS=EED03EFAACD1A34C9A95B676A5742E986961084A1D66E5C82F7FDBF66FFF6525; XFT=YIBAwYbCQVTX/hBmbFSk3pokc8vmvt9MmWTTIO60MVk=");
+            ////request.Headers.Add("Acs-Token", "1679288415966_1679369409945_H2S6+gSGuHdouzSnuYXZt9m6M5kauNTIZXpHl6c5/p+ky0VMWplii+uwH2E+JsD1c0Z2Wu58VGKzVUJYrqlyfr/b7NEqKCVQUbNp47RIRZtwfSNLueUDK/pidv5MvU8cJe8LFzjfAuJ1t+2ujjkn403zZnT+V+6QsuO1P4Mpk3YM+z/ulNVN6hCOdG17KnB9alyB7XcceKCBmghYIbFrICf40Lw10FUqxtGo2QHUgCYOMC/Ev3baG6pNIMrjYdaiGFFjug9Kx7sAS7k8dfjADk7H3W80kuq4d6/AyXELYQ+hylZLQVgzyqa9lDBsd1C26fl102rgY47dLfkjwOpfIw==");
+            ////CookieContainer cc = new CookieContainer();
+            ////cc.Add(new System.Uri("https://yiyan.baidu.com"), new Cookie("Cookie", "BIDUPSID=7891B647FEF86D67510769E8D37EA33E; BAIDUID=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; PSTM=1658661266; BDUSS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; BDUSS_BFESS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; MCITY=-257%3A; Hm_lvt_01e907653ac089993ee83ed00ef9c2f3=1679276132; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BA_HECTOR=8h8k002h050g01048k8g840s1i1i3g31n; BDRCVFR[feWj1Vr5u3D]=I67x6TjHwwYf0; delPer=0; PSINO=6; BAIDUID_BFESS=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; ZFY=xeG8XGnodAhNOH37maKvpHgvVS4yWCQShEruX4R6o2w:C; BCLID=4201984001025888909; BCLID_BFESS=4201984001025888909; BDSFRCVID=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; BDSFRCVID_BFESS=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; H_BDCLCKID_SF_BFESS=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; XFI=d8cdfac0-c78c-11ed-9363-11fb77acfb22; Hm_lpvt_01e907653ac089993ee83ed00ef9c2f3=1679364327; __bid_n=186fca84a5b9216b5752e1; ab_sr=1.0.1_MDhlMzhhZjkyZDJiYWNlOGRhMjdkNjQ1YzczYjkzNDA0YzAyODQ1ZDhhNjNmMDAzZTZkMDM2ZmVhNGEzMzUwZTcwOTc3ODlmMWU0NjgzYzY1OWMyOWE2YTYyMjcxMDA3N2IwNTBkZTEzZGJiMTc4MjM4YjkzOTEwMmFmYjlhNzI4NzA5ZjY4ZjQxMmFiYWJjNDRiN2NjM2ZjNTBlNjQyNGQ0NTFiZGNlYmVkZjc0MWRmMDg5MWJiZTI5ODlhNzlm; XFCS=D4DA282258F7335484898A2AF69DC41EA15E3806075C8AAFEA6DDBE278479D6E; XFT=s25AHfKy5Z9kcvgUrcryF3aCf5jg21c06GlfhkXUHWw=; BDRCVFR[VXHUG3ZuJnT]=mk3SLVN4HKm; H_PS_PSSID=26350"));
+            ////cc.Add(new System.Uri("https://yiyan.baidu.com"), new Cookie("token", "1679288415966_1679364661713_iUtUdtoyITmXeBfte7MCnnK8oI/JVoX8qSHD7dEk/qtqgG5DD1JKOgEqQGD+msq4GuE05P//gtrrZjQxk0dwRuFPCSdlrfU9duyrDWkp0PeyFljeboqFVso55q4it+VrbQPUW34pdj80wLEIty8YrBGL7NvlqnmDTly+w/my5pvhAFPr4YD7RzY/xMP//Agyxi/wMj8bJP8rcozzEmWbaLOxslIZPgO5PFN/KBVN/tj9ZYJJDt5xvYk8ZwHHFgA4039fco4g20z32qhEs5JEM4Jtwuyyd7Jas0esf6GC36Af+FGzKL/hMbd3kFS3giu0DNLBz4CEY01UoqqVCSkBgA=="));
+            ////request.CookieContainer = cc;
+            //byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            //int length = byteData.Length;
+            //request.ContentLength = length;
+            //Stream writer = request.GetRequestStream();
+            //writer.Write(byteData, 0, length);
+            //writer.Close();
+            //var response = (HttpWebResponse)request.GetResponse();
+            //var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            //JObject jo = JObject.Parse(responseString);
+            //JObject joo = (JObject)JsonConvert.DeserializeObject(responseString);
+            //string zone = jo["Data"]["id"].ToString();
+            //System.Threading.Thread.Sleep(1 * 30 * 1000); //休眠30秒
+            //string _url2 = string.Format("https://modelscope.cn/api/v1/models/damo/cv_diffusion_text-to-image-synthesis/widgets/query");
+            //string jsonParam2 = "{\"id\":\""+ zone + "\"}";
+            //var request2 = (HttpWebRequest)WebRequest.Create(_url2);
+            //request2.Method = "POST";
+            //request2.ContentType = "application/json;charset=UTF-8";//ContentType
+            //request2.Headers.Add("cookie", "uuid_tt_dd=11_27076939590-1679470980362-017728; dc_session_id=11_1679470980362.638130; c_segment=0; c_page_id=default; cna=ffxkG9VIjgkCAXBeH6SxVDo+; xlly_s=1; dp_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTkwNzAwNywiZXhwIjoxNjgwMDc1Nzg5LCJpYXQiOjE2Nzk0NzA5ODksInVzZXJuYW1lIjoid2VpeGluXzM5MjY5NzQwIn0.RV9_FW84VdXJM0roKBuzUwglc5DrpFdRA687nRC1gRA; UserName=weixin_39269740; UN=weixin_39269740; c_ref=https%3A//community.modelscope.cn/; c_first_ref=community.modelscope.cn; c_pref=https%3A//community.modelscope.cn/; c_first_page=https%3A//community.modelscope.cn/%3F; c_dsid=11_1679470991475.861447; dc_tos=rrww3z; log_Id_pv=3; _samesite_flag_=true; cookie2=1d1928d7774c4ae1fcdc9391baf7953c; t=cb3738081446cb99b5a4dbf3415aa368; _tb_token_=75ea6a93eb370; csg=ed524eae; m_session_id=d12d527f-624f-40ae-8cf6-bcb76e634ef1; h_uid=2215618637015; log_Id_view=7; log_Id_click=3; isg=BGZmIhFXPusWM-pPMfirKMXVt9zoR6oBS9jq6lA9Pw6w01LtDNDWEb_tL8_f-6IZ");
+            //byte[] byteData2 = Encoding.UTF8.GetBytes(jsonParam2);
+            //int length2 = byteData2.Length;
+            //request2.ContentLength = length2;
+            //Stream writer2 = request2.GetRequestStream();
+            //writer2.Write(byteData2, 0, length2);
+            //writer2.Close();
+            //var response2 = (HttpWebResponse)request2.GetResponse();
+            //var responseString2 = new StreamReader(response2.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+            //JObject jooo = (JObject)JsonConvert.DeserializeObject(responseString2);
+            //string zoneo = jooo["Data"]["data"]["output_imgs"][0].ToString();
+            //string zone1 = jooo["Data"]["data"]["output_imgs"][1].ToString();
+            //WebRequest imgRequest0 = WebRequest.Create(zoneo);
+            //WebRequest imgRequest1 = WebRequest.Create(zone1);
+            //System.Drawing.Image downImage = System.Drawing.Image.FromStream(imgRequest0.GetResponse().GetResponseStream());
+            //System.Drawing.Image downImage1 = System.Drawing.Image.FromStream(imgRequest1.GetResponse().GetResponseStream());
+            //string deerory = string.Format(@"D:\img\{0}\", DateTime.Now.ToString("yyyy-MM-dd"));
+            //string fileName = string.Format("{0}.png", DateTime.Now.ToString("HHmmssffff"));
+            //string fileName1 = string.Format("{0}.png", DateTime.Now.ToString("HHmmssffff")+ "1");
+            //if (!System.IO.Directory.Exists(deerory)) {
+            //    System.IO.Directory.CreateDirectory(deerory);
+            //}
+            //downImage.Save(deerory + fileName);
+            //downImage.Dispose();
+            //downImage1.Save(deerory + fileName1);
+            //downImage1.Dispose();
+
+            //var m0 = deerory + fileName;
+            //var m1 = deerory + fileName1;
+
+            //var reslut = "{\r\n  \"jiutai_imgs\": [\r\n    \""+ m0 + "\",\r\n    \""+ m1  + "\"\r\n  ]\r\n}";
+            //var ff = 1;
+
+
+
+
+
+
+
+
+
+            //var iii = 1;
+            //var strsql = "SELECT  postkeyurl,other FROM PaperPDF  WHERE postkey LIKE '%京械注准%'  ";
+            //var result1 = GetItemEntityCore1(strsql);
+            //foreach (var item in result1) {
+            //    var url = item.Title;
+            //    var save = @"D:\文献\pdf-beijing\" + item.projectcount + ".docx";
+            //    using (var web = new WebClient())
+            //    {
+            //        web.DownloadFile(url, save);
+            //    }
+            //    iii = iii + 1;
+            //    Console.WriteLine("下载 ----->" + iii);
+            //    Thread.Sleep(1000);
+            //}
+            //var kk = 44;
+            //var url = "https://zc-tender.oss-cn-beijing.aliyuncs.com/a_product/tech_perf/beijing/京械注准20152090310.docx";
+            //var save = @"D:\22.docx";
+            //using (var web = new WebClient())
+            //{
+            //    web.DownloadFile(url, save);
+            //}
+
+            //try
+            //{
+            //    string hostName = Dns.GetHostName();
+            //    IPHostEntry iPHostEntry = Dns.GetHostEntry(hostName);
+            //    var addressV = iPHostEntry.AddressList.FirstOrDefault(q => q.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);//ip4地址
+            //    if (addressV != null) {
+            //        var dd = GetAdrByIp(addressV.ToString());
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //}
+
+            var pagesize = 10;
+            List<BannerInfo> list = null;
+            if (code != "" && code != null)
+            {
+                index = Convert.ToInt32(code);
+            }
+            if (state != "" && state != null)
+            {
+                pagesize = Convert.ToInt32(state);
+            }
+            string str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  AirtleTable_guangdong order by Topdesc desc ";
+            if (tag == "1")
+            {
+                str = @"SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  AirtleTable 
+                                    where 
+                                     Sytag   like '%" + key + @"%' Or
+                                    Sytag1   like '%" + key + @"%' Or
+                                    Sytag2   like '%" + key + @"%' Or
+                                    Sytag3   like '%" + key + @"%' Or
+                                    Sytag4   like '%" + key + @"%' Or
+                                    Syxiangmu   like '%" + key + @"%' Or
+                                    Syphnoe   like '%" + key + @"%' Or
+                                    Syjiedaishijian   like '%" + key + @"%' Or
+                                    Syadress   like '%" + key + @"%' Or
+                                    Dsname   like '%" + key + @"%' Or
+                                    Dsshijian   like '%" + key + @"%' Or
+                                    Dstag   like '%" + key + @"%' Or
+                                    Dstag1   like '%" + key + @"%' Or
+                                    Dstag2   like '%" + key + @"%' Or
+                                    Dstag3   like '%" + key + @"%' Or
+                                    Dstag4   like '%" + key + @"%' Or
+                                    Dstag5   like '%" + key + @"%' Or
+                                    Dstag6   like '%" + key + @"%' Or
+                                    Dsphone   like '%" + key + @"%' Or
+                                    Dsemais   like '%" + key + @"%' Or
+                                    Dsemail   like '%" + key + @"%' Or
+                                    Dsjiedaishijian   like '%" + key + @"%' Or
+                                    Dsadress   like '%" + key + @"%' Or
+                                    Dsliurangshu   like '%" + key + @"%' Or
+                                    DJGXXshen   like '%" + key + @"%' Or
+                                    DJGXXweb   like '%" + key + @"%' Or
+                                    DJGXXjgwz   like '%" + key + @"%' Or
+                                    DJGXXjgzzdm   like '%" + key + @"%' Or
+                                    DJGXXsclxzl   like '%" + key + @"%' Or
+                                    DJGXXscllzldj   like '%" + key + @"%' Or
+                                    DJGXXllxllht   like '%" + key + @"%' Or
+                                    DJGXXgcp   like '%" + key + @"%' Or
+                                    DJGXXzkxm   like '%" + key + @"%' Or
+                                    DJGXXglfc   like '%" + key + @"%' Or
+                                    DJGXXlianxirenzhiwei   like '%" + key + @"%' Or
+                                    DJGXXlianxiren   like '%" + key + @"%' Or
+                                    DJGXXlianxirenphone   like '%" + key + @"%' Or
+                                    DJGXXlianxirenemmail   like '%" + key + @"%' Or
+                                    DJGXXlianxirenzhiwei1   like '%" + key + @"%' Or
+                                    DJGXXlianxiren1   like '%" + key + @"%' Or
+                                    DJGXXlianxirenphone1   like '%" + key + @"%' Or
+                                    DJGXXlianxirenemmail1   like '%" + key + @"%' Or
+                                    DJGXXjiajie   like '%" + key + @"%' Or
+                                    DJGXXjiajie1   like '%" + key + @"%' Or
+                                    DJGXXjiajie2   like '%" + key + @"%' Or
+                                    DJGXXjiajie3   like '%" + key + @"%' Or
+                                    DJGXXjiajie4   like '%" + key + @"%' Or
+                                    DBAXXYWshen   like '%" + key + @"%' Or
+                                    DBAXXYWbenanhao   like '%" + key + @"%' Or
+                                    DBAXXYWname   like '%" + key + @"%' Or
+                                    DBAXXYWjibei   like '%" + key + @"%' Or
+                                    DBAXXYWlianxiren   like '%" + key + @"%' Or
+                                    DBAXXYWlianxiphone   like '%" + key + @"%' Or
+                                    DBAXXYWzhuantai   like '%" + key + @"%' Or
+                                    DBAXXYWshijian   like '%" + key + @"%' Or
+                                    DBAXXYWjcrq   like '%" + key + @"%' Or
+                                    DBAXXYWjclb   like '%" + key + @"%' Or
+                                    DBAXXYWjdjcjg   like '%" + key + @"%' Or
+                                    DBAXXYWclqk   like '%" + key + @"%' Or
+                                    DBAXXYWjcrq1   like '%" + key + @"%' Or
+                                    DBAXXYWjclb1   like '%" + key + @"%' Or
+                                    DBAXXYWjdjcjg1   like '%" + key + @"%' Or
+                                    DBAXXYWclqk1   like '%" + key + @"%' Or
+                                    DBAXXYWzymc   like '%" + key + @"%' Or
+                                    DBAXXYWzyyjz   like '%" + key + @"%' Or
+                                    DBAXXYWzc   like '%" + key + @"%' Or
+                                    DBAXXYWzybasj   like '%" + key + @"%' Or
+                                    DBAXXYWzymc1   like '%" + key + @"%' Or
+                                    DBAXXYWzyyjz1   like '%" + key + @"%' Or
+                                    DBAXXYWzc1   like '%" + key + @"%' Or
+                                    DBAXXYWzybasj1   like '%" + key + @"%' Or
+                                    DBAXXYLshen   like '%" + key + @"%' Or
+                                    DBAXXYLbenanhao   like '%" + key + @"%' Or
+                                    DBAXXYLname   like '%" + key + @"%' Or
+                                    DBAXXYLjibei   like '%" + key + @"%' Or
+                                    DBAXXYLlianxiren   like '%" + key + @"%' Or
+                                    DBAXXYLlianxiphone   like '%" + key + @"%' Or
+                                    DBAXXYLzhuantai   like '%" + key + @"%' Or
+                                    DBAXXYLshijian   like '%" + key + @"%' Or
+                                    DBAXXYLzymc   like '%" + key + @"%' Or
+                                    DBAXXYLzyyjz   like '%" + key + @"%' Or
+                                    DBAXXYLzc   like '%" + key + @"%' Or
+                                    DLLWTHphone   like '%" + key + @"%' Or
+                                    DLLWTHchuangzhen   like '%" + key + @"%' Or
+                                    DLLWTHemail   like '%" + key + @"%' Or
+                                    DLLWTHjiedaishijian   like '%" + key + @"%' Or
+                                    DLLWTHwangzhi   like '%" + key + @"%' Or
+                                    DLLWTHshen   like '%" + key + @"%' Or
+                                    DLLWTHadress   like '%" + key + @"%' Or
+                                    DLLWTHLXFSzhiwei   like '%" + key + @"%' Or
+                                    DLLWTHLXFSmingzhi   like '%" + key + @"%' Or
+                                    DLLWTHLXFSdianhua   like '%" + key + @"%' Or
+                                    DLLWTHLXFSyouxiang   like '%" + key + @"%' Or
+                                    DLLWTHLXFSzhiwei1   like '%" + key + @"%' Or
+                                    DLLWTHLXFSmingzhi1   like '%" + key + @"%' Or
+                                    DLLWTHLXFSdianhua1   like '%" + key + @"%' Or
+                                    DLLWTHLXFSyouxiang1   like '%" + key + @"%' Or
+                                    DLLWTHLLllzkpl   like '%" + key + @"%' Or
+                                    DLLWTHLLllshxs   like '%" + key + @"%' Or
+                                    DLLWTHLLllscfy   like '%" + key + @"%' Or
+                                    DLLWTHLLxgzc   like '%" + key + @"%' Or
+                                    DLLWTHLLzkpl   like '%" + key + @"%' Or
+                                    DLLWTHLLzkpl1   like '%" + key + @"%' Or
+                                    DLLWTHLLllzkpl1   like '%" + key + @"%' Or
+                                    DLLWTHLLllshxs1   like '%" + key + @"%' Or
+                                    DLLWTHLLllscfy1   like '%" + key + @"%' Or
+                                    DLLWTHLLxgzc1   like '%" + key + @"%' Or
+                                    DKSZYZHX1   like '%" + key + @"%' Or
+                                    DKSZYZHX1weizhi   like '%" + key + @"%' Or
+                                    DKSZYZHX1zhiwei   like '%" + key + @"%' Or
+                                    DKSZYZHX1mingzi   like '%" + key + @"%' Or
+                                    DKSZYZHX1dianhua   like '%" + key + @"%' Or
+                                    DKSZYZHX1email   like '%" + key + @"%' Or
+                                    DKSZYZHX1keshi   like '%" + key + @"%' Or
+                                    DKSZYZHX1yanjiutuandui   like '%" + key + @"%' Or
+                                    DLCSYqdlx   like '%" + key + @"%' Or
+                                    DLCSYgcc   like '%" + key + @"%' Or
+                                    DLCSYqdny   like '%" + key + @"%' Or
+                                    DLCSYcjcws   like '%" + key + @"%' Or
+                                    DLCSYjtlcdz   like '%" + key + @"%' Or
+                                    DLCSYgsszlx   like '%" + key + @"%' Or
+                                    DLCSYLXFSzhiwei   like '%" + key + @"%' Or
+                                    DLCSYLXFSmingzhi   like '%" + key + @"%' Or
+                                    DLCSYLXFSdianhua   like '%" + key + @"%' Or
+                                    DLCSYLXFSdizhi   like '%" + key + @"%' Or
+                                    DLCSYXMJY1   like '%" + key + @"%' Or
+                                    DLCSYXMJY11   like '%" + key + @"%' Or
+                                    DLCSYXMJY2   like '%" + key + @"%' Or
+                                    DLCSYXMJY21   like '%" + key + @"%' Or
+                                    DLCSYXMJY3   like '%" + key + @"%' Or
+                                    DLCSYXMJY31   like '%" + key + @"%' Or
+                                    DLCSYXMJY4   like '%" + key + @"%' Or
+                                    DLCSYXMJY41   like '%" + key + @"%' Or
+                                    DLCSYXMJY5   like '%" + key + @"%' Or
+                                    DLCSYXMJY51   like '%" + key + @"%' Or
+                                    DLCSYXMJY6   like '%" + key + @"%' Or
+                                    DLCSYXMJY61   like '%" + key + @"%' Or
+                                    DLCSYXMJY7   like '%" + key + @"%' Or
+                                    DLCSYXMJY71   like '%" + key + @"%' Or
+                                    DLCSYXMJY8   like '%" + key + @"%' Or
+                                    DLCSYXMJY81   like '%" + key + @"%' Or
+                                    DLCSYYJTD1   like '%" + key + @"%' Or
+                                    DLCSYGDJS1   like '%" + key + @"%' Or
+                                    DKSZYZHX2   like '%" + key + @"%' Or
+                                    DKSZYZHX2weizhi   like '%" + key + @"%' Or
+                                    DKSZYZHX2zhiwei   like '%" + key + @"%' Or
+                                    DKSZYZHX2mingzi   like '%" + key + @"%' Or
+                                    DKSZYZHX2dianhua   like '%" + key + @"%' Or
+                                    DKSZYZHX2email   like '%" + key + @"%' Or
+                                    DKSZYZHX2keshi   like '%" + key + @"%' Or
+                                    DKSZYZHX2keshi1   like '%" + key + @"%' Or
+                                    DKSZYZHX2yanjiutuandui   like '%" + key + @"%' Or
+                                    DKSZYZHX2yanjiutuandui1   like '%" + key + @"%' 
+                                        order by Topdesc desc";
+            }
+            else if (tag == "2")
+            {
+                //Sytag2:333@@Sytag4:888*@
+                str = "SELECT  Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe, Syjiedaishijian,Syadress  from  AirtleTable_guangdong";
+                string _where = "where 1= 1";
+                string _desc = "order by Topdesc desc";
+                var arr = key.Split("@@");
+                foreach (string i in arr)
+                {
+                    if (i.Contains("Syurl")) _where += "  AND Syurl   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Sytag")) _where += "  AND Sytag   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Sytag1")) _where += "  AND Sytag1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Sytag2")) _where += "  AND Sytag2   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Sytag3")) _where += "  AND Sytag3   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Sytag4")) _where += "  AND Sytag4   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Syxiangmu")) _where += "  AND Syxiangmu   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Syphnoe")) _where += "  AND Syphnoe   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Syjiedaishijian")) _where += "  AND Syjiedaishijian   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Syadress")) _where += "  AND Syadress   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsname")) _where += "  AND Dsname   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsshijian")) _where += "  AND Dsshijian   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag")) _where += "  AND Dstag   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag1")) _where += "  AND Dstag1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag2")) _where += "  AND Dstag2   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag3")) _where += "  AND Dstag3   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag4")) _where += "  AND Dstag4   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag5")) _where += "  AND Dstag5   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dstag6")) _where += "  AND Dstag6   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsphone")) _where += "  AND Dsphone   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsemais")) _where += "  AND Dsemais   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsemail")) _where += "  AND Dsemail   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsjiedaishijian")) _where += "  AND Dsjiedaishijian   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsadress")) _where += "  AND Dsadress   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("Dsliurangshu")) _where += "  AND Dsliurangshu   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXshen")) _where += "  AND DJGXXshen   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXweb")) _where += "  AND DJGXXweb   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjgwz")) _where += "  AND DJGXXjgwz   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjgzzdm")) _where += "  AND DJGXXjgzzdm   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXsclxzl")) _where += "  AND DJGXXsclxzl   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXscllzldj")) _where += "  AND DJGXXscllzldj   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXllxllht")) _where += "  AND DJGXXllxllht   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXgcp")) _where += "  AND DJGXXgcp   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXzkxm")) _where += "  AND DJGXXzkxm   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXglfc")) _where += "  AND DJGXXglfc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxirenzhiwei")) _where += "  AND DJGXXlianxirenzhiwei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxiren")) _where += "  AND DJGXXlianxiren   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxirenphone")) _where += "  AND DJGXXlianxirenphone   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxirenemmail")) _where += "  AND DJGXXlianxirenemmail   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxirenzhiwei1")) _where += "  AND DJGXXlianxirenzhiwei1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxiren1")) _where += "  AND DJGXXlianxiren1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxirenphone1")) _where += "  AND DJGXXlianxirenphone1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXlianxirenemmail1")) _where += "  AND DJGXXlianxirenemmail1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjiajie")) _where += "  AND DJGXXjiajie   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjiajie1")) _where += "  AND DJGXXjiajie1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjiajie2")) _where += "  AND DJGXXjiajie2   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjiajie3")) _where += "  AND DJGXXjiajie3   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DJGXXjiajie4")) _where += "  AND DJGXXjiajie4   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWshen")) _where += "  AND DBAXXYWshen   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWbenanhao")) _where += "  AND DBAXXYWbenanhao   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWname")) _where += "  AND DBAXXYWname   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjibei")) _where += "  AND DBAXXYWjibei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWlianxiren")) _where += "  AND DBAXXYWlianxiren   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWlianxiphone")) _where += "  AND DBAXXYWlianxiphone   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzhuantai")) _where += "  AND DBAXXYWzhuantai   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWshijian")) _where += "  AND DBAXXYWshijian   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjcrq")) _where += "  AND DBAXXYWjcrq   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjclb")) _where += "  AND DBAXXYWjclb   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjdjcjg")) _where += "  AND DBAXXYWjdjcjg   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWclqk")) _where += "  AND DBAXXYWclqk   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjcrq1")) _where += "  AND DBAXXYWjcrq1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjclb1")) _where += "  AND DBAXXYWjclb1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWjdjcjg1")) _where += "  AND DBAXXYWjdjcjg1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWclqk1")) _where += "  AND DBAXXYWclqk1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzymc")) _where += "  AND DBAXXYWzymc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzyyjz")) _where += "  AND DBAXXYWzyyjz   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzc")) _where += "  AND DBAXXYWzc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzybasj")) _where += "  AND DBAXXYWzybasj   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzymc1")) _where += "  AND DBAXXYWzymc1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzyyjz1")) _where += "  AND DBAXXYWzyyjz1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzc1")) _where += "  AND DBAXXYWzc1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYWzybasj1")) _where += "  AND DBAXXYWzybasj1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLshen")) _where += "  AND DBAXXYLshen   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLbenanhao")) _where += "  AND DBAXXYLbenanhao   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLname")) _where += "  AND DBAXXYLname   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLjibei")) _where += "  AND DBAXXYLjibei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLlianxiren")) _where += "  AND DBAXXYLlianxiren   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLlianxiphone")) _where += "  AND DBAXXYLlianxiphone   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLzhuantai")) _where += "  AND DBAXXYLzhuantai   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLshijian")) _where += "  AND DBAXXYLshijian   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLzymc")) _where += "  AND DBAXXYLzymc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLzyyjz")) _where += "  AND DBAXXYLzyyjz   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DBAXXYLzc")) _where += "  AND DBAXXYLzc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHphone")) _where += "  AND DLLWTHphone   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHchuangzhen")) _where += "  AND DLLWTHchuangzhen   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHemail")) _where += "  AND DLLWTHemail   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHjiedaishijian")) _where += "  AND DLLWTHjiedaishijian   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHwangzhi")) _where += "  AND DLLWTHwangzhi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHshen")) _where += "  AND DLLWTHshen   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHadress")) _where += "  AND DLLWTHadress   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSzhiwei")) _where += "  AND DLLWTHLXFSzhiwei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSmingzhi")) _where += "  AND DLLWTHLXFSmingzhi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSdianhua")) _where += "  AND DLLWTHLXFSdianhua   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSyouxiang")) _where += "  AND DLLWTHLXFSyouxiang   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSzhiwei1")) _where += "  AND DLLWTHLXFSzhiwei1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSmingzhi1")) _where += "  AND DLLWTHLXFSmingzhi1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSdianhua1")) _where += "  AND DLLWTHLXFSdianhua1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLXFSyouxiang1")) _where += "  AND DLLWTHLXFSyouxiang1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLllzkpl")) _where += "  AND DLLWTHLLllzkpl   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLllshxs")) _where += "  AND DLLWTHLLllshxs   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLllscfy")) _where += "  AND DLLWTHLLllscfy   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLxgzc")) _where += "  AND DLLWTHLLxgzc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLzkpl")) _where += "  AND DLLWTHLLzkpl   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLzkpl1")) _where += "  AND DLLWTHLLzkpl1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLllzkpl1")) _where += "  AND DLLWTHLLllzkpl1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLllshxs1")) _where += "  AND DLLWTHLLllshxs1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLllscfy1")) _where += "  AND DLLWTHLLllscfy1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLLWTHLLxgzc1")) _where += "  AND DLLWTHLLxgzc1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1")) _where += "  AND DKSZYZHX1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1weizhi")) _where += "  AND DKSZYZHX1weizhi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1zhiwei")) _where += "  AND DKSZYZHX1zhiwei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1mingzi")) _where += "  AND DKSZYZHX1mingzi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1dianhua")) _where += "  AND DKSZYZHX1dianhua   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1email")) _where += "  AND DKSZYZHX1email   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1keshi")) _where += "  AND DKSZYZHX1keshi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX1yanjiutuandui")) _where += "  AND DKSZYZHX1yanjiutuandui   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYqdlx")) _where += "  AND DLCSYqdlx   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYgcc")) _where += "  AND DLCSYgcc   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYqdny")) _where += "  AND DLCSYqdny   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYcjcws")) _where += "  AND DLCSYcjcws   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYjtlcdz")) _where += "  AND DLCSYjtlcdz   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYgsszlx")) _where += "  AND DLCSYgsszlx   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYLXFSzhiwei")) _where += "  AND DLCSYLXFSzhiwei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYLXFSmingzhi")) _where += "  AND DLCSYLXFSmingzhi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYLXFSdianhua")) _where += "  AND DLCSYLXFSdianhua   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYLXFSdizhi")) _where += "  AND DLCSYLXFSdizhi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY1")) _where += "  AND DLCSYXMJY1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY11")) _where += "  AND DLCSYXMJY11   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY2")) _where += "  AND DLCSYXMJY2   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY21")) _where += "  AND DLCSYXMJY21   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY3")) _where += "  AND DLCSYXMJY3   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY31")) _where += "  AND DLCSYXMJY31   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY4")) _where += "  AND DLCSYXMJY4   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY41")) _where += "  AND DLCSYXMJY41   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY5")) _where += "  AND DLCSYXMJY5   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY51")) _where += "  AND DLCSYXMJY51   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY6")) _where += "  AND DLCSYXMJY6   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY61")) _where += "  AND DLCSYXMJY61   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY7")) _where += "  AND DLCSYXMJY7   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY71")) _where += "  AND DLCSYXMJY71   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY8")) _where += "  AND DLCSYXMJY8   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYXMJY81")) _where += "  AND DLCSYXMJY81   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYYJTD1")) _where += "  AND DLCSYYJTD1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DLCSYGDJS1")) _where += "  AND DLCSYGDJS1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2")) _where += "  AND DKSZYZHX2   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2weizhi")) _where += "  AND DKSZYZHX2weizhi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2zhiwei")) _where += "  AND DKSZYZHX2zhiwei   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2mingzi")) _where += "  AND DKSZYZHX2mingzi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2dianhua")) _where += "  AND DKSZYZHX2dianhua   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2email")) _where += "  AND DKSZYZHX2email   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2keshi")) _where += "  AND DKSZYZHX2keshi   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2keshi1")) _where += "  AND DKSZYZHX2keshi1   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2yanjiutuandui")) _where += "  AND DKSZYZHX2yanjiutuandui   like '%" + i.Split(":")[1] + @"%' ";
+                    if (i.Contains("DKSZYZHX2yanjiutuandui1")) _where += "  AND DKSZYZHX2yanjiutuandui1   like '%" + i.Split(":")[1] + @"%' ";
+                }
+                str = str + _where + _desc;
+
+            }
+            var result = GetGoalsEntity(str);
+            var data = result.Skip((index - 1) * pagesize).Take(pagesize).ToList();
+            list = await _bannerService.GetListCacheAsync(null, o => o.SortCode, false);
+
+            //var article = await _articleService.GetListCacheAsync(null, o => o.CreatorTime, false);
+            ViewBag.Yixue = data;
+            ViewBag.Count = result.Count();
+            ViewBag.PageNum = (result.Count() - 1) / pagesize + 1;
+            ViewBag.Code = index;
+
+            return View(list);
+            #endregion
+        }
+        public async Task<IActionResult> ModuleNewlist2(string key, string papes, string cid, string isen)
+        {
+            var strsql = "SELECT  postkeyurl,other FROM PaperPDF  WHERE postkey LIKE '%京械注准%'  ";
+            var result1 = GetItemEntityCore1(strsql);
+            return Json(new { result1 });
+        }
+        public async Task<IActionResult> JiutaiImag(string value)
+        {
+            string _url = string.Format("https://modelscope.cn/api/v1/models/damo/cv_diffusion_text-to-image-synthesis/widgets/submit");
+            //json参数
+            //string jsonParam = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            //{
+            //    chatId = "15187477",
+            //    parentChatId = "15187475",
+            //    sentenceId =0,
+            //    stop = 0,
+            //    timestamp = 1679368929167,
+            //    deviceType = "pc",
+            //    sign = "1679288415966_1679368029164_13iqOlPG28VuKkzRh9alRF0wVQ8WjvSsu2iuGokzD/ujqvrj/wmAD6A2a0hENZFH7YCZlX+DeNZQGooNjQW2zNPoR6TeAN9MD/GVfzUy8OJ081yg0f5dk8yFT7IPiBGAGLWozEdQQCEyXN20sR3gtYHrgniwxx5YFr69v+8WLBE77iFx7/dsJDjFi3tv78MFVWxgO5wywWJdv1kqWVQJqzwCqcwJ1wW2N5VngvNKyIy9r2953aEzK60VCc1TExjLY/bm+Pyu+v8uqMjGZZMlK4O93B3hTw+26raJkXxazDabx8b6s7adC9ymYANKqaWKwjx66+GGso2qaq9OHN2acg=="
+
+            //});
+            var valuestr = "1只老虎和小鸟";
+            string jsonParam = "\r\n{\"task\":\"text-to-image-synthesis\",\"inputs\":[\"" + valuestr + "\"],\"parameters\":{\"tokenizer\":\"xglm\",\"batch_size\":2},\"urlPaths\":{\"inUrls\":[{\"value\":\"" + valuestr + "\",\"type\":\"text\",\"displayProps\":{\"size\":\"small\"},\"displayType\":\"TextArea\",\"name\":\"text\",\"title\":\"输入prompt\",\"validator\":{\"max_words\":\"75\"}}],\"outUrls\":[{\"fileType\":\"png-list\",\"outputKey\":\"output_imgs\"}]}}";
+            var request = (HttpWebRequest)WebRequest.Create(_url);
+            request.Method = "POST";
+            request.ContentType = "application/json;charset=UTF-8";//ContentType
+            request.Headers.Add("cookie", "uuid_tt_dd=11_27076939590-1679470980362-017728; dc_session_id=11_1679470980362.638130; c_segment=0; c_page_id=default; cna=ffxkG9VIjgkCAXBeH6SxVDo+; xlly_s=1; dp_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTkwNzAwNywiZXhwIjoxNjgwMDc1Nzg5LCJpYXQiOjE2Nzk0NzA5ODksInVzZXJuYW1lIjoid2VpeGluXzM5MjY5NzQwIn0.RV9_FW84VdXJM0roKBuzUwglc5DrpFdRA687nRC1gRA; UserName=weixin_39269740; UN=weixin_39269740; c_ref=https%3A//community.modelscope.cn/; c_first_ref=community.modelscope.cn; c_pref=https%3A//community.modelscope.cn/; c_first_page=https%3A//community.modelscope.cn/%3F; c_dsid=11_1679470991475.861447; dc_tos=rrww3z; log_Id_pv=3; _samesite_flag_=true; cookie2=1d1928d7774c4ae1fcdc9391baf7953c; t=cb3738081446cb99b5a4dbf3415aa368; _tb_token_=75ea6a93eb370; csg=ed524eae; m_session_id=d12d527f-624f-40ae-8cf6-bcb76e634ef1; h_uid=2215618637015; log_Id_view=7; log_Id_click=3; isg=BNHR29IOUfrlB73ukpEUmXac4N1rPkWw2OHdS7NIDB9jWqKsT4l7gIf8_C680t3o");
+            //request.Headers.Add("Cookie", "BIDUPSID=7891B647FEF86D67510769E8D37EA33E; BAIDUID=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; PSTM=1658661266; BDUSS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; BDUSS_BFESS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; MCITY=-257%3A; Hm_lvt_01e907653ac089993ee83ed00ef9c2f3=1679276132; BDSFRCVID=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BA_HECTOR=a10h8l25a120ag8ka08080c81i1i5k51n; delPer=0; PSINO=6; ZFY=xeG8XGnodAhNOH37maKvpHgvVS4yWCQShEruX4R6o2w:C; BAIDUID_BFESS=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; BDSFRCVID_BFESS=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF_BFESS=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; H_PS_PSSID=38185_36558_38410_38349_38307_37862_38174_38290_37922_38425_38314_38383_38285_26350_38420_38283_37881; __bid_n=186fca84a5b9216b5752e1; XFI=bf261800-c796-11ed-9e7c-993a1e2bd1b9; Hm_lpvt_01e907653ac089993ee83ed00ef9c2f3=1679368579; ab_sr=1.0.1_N2YyOTA1NTAyMjI2NmViYzQ3NjMxZjg3OTE4ZTQ3ODg1NGJiNDgxOWZhZjAyYjU5YTk4NDIyMmZlZmI4NGFiYTA5MDg1YzZiOTdiMGNkNzc5NjZlOGI5ZTBiYTY5ZjBkZmZjNTE1NjhkMzExMmRjZGU1MzEyYmNjOTVjYTBiMDhhNjgwMjA0YmQxMjM5M2VjMjRhMGE4ZWZiNmNhZTVkYzViYjMxNGFhYzE4ZDJkMzNkZDBiMmIyMmZlYjI0MmQz; XFCS=EED03EFAACD1A34C9A95B676A5742E986961084A1D66E5C82F7FDBF66FFF6525; XFT=YIBAwYbCQVTX/hBmbFSk3pokc8vmvt9MmWTTIO60MVk=");
+            //request.Headers.Add("Acs-Token", "1679288415966_1679369409945_H2S6+gSGuHdouzSnuYXZt9m6M5kauNTIZXpHl6c5/p+ky0VMWplii+uwH2E+JsD1c0Z2Wu58VGKzVUJYrqlyfr/b7NEqKCVQUbNp47RIRZtwfSNLueUDK/pidv5MvU8cJe8LFzjfAuJ1t+2ujjkn403zZnT+V+6QsuO1P4Mpk3YM+z/ulNVN6hCOdG17KnB9alyB7XcceKCBmghYIbFrICf40Lw10FUqxtGo2QHUgCYOMC/Ev3baG6pNIMrjYdaiGFFjug9Kx7sAS7k8dfjADk7H3W80kuq4d6/AyXELYQ+hylZLQVgzyqa9lDBsd1C26fl102rgY47dLfkjwOpfIw==");
+            //CookieContainer cc = new CookieContainer();
+            //cc.Add(new System.Uri("https://yiyan.baidu.com"), new Cookie("Cookie", "BIDUPSID=7891B647FEF86D67510769E8D37EA33E; BAIDUID=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; PSTM=1658661266; BDUSS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; BDUSS_BFESS=JXYVktblhaVTlGZkcxMFlPNGg2aG01MVZ0RDgyY1dXSEYxWTI4R35RUzBCalprSUFBQUFBJCQAAAAAAAAAAAEAAAB-4P9EbHVvZmFtaW5nNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALR5DmS0eQ5kbG; MCITY=-257%3A; Hm_lvt_01e907653ac089993ee83ed00ef9c2f3=1679276132; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BA_HECTOR=8h8k002h050g01048k8g840s1i1i3g31n; BDRCVFR[feWj1Vr5u3D]=I67x6TjHwwYf0; delPer=0; PSINO=6; BAIDUID_BFESS=F0147F17F26EC14E47BCF2AEFFE12921:FG=1; ZFY=xeG8XGnodAhNOH37maKvpHgvVS4yWCQShEruX4R6o2w:C; BCLID=4201984001025888909; BCLID_BFESS=4201984001025888909; BDSFRCVID=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; BDSFRCVID_BFESS=MSkOJeC62GHnemvfyjuGhfuCPvJiZXjTH6aoT49yHx85QsgAUu5oEG0P0U8g0KuM5NlwogKK3gOTH4DF_2uxOjjg8UtVJeC6EG0Ptf8g0f5; H_BDCLCKID_SF=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; H_BDCLCKID_SF_BFESS=JnI8oCD2JIK3Hnnp5-J25KCQbMDDJT8XbD5jVM7Dbl7keq8CD6jIW4KuhxjIKTjJ2Ict5MJ8WCQsKqc2y5jHhUL4yfTv2-T--27phlvRfnjpsIJMhxFWbT8UQ4cT04r0aKviaKOjBMb1MhbDBT5h2M4qMxtOLR3pWDTm_q5TtUJMeCnTD-Dhe6jWDH8HJ6-jfKQtW4thHDKaJbTp24QEq4tHeNt8-URZ5m7LaUoOtbnEHRQwjjQbM-K0Ln3MBMPj52OnanRsaqo6ED5c5RjbLpFm346-35543bRTLnLy5KJvfJoD3h3ChP-UyN3MWh37Je3lMKoaMp78jR093JO4y4Ldj4oxJpOJ5JbMopCafD8bhDtGjTt-en-W5gTBa4T8bC_X3buQtII28pcNLTDKjx4eD-6BKJcvWJn30t5nLPL-MxoKKlO1j4_eQh642-Lq2Kvr0nT7atTvhl5jDh0K25ksD-4JW45AWHby0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qhja0tJT0ttJ-sL-35HJj2jtJvKn8_-P6MXGjCWMT-0bFH5xJgWx7ke4Te55osbRLd0h3eQpRxJan7_JjOQI-BJqn9e5oGKP-b54tOaUQxtN4j2CnjtpvP8D58hbJobUPUDUJ9LUkJ3gcdot5yBbc8eIna5hjkbfJBQttjQn3hfIkj0DKLJIthhK-GD6A35n-WqxQjaROy-5PX3buQBxOO8pcNLTDKQUkHbfcqKJcBbmv30t5nLPQkjfcyMlO1j4_e3a88hxvOfnTIQb3pQ4KhDp5jDh023jksD-RtW6QwaTvy0hvctb3cShPmQMjrDRLbXU6BK5vPbNcZ0l8K3l02V-bIe-t2b6Qh-p52f6KetJFf3e; XFI=d8cdfac0-c78c-11ed-9363-11fb77acfb22; Hm_lpvt_01e907653ac089993ee83ed00ef9c2f3=1679364327; __bid_n=186fca84a5b9216b5752e1; ab_sr=1.0.1_MDhlMzhhZjkyZDJiYWNlOGRhMjdkNjQ1YzczYjkzNDA0YzAyODQ1ZDhhNjNmMDAzZTZkMDM2ZmVhNGEzMzUwZTcwOTc3ODlmMWU0NjgzYzY1OWMyOWE2YTYyMjcxMDA3N2IwNTBkZTEzZGJiMTc4MjM4YjkzOTEwMmFmYjlhNzI4NzA5ZjY4ZjQxMmFiYWJjNDRiN2NjM2ZjNTBlNjQyNGQ0NTFiZGNlYmVkZjc0MWRmMDg5MWJiZTI5ODlhNzlm; XFCS=D4DA282258F7335484898A2AF69DC41EA15E3806075C8AAFEA6DDBE278479D6E; XFT=s25AHfKy5Z9kcvgUrcryF3aCf5jg21c06GlfhkXUHWw=; BDRCVFR[VXHUG3ZuJnT]=mk3SLVN4HKm; H_PS_PSSID=26350"));
+            //cc.Add(new System.Uri("https://yiyan.baidu.com"), new Cookie("token", "1679288415966_1679364661713_iUtUdtoyITmXeBfte7MCnnK8oI/JVoX8qSHD7dEk/qtqgG5DD1JKOgEqQGD+msq4GuE05P//gtrrZjQxk0dwRuFPCSdlrfU9duyrDWkp0PeyFljeboqFVso55q4it+VrbQPUW34pdj80wLEIty8YrBGL7NvlqnmDTly+w/my5pvhAFPr4YD7RzY/xMP//Agyxi/wMj8bJP8rcozzEmWbaLOxslIZPgO5PFN/KBVN/tj9ZYJJDt5xvYk8ZwHHFgA4039fco4g20z32qhEs5JEM4Jtwuyyd7Jas0esf6GC36Af+FGzKL/hMbd3kFS3giu0DNLBz4CEY01UoqqVCSkBgA=="));
+            //request.CookieContainer = cc;
+            byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
+            int length = byteData.Length;
+            request.ContentLength = length;
+            Stream writer = request.GetRequestStream();
+            writer.Write(byteData, 0, length);
+            writer.Close();
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            JObject jo = JObject.Parse(responseString);
+            JObject joo = (JObject)JsonConvert.DeserializeObject(responseString);
+            string zone = jo["Data"]["id"].ToString();
+            System.Threading.Thread.Sleep(1 * 30 * 1000); //休眠30秒
+            string _url2 = string.Format("https://modelscope.cn/api/v1/models/damo/cv_diffusion_text-to-image-synthesis/widgets/query");
+            string jsonParam2 = "{\"id\":\"" + zone + "\"}";
+            var request2 = (HttpWebRequest)WebRequest.Create(_url2);
+            request2.Method = "POST";
+            request2.ContentType = "application/json;charset=UTF-8";//ContentType
+            request2.Headers.Add("cookie", "uuid_tt_dd=11_27076939590-1679470980362-017728; dc_session_id=11_1679470980362.638130; c_segment=0; c_page_id=default; cna=ffxkG9VIjgkCAXBeH6SxVDo+; xlly_s=1; dp_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTkwNzAwNywiZXhwIjoxNjgwMDc1Nzg5LCJpYXQiOjE2Nzk0NzA5ODksInVzZXJuYW1lIjoid2VpeGluXzM5MjY5NzQwIn0.RV9_FW84VdXJM0roKBuzUwglc5DrpFdRA687nRC1gRA; UserName=weixin_39269740; UN=weixin_39269740; c_ref=https%3A//community.modelscope.cn/; c_first_ref=community.modelscope.cn; c_pref=https%3A//community.modelscope.cn/; c_first_page=https%3A//community.modelscope.cn/%3F; c_dsid=11_1679470991475.861447; dc_tos=rrww3z; log_Id_pv=3; _samesite_flag_=true; cookie2=1d1928d7774c4ae1fcdc9391baf7953c; t=cb3738081446cb99b5a4dbf3415aa368; _tb_token_=75ea6a93eb370; csg=ed524eae; m_session_id=d12d527f-624f-40ae-8cf6-bcb76e634ef1; h_uid=2215618637015; log_Id_view=7; log_Id_click=3; isg=BGZmIhFXPusWM-pPMfirKMXVt9zoR6oBS9jq6lA9Pw6w01LtDNDWEb_tL8_f-6IZ");
+            byte[] byteData2 = Encoding.UTF8.GetBytes(jsonParam2);
+            int length2 = byteData2.Length;
+            request2.ContentLength = length2;
+            Stream writer2 = request2.GetRequestStream();
+            writer2.Write(byteData2, 0, length2);
+            writer2.Close();
+            var response2 = (HttpWebResponse)request2.GetResponse();
+            var responseString2 = new StreamReader(response2.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+            JObject jooo = (JObject)JsonConvert.DeserializeObject(responseString2);
+            string zoneo = jooo["Data"]["data"]["output_imgs"][0].ToString();
+            string zone1 = jooo["Data"]["data"]["output_imgs"][1].ToString();
+            WebRequest imgRequest0 = WebRequest.Create(zoneo);
+            WebRequest imgRequest1 = WebRequest.Create(zone1);
+            System.Drawing.Image downImage = System.Drawing.Image.FromStream(imgRequest0.GetResponse().GetResponseStream());
+            System.Drawing.Image downImage1 = System.Drawing.Image.FromStream(imgRequest1.GetResponse().GetResponseStream());
+            string deerory = string.Format(@"E:\web\web6\img\{0}\", DateTime.Now.ToString("yyyy-MM-dd"));
+            string deeroryrr = string.Format(@"img\{0}\", DateTime.Now.ToString("yyyy-MM-dd"));
+            string fileName = string.Format("{0}.png", DateTime.Now.ToString("HHmmssffff"));
+            string fileName1 = string.Format("{0}.png", DateTime.Now.ToString("HHmmssffff") + "1");
+            if (!System.IO.Directory.Exists(deerory))
+            {
+                System.IO.Directory.CreateDirectory(deerory);
+            }
+            downImage.Save(deerory + fileName);
+            downImage.Dispose();
+            downImage1.Save(deerory + fileName1);
+            downImage1.Dispose();
+
+            var m0 = deeroryrr + fileName;
+            var m1 = deeroryrr + fileName1;
+
+            var reslut = "{ \"jiutai_imgs2\": [  \"" + m0 + "\",   \"" + m1 + "\" ]\r\n}";
+            return Json(new { reslut });
+        }
+        private IList<Articleiteminfo1> GetItemEntityCore1(string sqlstr, string filter = "")
+        {
+            var list1 = new List<Articleiteminfo1>();
+            string conStr = "server=192.168.10.12;user=sa;pwd=123456;database=Blog";//连接字符串  
+            SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+            conText.Open();//打开数据库  
+            string sqls = sqlstr;//创建统计语句  
+            SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+            SqlDataReader dr;//创建DataReader对象  
+            dr = comText.ExecuteReader();//执行查询  
+            while (dr.Read())//判断数据表中是否含有数据  
+            {
+                var i = new Articleiteminfo1();
+                var date = dr;
+                i.Title = date["postkeyurl"].ToString();
+                i.projectcount = date["other"].ToString();
+                list1.Add(i);
+            }
+            dr.Close();//关闭DataReader对象  
+            return list1;
+        }
         public int changeSqlData(String sql)
         {  //执行
             try
             {
-                using (SqlConnection con = new SqlConnection("server=192.168.10.28;user=sa;pwd=123456;database=Blog"))
+                using (SqlConnection con = new SqlConnection("server=192.168.10.12;user=sa;pwd=123456;database=Blog"))
                 {
                     con.Open();
                     //操作数据库的工具SqlCommand
@@ -1736,7 +2966,7 @@ namespace App.Hosting.Controllers
         private IList<Articleiteminfo> GetGoalsEntity(string sqlstr, string filter = "")
         {
             var list1 = new List<Articleiteminfo>();
-            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            string conStr = "server=192.168.10.12;user=sa;pwd=123456;database=Blog";//连接字符串  
             SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
             conText.Open();//打开数据库  
             string sqls = sqlstr;//创建统计语句  
@@ -1767,7 +2997,7 @@ namespace App.Hosting.Controllers
         private Makeiteminfo GetMakeitemEntity(string sqlstr, string filter = "")
         {
             var i = new Makeiteminfo();
-            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            string conStr = "server=192.168.10.12;user=sa;pwd=123456;database=Blog";//连接字符串  
             SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
             conText.Open();//打开数据库  
             string sqls = sqlstr;//创建统计语句  
@@ -2085,7 +3315,7 @@ namespace App.Hosting.Controllers
         private Articleiteminfo GetGoalsitemEntity(string sqlstr, string filter = "")
         {
             var i = new Articleiteminfo();
-            string conStr = "server=192.168.10.28;user=sa;pwd=123456;database=Blog";//连接字符串  
+            string conStr = "server=192.168.10.12;user=sa;pwd=123456;database=Blog";//连接字符串  
             SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
             conText.Open();//打开数据库  
             string sqls = sqlstr;//创建统计语句  
@@ -2349,7 +3579,7 @@ namespace App.Hosting.Controllers
                              LLWYHshechajiruan5, LLWYHchachariqi1, LLWYHchachariqi2, LLWYHchachariqi3, LLWYHchachariqi4, 
                              LLWYHchachariqi5, SYZTXXshiyanzhuantai, SYZTXXmubiaoruzhurenshu, SYZTXXyiruzhulishu, SYZTXXshijiruzhuzonglishu,
                              SYZTXXdiyilieshoushizheqianshu, SYZTXXdiyilieshoushizheruzhuriqi, SYZTXXshiyanzongzhiriqi, LCSYJGZYbanbenhao, 
-                             LCSYJGZYbanbenriqi, Other, TitleName, TitleStage, Todesc from MakeTable where JBXXdengjihao = '" + filter + "'";
+                             LCSYJGZYbanbenriqi, Other, TitleName, TitleStage, Todesc from MakeTable where JBXXdengjihao = '" + filter + "';";
             var reslut = GetMakeitemEntity(str);
             ////string url = Request.RawUrl;
             ////string url = HttpContext.Current.Request.Url.Host;
@@ -2357,7 +3587,7 @@ namespace App.Hosting.Controllers
             ViewBag.Dailt = reslut;
             return View();
         }
-        public IActionResult About(string tid,string sid = "")
+        public IActionResult About(string tid, string sid = "")
         {
             var k = 1;
             string table = "AirtleTable";
@@ -2366,7 +3596,8 @@ namespace App.Hosting.Controllers
             {
                 table = table + "_" + sid;
             }
-            else {
+            else
+            {
                 table = _table;
             }
             string str = " SELECT top 1 Syname,Syurl,Sytag,Sytag1,Sytag2,Sytag3,Sytag4,Syxiangmu,Syphnoe,Syjiedaishijian,Syadress,Dsname," +
@@ -2391,7 +3622,7 @@ namespace App.Hosting.Controllers
                 "DKSZYZHX2zhiwei,DKSZYZHX2mingzi,DKSZYZHX2dianhua,DKSZYZHX2email,DKSZYZHX2keshi,DKSZYZHX2keshi1," +
                 "DKSZYZHX2yanjiutuandui,DKSZYZHX3, DKSZYZHX3weizhi, DKSZYZHX3zhiwei, DKSZYZHX3mingzi, DKSZYZHX3dianhua, DKSZYZHX3email, " +
                 "DKSZYZHX3keshi, DKSZYZHX3keshi1, DKSZYZHX3yanjiutuandui, DKSZYZHX3yanjiutuandui1, DKSZYZHX3jingyan, DKSZYZHX3qita, " +
-                "DKSZYZHX2yanjiutuandui1 FROM "+ table + " where Syurl ='" + tid +"'";
+                "DKSZYZHX2yanjiutuandui1 FROM " + table + " where Syurl ='" + tid + "';";
             var reslut = GetGoalsitemEntity(str);
             //string url = Request.RawUrl;
             //string url = HttpContext.Current.Request.Url.Host;
@@ -2408,7 +3639,7 @@ namespace App.Hosting.Controllers
         {
             return View();
         }
-        #endregion
+
 
 
         public async Task<IActionResult> Init()

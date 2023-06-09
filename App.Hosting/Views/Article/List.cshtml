@@ -188,7 +188,7 @@
                     </div>
                 </div>
       
-                <div class="layui-row">
+                <div class="layui-row" style="display:none">
                     <div class="layui-col-xs6">
                         <div class="layui-form-item">
                             <label class="layui-form-label">申请人</label>
@@ -221,14 +221,16 @@
                     if (info.projectcount != "0") {
 
                         k++;
-                    <div class="article shadow animated zoomIn">
-                        <div class="article-left "> <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" alt=""> </div>
-                        <div class="article-right">
-                            <div class="article-title">
-                                @*                                <span class="article_is_top">置顶</span>&nbsp; <span class="article_is_yc">
+                        <div class="article shadow animated zoomIn">
+                            <div class="article-left "> <img src="https://storage.yscro.com/defaut_logo_new6.jpg?imageView2/1/h/115/w/110" alt=""> </div>
+                            <div class="article-right">
+                                <div class="article-title">
+                                    @*                                <span class="article_is_top">置顶</span>&nbsp; <span class="article_is_yc">
                             原创
                             </span>*@
-                                <a href="/home/about?tid=@info.Syurl&sid=@shenfen" class="index-block"> @info.Syname</a>  <a href="javascript:void(0)" data="@info.Syname" class="index-block projectBtn"> 符合项目： @info.projectcount</a>
+                                    @if (info.projectcount != null ) { 
+                                             <a href="/home/about?tid=@info.Syurl&sid=@shenfen" class="index-block"> @info.Syname</a>  <a href="javascript:void(0)" data="@info.Syname" class="index-block projectBtn"> 符合项目： @info.projectcount</a>
+                                    }
                             </div>
                             <div class=" article-footer">
                                 @if (info.Sytag != "")
@@ -441,7 +443,7 @@
                                     , jump: function (obj, first) {
                     if (!first) {
                         curr = obj.curr
-                        window.location.href = "/article/list?tid=7&where2=@where2&state=10&code=" + 9999 + "&" + keyStrAll
+                        window.location.href = "/article/list?tid=7&where2=@where2&state=10&code=" + curr + "&" + keyStrAll
                         console.log(obj)
                     }
 

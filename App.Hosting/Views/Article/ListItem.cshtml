@@ -47,7 +47,7 @@
         </blockquote>
         <div style="background:#fff;padding: 10px">
             <form class="layui-form layui-form-pane"  id="advance-form">
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="display:none"> 
                     <label class="layui-form-label">省份地区</label>
                     <div class="layui-input-block">
                             <select name="DJGXXshen" lay-filter="aihao" id="area">
@@ -88,7 +88,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="display:none">
                     <label class="layui-form-label">专业类型</label>
                     <div class="layui-input-block">
                             <select name="Dstag" lay-filter="aihao">
@@ -116,9 +116,9 @@
                     <div class="layui-input-block">
                         <select name="interest3" lay-filter="aihao">
                             <option value=""></option>
-                            <option value="0">进行中-尚未招募</option>
-                            <option value="1" >进行中-招募中</option>
-                            <option value="2">进行中-招募完成</option>
+                                <option value="进行中-尚未招募">进行中-尚未招募</option>
+                                <option value="进行中-招募中">进行中-招募中</option>
+                                <option value="进行中-招募完成">进行中-招募完成</option>
                         </select>
                     </div>
                 </div>
@@ -141,11 +141,11 @@
                     <div class="layui-input-block">
                         <input type="radio" name="qishu" value="I 期" title="I 期" >
                             <input type="radio" name="qishu" value="II 期" title="II 期">
-                            <input type="radio" name="qishu" value="III 期" title="II 期">
+                            <input type="radio" name="qishu" value="III 期" title="III 期">
                     </div>
                 </div>
 
-                <div class="layui-row">
+                <div class="layui-row" style="display:none">
                     <div class="layui-col-xs6">
                         <div class="layui-form-item">
                             <label class="layui-form-label">机构名称</label>
@@ -183,7 +183,7 @@
                     </div>
                 </div>
       
-                <div class="layui-row">
+                <div class="layui-row" style="display:none">
                     <div class="layui-col-xs6">
                         <div class="layui-form-item">
                             <label class="layui-form-label">申请人</label>
@@ -212,6 +212,8 @@
                             <th lay-data="{field:'no',sort:true, escape: false}">登记号</th>
                             <th lay-data="{field:'username2',sort:true, escape: false}">试验状态</th>
                             <th lay-data="{field:'username3',sort:true, escape: false}">药物名称</th>
+                            <th lay-data="{field:'username21',sort:true, escape: false}">试验范围</th>
+                            <th lay-data="{field:'username31',sort:true, escape: false}">试验分期</th>
                             <th lay-data="{field:'username4',sort:true, escape: false}">适应症</th>
                             <th lay-data="{field:'username5',sort:true, escape: false}">试验通俗题目</th>
                         </tr>
@@ -236,7 +238,17 @@
                                 <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
                                     @info.TitleName
 					            </a>
-				            </td>
+                            </td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.LCSYXXshiyanfenqi
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">
+                                    @info.LCSYXXshiyanfangwei
+                                </a>
+                            </td>
                             <td><a href="/home/aboutItem?tid=@info.JBXXdengjihao"  onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">@info.JBXXshiyingzheng</a></td>
                             <td><a href="/home/aboutItem?tid=@info.JBXXdengjihao" onclick="getDetail(this.id)" id="4a7537df8def48f3b8eabe6f6d44a9b4_p" name="1">@info.JBXXshiyantongshutimu</a></td>
 				            </tr>

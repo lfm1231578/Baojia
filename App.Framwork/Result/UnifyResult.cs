@@ -7,6 +7,7 @@ namespace App.Framwork.Result
     /// </summary>
     public class UnifyResult
     {
+        public string Type = "success";// warning  //error
         public UnifyResult()
         {
             StatusCode = ResultCode.Success;

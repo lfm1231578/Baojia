@@ -16,6 +16,7 @@ using App.Framwork.Result;
 using Mapster;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace App.Hosting.Areas.BlogManage.Controllers
 {
@@ -43,6 +44,51 @@ namespace App.Hosting.Areas.BlogManage.Controllers
         [HttpPost]
         [Description("新增/编辑文章")]
         public async Task<IActionResult> Form(ArticleInputDto dto)
+        {
+            string cc = dto.Content.Replace("'","");
+            var strsql = @"UPDATE CoreCmsNews set encontentBody = '"+ cc + @"' where id = " + Convert.ToInt32(dto.Title);
+            var kk = GetIntegralByMonth(strsql);
+            return Json(kk);
+        }
+        private string GetIntegralByMonth(string sqlstr, int filter = 0)
+        {
+
+            string month = "失败";
+            try
+            {
+                string conStr = "server=192.168.10.12;user=sa;pwd=123456;database=CoreShopProfessional";//连接字符串  
+                SqlConnection conText = new SqlConnection(conStr);//创建Connection对象 
+                conText.Open();//打开数据库  
+                string sqls = sqlstr;//创建统计语句  
+                SqlCommand comText = new SqlCommand(sqls, conText);//创建Command对象  
+                SqlDataReader dr;//创建DataReader对象  
+                dr = comText.ExecuteReader();//执行查询  
+                //while (dr.Read())//判断数据表中是否含有数据  
+                //{
+                //    var date = dr;
+                //    if (filter == 0)
+                //    {
+                //        month = date["IntegralByMonth"].ToString();//到店次数
+                //    }
+                //    else
+                //    {
+                //        month = date["AttributeValue"].ToString();//其他
+                //    }
+                //}
+                month = "成功";
+                dr.Close();//关闭DataReader对象  
+            }
+            catch
+            {
+
+            }
+            return month;
+
+        }
+
+        [HttpPost]
+        [Description("新增/编辑文章")]
+        public async Task<IActionResult> Form11(ArticleInputDto dto)
         {
             return Json(await _articleService.Save(dto), "yyyy-MM-dd HH:mm:ss");
         }

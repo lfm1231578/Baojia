@@ -1,0 +1,29 @@
+
+@{
+    ViewData["Title"] = "九泰药械-文献数据库";
+}
+@section css{
+    <link href="~/web/css/mixed.css" rel="stylesheet" />
+}
+<!-- 主体（一般只改变这里的内容） -->
+<div class="blog-body">
+    <!-- 这个一般才是真正的主体内容 -->
+    <div class="blog-container">
+        <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+            <a href="/" title="网站首页">首页</a>
+            <a><cite>文献数据库</cite></a>
+        </blockquote>
+        <div class="blog-main">
+            <div class="child-nav shadow">
+                <span class="child-nav-btn child-nav-btn-this">文献</span>
+                    <span class="child-nav-btn" onclick="layer.msg('暂未开发');">重要文献</span>
+                    <span class="child-nav-btn" onclick="layer.msg('暂未开发');">特殊文献</span>
+            </div>
+            <div class="mixed-main" id="pic"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+@section script{
+    <script src="~/web/js/mixed_pic.js"></script>
+}

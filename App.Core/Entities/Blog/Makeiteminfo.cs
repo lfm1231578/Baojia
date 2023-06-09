@@ -15,6 +15,10 @@ namespace App.Core.Entities.Blog
         /// <summary>
         /// 标题
         /// </summary>
+        /// 
+
+        public string PathName { get; set; }
+        public string Pathpapes { get; set; }
         public string Other { get; set; }
         public string TitleName { get; set; }
         public string JBXXdengjihao { get; set; }
